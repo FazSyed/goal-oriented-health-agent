@@ -14,7 +14,6 @@
         (threshold_met ?p - patient) ; Goal: hydration is OK
         (checked ?p - patient) ; Indicates if hydration was checked
         (monitoring_active ?p - patient) ; Monitoring is active
-        (one)
     )
 
     ;; Action: Check the patient's hydration level

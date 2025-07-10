@@ -2,18 +2,19 @@ import subprocess
 
 def run_planner():
     # Define input files
+    base_path = "C:/Users/Fazila Syed/Desktop/GoalOrientedElderlyCare/pddl_planning"
     domain_file = "hydration_domain.pddl"
     problem_file = "hydration_problem.pddl"
     output_file = "hydration_plan.txt"
 
     # Run the Fast Downward planner 
     subprocess.run([
-    "python",  # or full path to python if needed
-    "C:/Users/Fazila Syed/Downloads/FastDownward/downward/fast-downward.py",
-    domain_file,
-    problem_file,
-    "--search", "astar(blind())"
-])
+        "python",
+        "C:/Users/Fazila Syed/Downloads/FastDownward/downward/fast-downward.py",
+        domain_file,
+        problem_file,
+        "--search", "astar(blind())"
+    ], cwd=base_path)
 
 
     # Read the generated plan file and save it to a new file

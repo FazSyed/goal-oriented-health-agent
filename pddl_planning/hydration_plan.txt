@@ -1,0 +1,3 @@
+(check_hydration patient1)
+(remind patient1)
+; cost = 2 (unit cost)
