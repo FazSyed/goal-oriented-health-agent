@@ -1,33 +1,3 @@
-'''
-NOTES:
-Domain file has -> predicate, actions
-Problem file has -> object, initial state, goals
-
-Domain Name - care_agent
-Problem Name - care_routine
-
---> I have a healthcare agent that generates a 'Plan' 
-    based on hydration and threshold values
-
-
---> TASK:
-There is a health agent that can check the patient's hydration level 
-every 1 hour to ensure it is greater than or equal to the threshold value
-and will either remind the patient to drink more water, or alert the 
-caregiver if the hydration level is Moderate (they need IV) or Severe (Emergency).
-It continues rechecking every 1 hour to ensure the threshold value is met.
-The hydration value is what is initially noted. We want to make sure it is
-greater than or equal to threshold value.
-
-
-1. Objects: Patient, hydration value, threshold value
-2. Predicates: 
-3. Initial State: Current Hydration value 
-4. Goal Specifications: Hydration value >= Threshold Value
-5. Actions/Operators: Remind, AlertCaregiver, Recheck
-
-'''
-
 import subprocess
 
 def run_planner():
