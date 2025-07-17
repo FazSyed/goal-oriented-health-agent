@@ -1,0 +1,1 @@
+owlready2 -- install using "pip  install owlready2"

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/"
-     xml:base="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/"
+<rdf:RDF xmlns="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#"
+     xml:base="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -99,6 +99,7 @@
     <!-- http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hydrationValue -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hydrationValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#HydrationLevel"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     </owl:DatatypeProperty>
@@ -306,28 +307,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient1">
         <rdf:type rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-        <HealthAgent:hydrationValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1470</HealthAgent:hydrationValue>
-        <HealthAgent:thresholdValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</HealthAgent:thresholdValue>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient2 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient2">
-        <rdf:type rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-        <HealthAgent:hydrationValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1350</HealthAgent:hydrationValue>
-        <HealthAgent:thresholdValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</HealthAgent:thresholdValue>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient3 -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient3">
-        <rdf:type rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-        <HealthAgent:hydrationValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1200</HealthAgent:hydrationValue>
-        <HealthAgent:thresholdValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</HealthAgent:thresholdValue>
+        <hydrationValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</hydrationValue>
+        <thresholdValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1500</thresholdValue>
     </owl:NamedIndividual>
     
 
@@ -387,149 +368,14 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p">
+    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h">
+    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>EmergencyRule</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Mild"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#SendHydrationReminder"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-            </rdf:Description>
-        </swrl:head>
-    </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>HydrationRule</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Mild"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#SendHydrationReminder"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-            </rdf:Description>
-        </swrl:head>
-    </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>IVRule</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Moderate"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#SendIVRequiredAlert"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-            </rdf:Description>
-        </swrl:head>
+    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
@@ -543,7 +389,7 @@
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
                         <swrl:classPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest>
@@ -553,8 +399,8 @@
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
                                 <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hydrationValue"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -562,21 +408,10 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
-                                        <swrl:arguments>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1315</rdf:first>
-                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </swrl:arguments>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#thresholdValue"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t"/>
                                     </rdf:Description>
                                 </rdf:first>
                                 <rdf:rest>
@@ -585,23 +420,62 @@
                                         <rdf:first>
                                             <rdf:Description>
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
-                                                <swrl:arguments>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                        <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
-                                                        <rdf:rest>
-                                                            <rdf:Description>
-                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1440</rdf:first>
-                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                            </rdf:Description>
-                                                        </rdf:rest>
-                                                    </rdf:Description>
+                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                                                <swrl:arguments rdf:parseType="Collection">
+                                                    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t"/>
                                                 </swrl:arguments>
                                             </rdf:Description>
                                         </rdf:first>
-                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                                                        <swrl:arguments>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1315</rdf:first>
+                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </swrl:arguments>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                                <swrl:arguments>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                        <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                                        <rdf:rest>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1440</rdf:first>
+                                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                            </rdf:Description>
+                                                                        </rdf:rest>
+                                                                    </rdf:Description>
+                                                                </swrl:arguments>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
                                     </rdf:Description>
                                 </rdf:rest>
                             </rdf:Description>
@@ -617,11 +491,24 @@
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
                         <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Moderate"/>
                     </rdf:Description>
                 </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#SendIVRequiredAlert"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
             </rdf:Description>
         </swrl:head>
     </rdf:Description>
@@ -637,7 +524,7 @@
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
                         <swrl:classPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest>
@@ -647,8 +534,8 @@
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
                                 <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hydrationValue"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -656,24 +543,52 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
-                                        <swrl:arguments>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1440</rdf:first>
-                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </swrl:arguments>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#thresholdValue"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t"/>
                                     </rdf:Description>
                                 </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                                                <swrl:arguments rdf:parseType="Collection">
+                                                    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                    <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t"/>
+                                                </swrl:arguments>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                                                        <swrl:arguments>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1440</rdf:first>
+                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </swrl:arguments>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
                             </rdf:Description>
                         </rdf:rest>
                     </rdf:Description>
@@ -687,11 +602,24 @@
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
                         <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Mild"/>
                     </rdf:Description>
                 </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#SendHydrationReminder"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
             </rdf:Description>
         </swrl:head>
     </rdf:Description>
@@ -707,7 +635,7 @@
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
                         <swrl:classPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest>
@@ -717,8 +645,8 @@
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
                                 <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hydrationValue"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -726,24 +654,52 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
-                                        <swrl:arguments>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/h"/>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1315</rdf:first>
-                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </swrl:arguments>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#thresholdValue"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t"/>
                                     </rdf:Description>
                                 </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                <swrl:arguments>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                                <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1315</rdf:first>
+                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </swrl:arguments>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                                                        <swrl:arguments rdf:parseType="Collection">
+                                                            <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#h"/>
+                                                            <rdf:Description rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#t"/>
+                                                        </swrl:arguments>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
                             </rdf:Description>
                         </rdf:rest>
                     </rdf:Description>
@@ -757,11 +713,24 @@
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
                         <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent/p"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Severe"/>
                     </rdf:Description>
                 </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#p"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#SendEmergencySignal"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
             </rdf:Description>
         </swrl:head>
     </rdf:Description>
