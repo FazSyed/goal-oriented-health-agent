@@ -10,11 +10,11 @@ owlready2.JAVA_MEMORY = 8000
 onto = get_ontology("C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/ontology/healthagent.owl").load()
 
 # Work within the context of loaded ontology
-# with onto:
-#     # Access instance named "Patient1" defined in the ontology
-#     patient1 = onto.Patient1
-#     # Update hydartionValue (data property) of the patient
-#     patient1.hydrationValue = [1350]
+with onto:
+    # Access instance named "Patient1" defined in the ontology
+    patient1 = onto.Patient1
+    # Update hydartionValue (data property) of the patient
+    patient1.hydrationValue = [1350]
 
 # Save updated ontology witha new file name
 # onto.save(file="updated.owl", format="rdfxml")
