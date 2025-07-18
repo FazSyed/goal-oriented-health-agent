@@ -1,1 +1,4 @@
 owlready2 -- install using "pip  install owlready2"
+(make sure you have rust installed in your system before installing spade. Use the following URL to download rust: "https://rustup.rs/")
+spade -- "pip install spade"
+xmpp server - I use ejabberd that I installed using Docker. Make sure ejabberd port is active to run the agents
