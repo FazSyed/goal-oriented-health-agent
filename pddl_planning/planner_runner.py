@@ -2,7 +2,7 @@ import subprocess
 
 def run_planner():
     # Define input files
-    base_path = "C:/Users/Fazila Syed/Desktop/GoalOrientedElderlyCare/pddl_planning"
+    base_path = "C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/pddl_planning"
     domain_file = "hydration_domain.pddl"
     problem_file = "hydration_problem.pddl"
     output_file = "hydration_plan.txt"
