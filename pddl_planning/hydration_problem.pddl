@@ -6,14 +6,11 @@
     )
 
     (:init
-        ;; Set the initial health condition
-        (dehydrated patient1) ; Patient starts mildly dehydrated
-        (monitoring_active patient1) ; Monitoring is active
-        ;; Note: (checked patient1) is false initially, (threshold_met patient1) is false initially
+        (mildly_dehydrated patient1)
+        (monitoring_active patient1)
     )
 
     (:goal
-        ;; Goal: to bring hydration to safe level
         (threshold_met patient1)
     )
 )

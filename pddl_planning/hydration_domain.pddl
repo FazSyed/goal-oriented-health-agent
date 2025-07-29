@@ -8,7 +8,7 @@
     ;; Conditions or states we care about
     (:predicates
         (hydrated ?p - patient) ; Patient is well-hydrated
-        (dehydrated ?p - patient) ; Patient is mildly dehydrated
+        (mildly_dehydrated ?p - patient) ; Patient is mildly dehydrated
         (moderately_dehydrated ?p - patient) ; Moderate dehydration
         (severely_dehydrated ?p - patient) ; Severe dehydration
         (threshold_met ?p - patient) ; Goal: hydration is OK
@@ -30,7 +30,7 @@
                 (hydrated ?p)
                 (threshold_met ?p))
             (when
-                (dehydrated ?p)
+                (mildly_dehydrated ?p)
                 (not (threshold_met ?p)))
             (when
                 (moderately_dehydrated ?p)
@@ -46,11 +46,11 @@
         :parameters (?p - patient)
         :precondition (and
             (checked ?p)
-            (dehydrated ?p)
+            (mildly_dehydrated ?p)
             (not (threshold_met ?p))
         )
         :effect (and
-            (not (dehydrated ?p))
+            (not (mildly_dehydrated ?p))
             (hydrated ?p)
             (threshold_met ?p)
         )
@@ -96,9 +96,9 @@
         :effect (and
             (not (checked ?p))
             (when
-                (dehydrated ?p)
+                (mildly_dehydrated ?p)
                 (and
-                    (not (dehydrated ?p))
+                    (not (mildly_dehydrated ?p))
                     (moderately_dehydrated ?p)))
         )
     )

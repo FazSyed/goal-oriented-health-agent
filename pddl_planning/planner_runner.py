@@ -1,13 +1,54 @@
 import subprocess
+import os
 
-def run_planner():
-    # Define input files
+def create_problem_file(risk_status: str, problem_path: str):
+    init_facts = []
+
+    if risk_status == "Mild":
+        init_facts.append("(mildly_dehydrated patient1)")
+        init_facts.append("(monitoring_active patient1)")
+    elif risk_status == "Moderate":
+        init_facts.append("(moderately_dehydrated patient1)")
+        init_facts.append("(monitoring_active patient1)")
+    elif risk_status == "Severe":
+        init_facts.append("(severely_dehydrated patient1)")
+        init_facts.append("(monitoring_active patient1)")
+    else:
+        init_facts.append("(monitoring_active patient1)")
+
+
+    init_facts_str = "\n        ".join(init_facts)
+    problem_template = f"""
+(define (problem care_routine)
+    (:domain care_agent)
+
+    (:objects
+        patient1 - patient
+    )
+
+    (:init
+        {init_facts_str}
+    )
+
+    (:goal
+        (threshold_met patient1)
+    )
+)
+"""
+    with open(problem_path, "w") as f:
+        f.write(problem_template.strip())
+    print("Problem file created.")
+
+def run_planner(risk_status: str):
     base_path = "C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/pddl_planning"
     domain_file = "hydration_domain.pddl"
     problem_file = "hydration_problem.pddl"
     output_file = "hydration_plan.txt"
 
-    # Run the Fast Downward planner 
+    # Step 1: Generate problem file dynamically
+    create_problem_file(risk_status, os.path.join(base_path, problem_file))
+
+    # Step 2: Run Fast Downward planner
     subprocess.run([
         "python",
         "C:/Users/Fazila Syed/Downloads/FastDownward/downward/fast-downward.py",
@@ -16,20 +57,20 @@ def run_planner():
         "--search", "astar(blind())"
     ], cwd=base_path)
 
-
-    # Read the generated plan file and save it to a new file
+    # Step 3: Capture the plan
     try:
-        with open("sas_plan", "r") as f:
+        with open(os.path.join(base_path, "sas_plan"), "r") as f:
             plan = f.read()
 
-        with open(output_file, "w") as out:
+        with open(os.path.join(base_path, output_file), "w") as out:
             out.write(plan)
 
-        print("Plan saved to:", output_file)
+        print("Generated Plan:\n", plan)
 
     except FileNotFoundError:
         print("No plan was found. Check your domain/problem setup.")
 
 if __name__ == "__main__":
-    run_planner()
-
+    # Example from ontology inference
+    inferred_risk_status = "Mild"
+    run_planner(inferred_risk_status)
