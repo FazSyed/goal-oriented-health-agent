@@ -9,9 +9,9 @@ owlready2.JAVA_MEMORY = 8000
 # Loading existing OWL ontology
 onto = get_ontology("C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/ontology/healthagent.owl").load()
 
-# with onto:
-#     patient1 = onto.Patient1
-#     patient1.TBWLossPercent = 6.6
+with onto:
+    patient1 = onto.Patient1
+    patient1.TBWLossPercent = int(4.5)
 
 # Working within the ontology context to run reasoner
 with onto:
