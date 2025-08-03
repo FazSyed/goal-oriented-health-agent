@@ -1,8 +1,18 @@
-owlready2 -- install using "pip  install owlready2"
-(make sure you have rust installed in your system before installing spade. Use the following URL to download rust: "https://rustup.rs/")
-spade -- "pip install spade"
-xmpp server - I use ejabberd that I installed using Docker. Make sure ejabberd port is active to run the agents 
-(healthagent@localhost, agentforpassword)
-(sensoragent@localhost, sensoragentforpassword)
-(reminderagent@localhost, reminderagentforpassword)
-(careagent@localhost, careagentforpassword)
+fastapi==0.115.12
+joblib==1.5.1
+keras==3.10.0
+matplotlib==3.9.2
+matplotlib-inline==0.1.7
+numpy==2.0.2
+owlready2==0.48
+panda==0.3.1
+pandas==2.2.2
+seaborn==0.13.2
+scikit-learn==1.6.1
+scipy==1.16.0
+spade==4.1.0
+tensorboard==2.19.0
+tensorboard-data-server==0.7.2
+tensorflow==2.19.0
+tensorflow-estimator==2.13.0
+tensorflow-io-gcs-filesystem==0.31.0
