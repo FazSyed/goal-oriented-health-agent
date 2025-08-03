@@ -1,7 +1,7 @@
-from sensor_agent import SensorAgent
-from health_agent import HealthAgent
-from reminder_agent import ReminderAgent
-from care_assisstant_alert_agent import CareAssistantAlertAgent
+from agents.sensor_agent import SensorAgent
+from agents.health_agent import HealthAgent
+from agents.reminder_agent import ReminderAgent
+from agents.care_assisstant_alert_agent import CareAssistantAlertAgent
 
 import asyncio
 
