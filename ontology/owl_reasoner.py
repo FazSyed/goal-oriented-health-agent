@@ -8,7 +8,7 @@ def infer_risk_and_action(tbw_percent: float):
     owlready2.JAVA_MEMORY = 8000
 
     # Loading existing OWL ontology
-    onto = get_ontology("C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/ontology/healthagent.owl").load()
+    onto = get_ontology("./ontology/healthagent.owl").load()
 
     with onto:
         patient1 = onto.Patient1
