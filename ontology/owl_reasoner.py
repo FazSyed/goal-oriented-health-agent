@@ -1,7 +1,7 @@
 from owlready2 import *
 import owlready2
 
-def infer_risk_and_action(ontology_path: str, tbw_percent: float):
+def infer_risk_and_action(tbw_percent: float):
     # Specifying path to Java executable (required for running Pellet reasoner)
     owlready2.JAVA_EXE = "C:/Program Files/Common Files/Oracle/Java/javapath/java.exe"
     # Set amount of memory (in MB) that Java can use
@@ -22,9 +22,9 @@ def infer_risk_and_action(ontology_path: str, tbw_percent: float):
     # Extracting inferred risk status and action for Patient1
     p = onto.Patient1
     # Return the Risk Status and Action for Patient1
-    risk = p.hasRiskStatus[0].name if p.hasRiskStatus else "No Risk Status" 
-    action = p.triggersAction[0].name if p.triggersAction else "No Action was Triggered"
+    risk = p.hasRiskStatus[0].name if p.hasRiskStatus else None
+    action = p.triggersAction[0].name if p.triggersAction else None
     
     return risk, action    
 
-# print(infer_risk_and_action("./ontology/healthagent.owl", 5.0))
+# print(infer_risk_and_action(5.0))
