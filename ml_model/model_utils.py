@@ -41,11 +41,11 @@ def predict_dehydration_risk(baseline_weight, current_weight):
     return prediction_code, prediction_label, tbw_loss_percent
 
 
-baseline_weight = 72  # kg
-current_weight = 65   # kg
+# baseline_weight = 72  # kg
+# current_weight = 65   # kg
 
-code, label, percent = predict_dehydration_risk(baseline_weight, current_weight)
+# code, label, percent = predict_dehydration_risk(baseline_weight, current_weight)
 
-print("Dehydration Risk Code:", code)
-print("Dehydration Risk Label:", label)
-print("TBW Loss %:", round(percent, 2))
+# print("Dehydration Risk Code:", code)
+# print("Dehydration Risk Label:", label)
+# print("TBW Loss %:", round(percent, 2))
