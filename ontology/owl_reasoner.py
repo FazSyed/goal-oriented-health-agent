@@ -23,6 +23,8 @@ def infer_risk_and_action(ontology_path: str, tbw_percent: float):
     p = onto.Patient1
     # Return the Risk Status and Action for Patient1
     risk = p.hasRiskStatus[0].name if p.hasRiskStatus else "No Risk Status" 
-    action = p.hasAction[0].name if p.hasAction else "No Action"
+    action = p.triggersAction[0].name if p.triggersAction else "No Action was Triggered"
     
     return risk, action    
+
+# print(infer_risk_and_action("./ontology/healthagent.owl", 5.0))
