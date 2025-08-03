@@ -25,9 +25,14 @@ class HealthAgent(Agent):
                 
                 # Run the PDDL planner to get a plan for the action
                 plan = run_planner(risk)
-                
-                # Send the plan to the reminder agent
-                m = Message(to="reminderagent@localhost")
+
+                if (risk == "Mild"):
+                    m = Message(to="reminderagent@localhost")
+                elif (risk == "Moderate"):
+                    m = Message(to="alertagent@localhost")
+                else:
+                    m = Message(to="alertagent@localhost")
+
                 m.set_metadata("performative", "inform")
                 m.body = f"{risk},{action},{plan}"
                 
