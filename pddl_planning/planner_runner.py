@@ -66,9 +66,11 @@ def run_planner(risk_status: str):
             out.write(plan)
 
         print("Generated Plan:\n", plan)
+        return plan
 
     except FileNotFoundError:
         print("No plan was found. Check your domain/problem setup.")
+        return None
 
 # if __name__ == "__main__":
 #     inferred_risk_status = "Mild"
