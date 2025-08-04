@@ -12,7 +12,15 @@ def infer_risk_and_action(tbw_percent: float):
 
     with onto:
         patient1 = onto.Patient1
-        patient1.TBWLossPercent = int(tbw_percent)
+        
+        # Clean previous assertions
+        patient1.TBWLossPercent = []
+        patient1.hasRiskStatus = []
+        patient1.triggersAction = []
+        patient1.is_a = [onto.Patient]  # Reset class
+
+        # Add new value
+        patient1.TBWLossPercent.append(int(tbw_percent))
 
     # Working within the ontology context to run reasoner
     with onto:
