@@ -1,6 +1,7 @@
 from spade.agent import Agent
 from spade.behaviour import PeriodicBehaviour
 from spade.message import Message
+import asyncio
 import random
 
 class SensorAgent(Agent):
@@ -10,7 +11,7 @@ class SensorAgent(Agent):
 
             # Simulate a weight sensor reading
             baseline = 72
-            current = max(0, baseline - random.uniform(0, 9))
+            current = round(max(0, baseline - random.uniform(0, 9)), 2)
 
             # The baseline weight is 72.0
             # current values can range from [63.0 - 72.0]
@@ -27,5 +28,6 @@ class SensorAgent(Agent):
 
     async def setup(self):
         # Add the periodic behaviour to the agent ie it will run every 10 seconds
+        print("[Sensor] SensorAgent started.")
+        await asyncio.sleep(5)  # wait for other agents to start
         self.add_behaviour(self.PeriodicSensor(period=10))
-
