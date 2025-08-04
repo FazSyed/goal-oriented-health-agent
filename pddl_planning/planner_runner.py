@@ -13,7 +13,7 @@ def create_problem_file(risk_status: str, problem_path: str):
     elif risk_status == "Severe":
         init_facts.append("(severely_dehydrated patient1)")
         init_facts.append("(monitoring_active patient1)")
-    else:
+    elif risk_status == None:
         init_facts.append("(monitoring_active patient1)")
 
 
@@ -40,6 +40,11 @@ def create_problem_file(risk_status: str, problem_path: str):
     print("Problem file created.")
 
 def run_planner(risk_status: str):
+    
+    if risk_status is None:
+        print("Not at Risk. No planning needed.")
+        return None
+
     base_path = "C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/pddl_planning"
     domain_file = "hydration_domain.pddl"
     problem_file = "hydration_problem.pddl"
