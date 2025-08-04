@@ -1,0 +1,78 @@
+2025-08-04 14:00:18,090 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:18,107 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:18,116 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:18,363 - INFO - JID set to: sensoragent@localhost/13415517460740366809163
+2025-08-04 14:00:18,368 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-04 14:00:23,964 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent@localhost" thread="None" metadata={'performative': 'inform'}>
+72,70.78
+</message>
+2025-08-04 14:00:24,108 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:24,115 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:24,124 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:24,319 - INFO - JID set to: healthagent@localhost/17288459105236717583227
+2025-08-04 14:00:24,321 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-04 14:00:24,709 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:24,713 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:24,719 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:24,890 - INFO - JID set to: reminderagent@localhost/9574286238428910436291
+2025-08-04 14:00:24,893 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-04 14:00:25,424 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:25,438 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:25,447 - INFO - Authentication failed: not-authorized
+2025-08-04 14:00:25,655 - INFO - JID set to: careagent@localhost/17608881820298339846355
+2025-08-04 14:00:25,658 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-04 14:02:25,678 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-04 14:02:25,835 - INFO - connection_lost: (None,)
+2025-08-04 14:02:25,838 - INFO - Client disconnected.
+2025-08-04 14:02:25,838 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-04 14:02:25,993 - INFO - connection_lost: (None,)
+2025-08-04 14:02:25,995 - INFO - Client disconnected.
+2025-08-04 14:02:25,995 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-04 14:02:26,138 - INFO - connection_lost: (None,)
+2025-08-04 14:02:26,138 - INFO - Client disconnected.
+2025-08-04 14:02:26,145 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-04 14:02:26,292 - INFO - connection_lost: (None,)
+2025-08-04 14:02:26,292 - INFO - Client disconnected.
+2025-08-04 14:02:26,294 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-04 14:02:26,294 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-04 14:02:26,296 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-04 14:02:26,296 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-04 14:04:25,445 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:25,449 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:25,450 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:26,050 - INFO - JID set to: sensoragent@localhost/6341621112382949095162
+2025-08-04 14:04:26,050 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-04 14:04:31,165 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent@localhost" thread="None" metadata={'performative': 'inform'}>
+72,70.98
+</message>
+2025-08-04 14:04:31,214 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,217 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,220 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,313 - INFO - JID set to: healthagent@localhost/15914382533205568469451
+2025-08-04 14:04:31,315 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-04 14:04:31,455 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,457 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,458 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,534 - INFO - JID set to: reminderagent@localhost/5651792589175272914515
+2025-08-04 14:04:31,535 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-04 14:04:31,673 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,675 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,678 - INFO - Authentication failed: not-authorized
+2025-08-04 14:04:31,756 - INFO - JID set to: careagent@localhost/5798860805823848455579
+2025-08-04 14:04:31,758 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-04 14:06:32,739 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-04 14:06:32,895 - INFO - connection_lost: (None,)
+2025-08-04 14:06:32,900 - INFO - Client disconnected.
+2025-08-04 14:06:32,904 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-04 14:06:33,068 - INFO - connection_lost: (None,)
+2025-08-04 14:06:33,070 - INFO - Client disconnected.
+2025-08-04 14:06:33,074 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-04 14:06:33,233 - INFO - connection_lost: (None,)
+2025-08-04 14:06:33,236 - INFO - Client disconnected.
+2025-08-04 14:06:33,241 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-04 14:06:33,402 - INFO - connection_lost: (None,)
+2025-08-04 14:06:33,406 - INFO - Client disconnected.
+2025-08-04 14:06:33,409 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-04 14:06:33,409 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-04 14:06:33,413 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-04 14:06:33,415 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
