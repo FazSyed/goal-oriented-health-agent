@@ -6,10 +6,10 @@ import pandas as pd
 model = joblib.load("ml_model/dehydration_model.pkl")
 
 risk_mapping = {
-    0: "Euhydrated/No Dehydration",
-    1: "Mild Dehydration",
-    2: "Moderate Dehydration",
-    3: "Severe Dehydration"
+    0: "Euhydrated",
+    1: "Mild",
+    2: "Moderate",
+    3: "Severe" 
 }
 
 def predict_dehydration_risk(baseline_weight, current_weight):
