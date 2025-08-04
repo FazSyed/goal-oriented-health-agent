@@ -1,6 +1,8 @@
 from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
+from spade.template import Template
+
 from ml_model.model_utils import predict_dehydration_risk
 from ontology.owl_reasoner import infer_risk_and_action
 from pddl_planning.planner_runner import run_planner
@@ -15,28 +17,55 @@ class HealthAgent(Agent):
             msg = await self.receive(timeout=20)
 
             if msg:
-                # Split the message body to get baseline and current weight
-                baseline, current = map(float, msg.body.split(","))
-                # predict TBW Loss % and risk from the trained ML model
-                code, label, tbw_pct = predict_dehydration_risk(baseline, current)
-                # Infer risk and action from the ontology
-                risk, action = infer_risk_and_action("./ontology/healthagent.owl", tbw_pct)
-                print(f"[Health] Risk={risk}, Action={action}")
-                
-                # Run the PDDL planner to get a plan for the action
-                plan = run_planner(risk)
+                print(f"[Health] Received vitals: {msg.body}")
 
-                if (risk == "Mild"):
-                    m = Message(to="reminderagent@localhost")
-                elif (risk == "Moderate"):
-                    m = Message(to="alertagent@localhost")
-                else:
-                    m = Message(to="alertagent@localhost")
+                try:
+                    # Split the message body to get baseline and current weight
+                    baseline_str, current_str = msg.body.split(",")
+                    baseline = float(baseline_str.strip())
+                    current = float(current_str.strip())
 
-                m.set_metadata("performative", "inform")
-                m.body = f"{risk},{action},{plan}"
-                
-                await self.send(m)
+                    # predict TBW Loss % and risk from the trained ML model
+                    _, _, tbw_pct = predict_dehydration_risk(baseline, current)
+                    # Infer risk and action from the ontology
+                    risk, action = infer_risk_and_action(tbw_pct)
+                    print(f"[Health] Risk={risk}, Action={action}")
+                    
+                    if risk is None:
+                        print("[Health] No action required for Euhydrated status.")
+                        return
+
+                    # Run the PDDL planner to get a plan for the action
+                    plan = run_planner(risk)
+
+                    if plan is not None:
+                        plan = plan.replace("\n", " ")
+                    else:
+                        plan = ""
+
+                    if (risk == "Mild"):
+                        to_jid = "reminderagent@localhost"
+                    elif risk in ["Moderate", "Severe"]:
+                        to_jid = "careagent@localhost"
+                    else:
+                        print("[Health] No action required for Euhydrated status.")
+                        return
+                    
+                    m = Message(to=to_jid)
+                    m.set_metadata("performative", "inform")
+                    m.body = f"{risk},{action},{plan}"
+                    
+                    await self.send(m)
+                    print(f"[Health] Sent action to {to_jid}")
+
+                except Exception as e:
+                    print(f"[Health] Error processing message: {e}")
 
     async def setup(self):
-        self.add_behaviour(self.Processor())
+        print("[Health] Agent started and ready.")
+        processor = self.Processor()
+
+        template = Template()
+        template.set_metadata("performative", "inform")
+
+        self.add_behaviour(processor, template)
