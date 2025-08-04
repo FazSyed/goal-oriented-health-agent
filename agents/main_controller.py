@@ -9,7 +9,7 @@ async def main():
     sensor = SensorAgent("sensoragent@localhost", "sensoragentforpassword")
     health = HealthAgent("healthagent@localhost", "agentforpassword")
     reminder = ReminderAgent("reminderagent@localhost", "reminderagentforpassword")
-    alert = CareAssistantAlertAgent("alertagent@localhost", "careagentforpassword")
+    alert = CareAssistantAlertAgent("careagent@localhost", "careagentforpassword")
 
     # Start the agents
     await sensor.start(auto_register=True)
@@ -18,9 +18,7 @@ async def main():
     await alert.start(auto_register=True)
 
     print("Initializing agents...")
-    await asyncio.sleep(60)  
-    # run for 1 minute - 10 for sensor agent to send data, 
-    # 20 for health agent to process, and 30 for reminder agent to receive
+    await asyncio.sleep(60) # run for 1 minute
 
     await sensor.stop()
     await health.stop()
