@@ -76,3 +76,70 @@
 2025-08-04 14:06:33,409 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
 2025-08-04 14:06:33,413 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
 2025-08-04 14:06:33,415 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-04 16:03:34,341 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:34,341 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:34,345 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:34,443 - INFO - JID set to: sensoragent@localhost/115954440311814999451828
+2025-08-04 16:03:34,444 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-04 16:03:44,601 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent@localhost" thread="None" metadata={'performative': 'inform'}>
+72,70.06
+</message>
+2025-08-04 16:03:44,644 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:44,648 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:44,653 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:44,734 - INFO - JID set to: healthagent@localhost/259422430195244506259
+2025-08-04 16:03:44,735 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-04 16:03:54,474 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent@localhost" thread="None" metadata={'performative': 'inform'}>
+72,65.91
+</message>
+2025-08-04 16:03:54,962 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:54,966 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:54,971 - INFO - Authentication failed: not-authorized
+2025-08-04 16:03:55,094 - INFO - JID set to: reminderagent@localhost/16852064729110773419130
+2025-08-04 16:03:55,095 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-04 16:04:08,728 - INFO - Authentication failed: not-authorized
+2025-08-04 16:04:08,732 - INFO - Authentication failed: not-authorized
+2025-08-04 16:04:08,735 - INFO - Authentication failed: not-authorized
+2025-08-04 16:04:08,993 - INFO - JID set to: careagent@localhost/10931470211041528314194
+2025-08-04 16:04:09,000 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-04 16:06:38,653 - INFO - Authentication failed: not-authorized
+2025-08-04 16:06:38,653 - INFO - Authentication failed: not-authorized
+2025-08-04 16:06:38,659 - INFO - Authentication failed: not-authorized
+2025-08-04 16:06:38,735 - INFO - JID set to: sensoragent@localhost/9506924003125842560258
+2025-08-04 16:06:38,736 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-04 16:07:35,252 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,255 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,258 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,333 - INFO - JID set to: healthagent@localhost/11503496880367246802322
+2025-08-04 16:07:35,335 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-04 16:07:35,467 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,469 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,469 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,548 - INFO - JID set to: reminderagent@localhost/3724229040824092728354
+2025-08-04 16:07:35,549 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-04 16:07:35,740 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,744 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,745 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,816 - INFO - JID set to: careagent@localhost/9402489709911699986386
+2025-08-04 16:07:35,820 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-04 16:07:35,954 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,956 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:35,958 - INFO - Authentication failed: not-authorized
+2025-08-04 16:07:36,035 - INFO - JID set to: sensoragent@localhost/6790676607354084559418
+2025-08-04 16:07:36,036 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-04 16:09:56,039 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-04 16:09:56,040 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-04 16:09:56,195 - INFO - connection_lost: (None,)
+2025-08-04 16:09:56,199 - INFO - Client disconnected.
+2025-08-04 16:09:56,199 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-04 16:09:56,347 - INFO - connection_lost: (None,)
+2025-08-04 16:09:56,350 - INFO - Client disconnected.
+2025-08-04 16:09:56,350 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-04 16:09:56,499 - INFO - connection_lost: (None,)
+2025-08-04 16:09:56,499 - INFO - Client disconnected.
+2025-08-04 16:09:56,499 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-04 16:09:56,652 - INFO - connection_lost: (None,)
+2025-08-04 16:09:56,655 - INFO - Client disconnected.
+2025-08-04 16:09:56,657 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-04 16:09:56,660 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-04 16:09:56,660 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
