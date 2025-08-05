@@ -2,7 +2,6 @@ from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from spade.template import Template
-import asyncio
 
 from ml_model.model_utils import predict_dehydration_risk
 from ontology.owl_reasoner import infer_risk_and_action
@@ -46,8 +45,10 @@ class HealthAgent(Agent):
 
                     if (risk == "Mild"):
                         to_jid = "reminderagent@localhost"
+                        print("[Health] Routing to ReminderAgent for Mild Dehydration")
                     elif risk in ["Moderate", "Severe"]:
                         to_jid = "careagent@localhost"
+                        print(f"[Health] Routing to AlertAgent for {risk} Dehydration")
                     else:
                         print("[Health] No action required for Euhydrated status.")
                         return
@@ -57,7 +58,7 @@ class HealthAgent(Agent):
                     m.body = f"{risk},{action},{plan}"
                     
                     await self.send(m)
-                    print(f"[Health] Sent action to {to_jid}")
+                    print(f"[Health] Sent Message to {to_jid}")
 
                 except Exception as e:
                     print(f"[Health] Error processing message: {e}")
