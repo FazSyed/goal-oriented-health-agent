@@ -28,6 +28,7 @@ class SensorAgent(Agent):
 
     async def setup(self):
         # Add the periodic behaviour to the agent ie it will run every 10 seconds
-        print("[Sensor] SensorAgent started.")
-        await asyncio.sleep(5)  # wait for other agents to start
+        print("[Sensor] SensorAgent starting...")
+        await asyncio.sleep(20) # Wait for other agents to start
+        print("[Sensor] SensorAgent ready to collect data")
         self.add_behaviour(self.PeriodicSensor(period=10))
