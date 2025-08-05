@@ -2,6 +2,7 @@ from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from spade.template import Template
+import asyncio
 
 class CareAssistantAlertAgent(Agent):
     class AlertBehaviour(CyclicBehaviour):
@@ -27,8 +28,11 @@ class CareAssistantAlertAgent(Agent):
                         print("[ALERT] Failed to process message:", e)
 
     async def setup(self):
-        print("[ALERT] CareAssistantAlertAgent started.")
+        print("[ALERT] CareAssistantAlertAgent starting...")
         processor = self.AlertBehaviour()
+        
         template = Template()
         template.set_metadata("performative", "inform")
+        
         self.add_behaviour(processor, template)
+        print("[ALERT] CareAssistantAlertAgent ready for emergency alerts")

@@ -1,6 +1,8 @@
 from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
+import asyncio
+from spade.template import Template
 
 class ReminderAgent(Agent):
     class ReminderBehaviour(CyclicBehaviour):
@@ -17,4 +19,11 @@ class ReminderAgent(Agent):
                 print("[Reminder] Plan:\n", plan)
 
     async def setup(self):
-        self.add_behaviour(self.ReminderBehaviour())
+        print("[ALERT] ReminderAgent starting...")
+        processor = self.ReminderBehaviour()
+
+        template = Template()
+        template.set_metadata("performative", "inform")
+        
+        self.add_behaviour(processor, template)
+        print("[Reminder] ReminderAgent ready to send hydration reminders")

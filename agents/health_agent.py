@@ -2,6 +2,7 @@ from spade.agent import Agent
 from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from spade.template import Template
+import asyncio
 
 from ml_model.model_utils import predict_dehydration_risk
 from ontology.owl_reasoner import infer_risk_and_action
@@ -62,10 +63,11 @@ class HealthAgent(Agent):
                     print(f"[Health] Error processing message: {e}")
 
     async def setup(self):
-        print("[Health] Agent started and ready.")
+        print("[Health] HealthAgent starting...")
         processor = self.Processor()
 
         template = Template()
         template.set_metadata("performative", "inform")
 
         self.add_behaviour(processor, template)
+        print("[Health] HealthAgent ready to process health data")
