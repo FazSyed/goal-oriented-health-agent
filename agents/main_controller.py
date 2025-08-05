@@ -30,9 +30,6 @@ async def main():
         
         # Start all agents
         print("🚀 Starting agents...")
-
-        await sensor.start(auto_register=True)
-        print("✅ Sensor Agent started")
             
         await health.start(auto_register=True)
         print("✅ Health Agent started")
@@ -42,6 +39,9 @@ async def main():
             
         await alert.start(auto_register=True)
         print("✅ Alert Agent started")
+
+        await sensor.start(auto_register=True)
+        print("✅ Sensor Agent started")
         
         print("Initializing all agents...")
         await asyncio.sleep(120) # run for 2 minutes
