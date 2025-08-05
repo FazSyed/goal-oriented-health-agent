@@ -143,3 +143,39 @@
 2025-08-04 16:09:56,657 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
 2025-08-04 16:09:56,660 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
 2025-08-04 16:09:56,660 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-05 18:27:22,110 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,115 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,116 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,211 - INFO - JID set to: healthagent@localhost/17964544813646926370194
+2025-08-05 18:27:22,212 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-05 18:27:22,344 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,344 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,344 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,422 - INFO - JID set to: reminderagent@localhost/9742127440053070400258
+2025-08-05 18:27:22,423 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-05 18:27:22,559 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,560 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,564 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,656 - INFO - JID set to: careagent@localhost/1038250017897333159322
+2025-08-05 18:27:22,657 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-05 18:27:22,818 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,821 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,821 - INFO - Authentication failed: not-authorized
+2025-08-05 18:27:22,896 - INFO - JID set to: sensoragent@localhost/10668452185744298738386
+2025-08-05 18:27:22,897 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-05 18:29:42,911 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-05 18:29:42,914 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-05 18:29:43,066 - INFO - connection_lost: (None,)
+2025-08-05 18:29:43,073 - INFO - Client disconnected.
+2025-08-05 18:29:43,073 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-05 18:29:43,237 - INFO - connection_lost: (None,)
+2025-08-05 18:29:43,240 - INFO - Client disconnected.
+2025-08-05 18:29:43,241 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-05 18:29:43,396 - INFO - connection_lost: (None,)
+2025-08-05 18:29:43,396 - INFO - Client disconnected.
+2025-08-05 18:29:43,400 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-05 18:29:43,557 - INFO - connection_lost: (None,)
+2025-08-05 18:29:43,559 - INFO - Client disconnected.
+2025-08-05 18:29:43,562 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-05 18:29:43,562 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-05 18:29:43,565 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
