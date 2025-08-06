@@ -77,6 +77,8 @@ def run_planner(risk_status: str):
         print("No plan was found. Check your domain/problem setup.")
         return None
 
-# if __name__ == "__main__":
-#     inferred_risk_status = "Mild"
-#     run_planner(inferred_risk_status)
+# Debugging
+if __name__ == "__main__":
+
+    inferred_risk_status = "Mild"
+    run_planner(inferred_risk_status)

@@ -24,7 +24,7 @@ class ReminderAgent(Agent):
                         # Split the message body into risk, action, and plan
                         risk, action, plan = msg.body.split(",", 2)
 
-                        print(f"[Reminder] 💧 MILD HYDRATION ALERT 💧")
+                        print(f"[Reminder] 💧 MILD DEHYDRATION ALERT 💧")
                         print(f"[Reminder] Risk Level: {risk}")
                         print(f"[Reminder] Recommended Action: {action}")
                         print(f"[Reminder] Care Plan: {plan}")
