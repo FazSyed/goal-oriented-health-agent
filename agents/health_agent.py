@@ -8,9 +8,19 @@ from ontology.owl_reasoner import infer_risk_and_action
 from pddl_planning.planner_runner import run_planner
 
 class HealthAgent(Agent):
+
+    """
+    The HealthAgent is responsible for processing health data received from the sensor agent.
+    It predicts dehydration risk based on the vitals data and routes the information to the appropriate agent.
+
+    It uses the following components:
+        - Machine Learning model to predict dehydration risk
+        - Ontology to infer risk and action
+        - PDDL planner to generate a plan for the action
+
+    It communicates with the ReminderAgent for mild dehydration and the CareAgent for moderate or severe dehydration
+    """
     class Processor(CyclicBehaviour):
-        # Waits for a message from the sensor agent, 
-        # processes it, and sends a response to the reminder agent.
         
         # Waiting for a message from the sensor agent
         async def run(self):

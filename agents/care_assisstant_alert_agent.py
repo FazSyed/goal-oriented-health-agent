@@ -6,6 +6,12 @@ import logging
 from datetime import datetime
 
 class CareAssistantAlertAgent(Agent):
+
+    """
+    The CareAssistantAlertAgent is responsible for sending emergency reminders to the user based on the health agent's messages.
+    It listens for messages from the health agent and processes them to send warnings or emergencies
+    if the dehydration risk level is Moderate or Severe.
+    """
     class AlertBehaviour(CyclicBehaviour):
        
         async def run(self):

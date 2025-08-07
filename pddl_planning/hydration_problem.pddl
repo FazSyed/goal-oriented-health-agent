@@ -6,7 +6,7 @@
     )
 
     (:init
-        (severely_dehydrated patient1)
+        (moderately_dehydrated patient1)
         (monitoring_active patient1)
     )
 

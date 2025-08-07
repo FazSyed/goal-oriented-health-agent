@@ -6,6 +6,13 @@ import random
 import logging
 
 class SensorAgent(Agent):
+
+    """
+    The SensorAgent simulates a weight sensor that periodically sends weight readings to the HealthAgent.
+    It uses a periodic behaviour to send readings every 10 seconds.
+    The readings simulate a baseline weight of 72kg, with current values ranging from 63kg to 72kg.
+    The TBW (Total Body Water) Loss percentage for these values would range from 0% to 12.5%.
+    """
     class PeriodicSensor(PeriodicBehaviour):
 
         async def run(self):
@@ -13,10 +20,6 @@ class SensorAgent(Agent):
                 # Simulate a weight sensor reading
                 baseline = 72
                 current = round(max(0, baseline - random.uniform(0, 9)), 2)
-
-                # The baseline weight is 72.0
-                # current values can range from [63.0 - 72.0]
-                # TBW Loss % would go from 0% to 12.5%
 
                 # Send the message to the health agent
                 msg = Message(to="healthagent@localhost")
@@ -26,7 +29,6 @@ class SensorAgent(Agent):
 
                 await self.send(msg)
                 
-                print(f"[Sensor] Sent weight {current:.2f}")
                 print(f"[Sensor] Baseline: {baseline}kg, Current: {current:.2f}kg")
                 print(f"[Sensor] Message sent to health agent")
             

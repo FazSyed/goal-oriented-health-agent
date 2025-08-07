@@ -7,6 +7,12 @@ import logging
 from datetime import datetime
 
 class ReminderAgent(Agent):
+
+    """
+    The ReminderAgent is responsible for sending hydration reminders to the user based on the health agent's messages.
+    It listens for messages from the health agent and processes them to send 
+    reminders about hydration if the dehydration risk level is Mild.
+    """
     class ReminderBehaviour(CyclicBehaviour):
 
         async def run(self):

@@ -42,7 +42,6 @@ def predict_dehydration_risk(baseline_weight, current_weight):
 
 # Debugging
 if __name__ == "__main__":
-
     baseline_weight = 72  # kg
     current_weight = 65   # kg
 

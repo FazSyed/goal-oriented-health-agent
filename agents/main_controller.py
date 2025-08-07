@@ -17,6 +17,22 @@ logging.basicConfig(
 
 async def main():
 
+    """
+    Main controller for the Elderly Dehydration Monitoring System.
+    This script initializes and starts all agents in the multi-agent system.
+    It handles agent registration, startup, and shutdown processes.
+    It also includes error handling and logging for better traceability.
+    The system runs for 2 minutes before shutting down all agents.
+
+    The following agents are utilized:
+        - SensorAgent: Monitors hydration levels and sends data to the health agent.
+        - HealthAgent: Analyzes health data, provides recommendations, and alerts appropriate agents (reminder or care assistant).
+        - ReminderAgent: Sends reminders for hydration (Mild Dehydration).
+        - CareAssistantAlertAgent: Alerts caregivers in case of critical conditions (Moderate/Severe Dehydration).
+        
+    The agents communicate via XMPP and are designed to work together in a cohesive manner.
+    """
+
     print("=" * 60)
     print("🏥 ELDERLY DEHYDRATION MONITORING SYSTEM")
     print("🤖 Multi-Agent System Starting...")

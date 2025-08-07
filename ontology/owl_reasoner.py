@@ -3,6 +3,18 @@ import owlready2
 import uuid # For generating unique patient IDs
 
 def infer_risk_and_action(tbw_percent: float):
+
+    """
+    Infers dehydration risk and action based on TBW Loss Percent using OWL ontology.
+
+    Parameters:
+    - tbw_percent: Total Body Water Loss Percent
+
+    Returns:
+    - risk: Inferred risk status (str)
+    - action: Inferred action to be taken (str)
+    """
+
     # Specifying path to Java executable (required for running Pellet reasoner)
     owlready2.JAVA_EXE = "C:/Program Files/Common Files/Oracle/Java/javapath/java.exe"
     # Set amount of memory (in MB) that Java can use
@@ -10,20 +22,6 @@ def infer_risk_and_action(tbw_percent: float):
 
     # Loading existing OWL ontology
     onto = get_ontology("./ontology/healthagent.owl").load()
-
-    '''
-    with onto:
-        patient1 = onto.Patient1
-        
-        # Clean previous assertions
-        patient1.TBWLossPercent = []
-        patient1.hasRiskStatus = []
-        patient1.triggersAction = []
-        patient1.is_a = [onto.Patient]  # Reset class
-
-        # Add new value
-        patient1.TBWLossPercent = [(int(tbw_percent))]
-    '''
     
     with onto:
         # Create a new Patient instance with a unique ID to prevent conflicts
@@ -36,15 +34,16 @@ def infer_risk_and_action(tbw_percent: float):
     with onto:
         # Run the Pellet reasoner and infer new property values (including updated TBWLossPercent data property)
         sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
-        
-    # Extracting inferred risk status and action for Patient1
 
+    '''
     # Debugging output to verify the TBW Loss Percent and inferred values
+    
     print(f"[DEBUG] {p.name}")
     print(f"[DEBUG] Patient1 TBW Loss = {int(tbw_percent)}%")
     print(f"[DEBUG] Inferred Classes: {[cls.name for cls in p.is_a]}")
     print(f"[DEBUG] Risk Status: {[r.name for r in p.hasRiskStatus]}")
     print(f"[DEBUG] Action Trigger: {[a.name for a in p.triggersAction]}")
+    '''
 
     # Return the Risk Status and Action for Patient1
     risk = p.hasRiskStatus[0].name if p.hasRiskStatus else None

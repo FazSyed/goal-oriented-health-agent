@@ -87,19 +87,19 @@
     )
 
     ;; Action: Recheck hydration after some time
-    (:action recheck
-        :parameters (?p - patient)
-        :precondition (and
-            (checked ?p)
-            (not (threshold_met ?p))
-        )
-        :effect (and
-            (not (checked ?p))
-            (when
-                (mildly_dehydrated ?p)
-                (and
-                    (not (mildly_dehydrated ?p))
-                    (moderately_dehydrated ?p)))
-        )
-    )
+    ; (:action recheck
+    ;     :parameters (?p - patient)
+    ;     :precondition (and
+    ;         (checked ?p)
+    ;         (not (threshold_met ?p))
+    ;     )
+    ;     :effect (and
+    ;         (not (checked ?p))
+    ;         (when
+    ;             (mildly_dehydrated ?p)
+    ;             (and
+    ;                 (not (mildly_dehydrated ?p))
+    ;                 (moderately_dehydrated ?p)))
+    ;     )
+    ; )
 )

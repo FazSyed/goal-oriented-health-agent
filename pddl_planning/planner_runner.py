@@ -2,6 +2,16 @@ import subprocess
 import os
 
 def create_problem_file(risk_status: str, problem_path: str):
+
+    """
+    Generates a PDDL problem file based on the dehydration risk status.
+
+    Parameters:
+    - risk_status: The dehydration risk status (e.g., "Mild", "Moderate", "Severe", or None).
+    - problem_path: The path where the PDDL problem file will be saved.
+
+    """
+
     init_facts = []
 
     if risk_status == "Mild":
@@ -40,6 +50,17 @@ def create_problem_file(risk_status: str, problem_path: str):
     print("Problem file created.")
 
 def run_planner(risk_status: str):
+
+    """
+    Runs the Fast Downward planner with the generated PDDL problem file.
+    
+    Parameters:
+    - risk_status: The dehydration risk status (e.g., "Mild", "Moderate", "Severe", or None).
+
+    Returns:
+    - plan: The generated plan as a string, or None if no plan was generated.
+
+    """
     
     if risk_status is None:
         print("Not at Risk. No planning needed.")
@@ -79,6 +100,5 @@ def run_planner(risk_status: str):
 
 # Debugging
 if __name__ == "__main__":
-
     inferred_risk_status = "Mild"
     run_planner(inferred_risk_status)
