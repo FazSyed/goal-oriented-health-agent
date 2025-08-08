@@ -41,4 +41,4 @@ class SensorAgent(Agent):
         print("[Sensor] SensorAgent starting...")
         await asyncio.sleep(5) # Wait for other agents to start
         print("[Sensor] SensorAgent ready to collect data")
-        self.add_behaviour(self.PeriodicSensor(period=10))
+        self.add_behaviour(self.PeriodicSensor(period=1800))  # Run every 30 minutes
