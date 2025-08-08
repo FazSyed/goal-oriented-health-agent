@@ -60,7 +60,7 @@ async def main():
         print("✅ Sensor Agent started")
         
         print("Initializing all agents...")
-        await asyncio.sleep(7200) # Run for 2 hours (7200 seconds)
+        await asyncio.sleep(120) # Run for 2 minutes
 
     except Exception as e:
         print(f"❌ Error in main controller: {e}")
