@@ -2,6 +2,8 @@ from owlready2 import *
 import owlready2
 import uuid # For generating unique patient IDs
 
+counter = 0
+
 def infer_risk_and_action(tbw_percent: float):
 
     """
@@ -14,6 +16,7 @@ def infer_risk_and_action(tbw_percent: float):
     - risk: Inferred risk status (str)
     - action: Inferred action to be taken (str)
     """
+    global counter
 
     # Specifying path to Java executable (required for running Pellet reasoner)
     owlready2.JAVA_EXE = "C:/Program Files/Common Files/Oracle/Java/javapath/java.exe"
@@ -26,9 +29,10 @@ def infer_risk_and_action(tbw_percent: float):
     with onto:
         # Create a new Patient instance with a unique ID to prevent conflicts
         # This ensures that each run creates a fresh patient instance
-        patient_id = f"Patient_1.{uuid.uuid4().hex[:6]}" 
+        patient_id = f"Patient_1.{counter}"
         p = onto.Patient(patient_id)
         p.TBWLossPercent = [int(tbw_percent)]
+        counter += 1
 
     # Working within the ontology context to run reasoner
     with onto:
@@ -37,7 +41,7 @@ def infer_risk_and_action(tbw_percent: float):
 
     '''
     # Debugging output to verify the TBW Loss Percent and inferred values
-    
+
     print(f"[DEBUG] {p.name}")
     print(f"[DEBUG] Patient1 TBW Loss = {int(tbw_percent)}%")
     print(f"[DEBUG] Inferred Classes: {[cls.name for cls in p.is_a]}")
@@ -45,14 +49,26 @@ def infer_risk_and_action(tbw_percent: float):
     print(f"[DEBUG] Action Trigger: {[a.name for a in p.triggersAction]}")
     '''
 
-    # Return the Risk Status and Action for Patient1
-    risk = p.hasRiskStatus[0].name if p.hasRiskStatus else None
-    action = p.triggersAction[0].name if p.triggersAction else None
-    
+    # Check if the patient has a Risk Status that matches one of the three valid risks
+    valid_risks = [
+        r for r in p.hasRiskStatus
+        if r != p and hasattr(r, "name") and r.name in ["Mild", "Moderate", "Severe"]
+    ]
+    # Check if the patient has an Action that matches an existing action provided by the ontology
+    valid_actions = [
+        a for a in p.triggersAction
+        if a != p and hasattr(a, "name")
+    ]
+
+    # Assign the first valid risk and action to their variables if they exist
+    # If no valid risks or actions are found, set them to None
+    risk = valid_risks[0].name if valid_risks else None
+    action = valid_actions[0].name if valid_actions else None
+
     return risk, action    
 
 # Debugging
 if __name__ == "__main__":
-    for weight in [63.1, 65.54, 70.54, 69.32]:
+    for weight in [63.1, 65.54, 70.54, 68.7, 69.32]:
         tbw = ((72 - weight) / 72) * 100
         print(infer_risk_and_action(tbw))
