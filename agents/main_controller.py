@@ -60,12 +60,19 @@ async def main():
         print("✅ Sensor Agent started")
         
         print("Initializing all agents...")
-        await asyncio.sleep(120) # Run for 2 minutes
+        
+        print("Press Ctrl+C to stop the system at any time.")
+
+        while True:
+            await asyncio.sleep(2)  # Run the loop indefinitely
+
+    except KeyboardInterrupt:
+        print("\n⚠️  System interrupted by user")
 
     except Exception as e:
         print(f"❌ Error in main controller: {e}")
         logging.error(f"Main controller error: {e}")
-        
+    
     finally:
         print("\n🛑 Shutting down agents...")
         try:
