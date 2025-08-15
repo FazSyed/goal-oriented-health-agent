@@ -1,6 +1,5 @@
 from owlready2 import *
 import owlready2
-import uuid # For generating unique patient IDs
 
 counter = 0
 
