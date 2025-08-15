@@ -11,7 +11,8 @@
      xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
      xmlns:HealthAgent="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent">
-        <rdfs:comment>Phase 1 of Goal-Oriented Agents for Real-time Decision-Making in Elderly Care. This phase focuses on a Single Goal - maintaining the patients hydration above threshold value ie preventing risk of dehydration.</rdfs:comment>
+        <rdfs:comment>Goal-Oriented Agents for Real-time Decision-Making in Elderly Care: 
+Creating a multi-agent system (MAS) that utilized Machine Learning, OWL, PDDL, and SPADE agents to detect and alert dehydration risks in elderly patients.</rdfs:comment>
     </owl:Ontology>
     
 
@@ -49,7 +50,7 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#hasRiskStatus">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#RiskStatus"/>
-        <rdfs:comment>Patient may have a certain Risk Status depending on their hydration and threshold value</rdfs:comment>
+        <rdfs:comment>Patient may have a certain Risk Status depending on the amount of TBWLossPercent</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -59,7 +60,7 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#triggersAction">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#RiskStatus"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#AlertAction"/>
-        <rdfs:comment>If RiskStatus detected, it triggers an action (Alerts a text)</rdfs:comment>
+        <rdfs:comment>If RiskStatus detected, it triggers an action</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -80,6 +81,7 @@
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#TBWLossPercent">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#Patient"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>A gold-standard biomarker for dehydration detection that is determined by the changes in body weight.</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -126,7 +128,7 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:comment>A Patient with a certain required hydration level, where the hydration value is less than or equal to 1500 ml. They have a Risk (status) of a specific Dehydration level.</rdfs:comment>
+        <rdfs:comment>When the Patient has a TBWLossPercent value &lt;2, they are Dehydrated. The Dehydration Status is further divided into Mild, Moderate, and Severe.</rdfs:comment>
     </owl:Class>
     
 
