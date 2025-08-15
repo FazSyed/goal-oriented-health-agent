@@ -9,7 +9,7 @@ class SensorAgent(Agent):
 
     """
     The SensorAgent simulates a weight sensor that periodically sends weight readings to the HealthAgent.
-    It uses a periodic behaviour to send readings every 10 seconds.
+    It uses a periodic behaviour to send readings every 20 seconds.
     The readings simulate a baseline weight of 72kg, with current values ranging from 63kg to 72kg.
     The TBW (Total Body Water) Loss percentage for these values would range from 0% to 12.5%.
     """
