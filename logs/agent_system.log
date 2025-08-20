@@ -1481,3 +1481,79 @@ task: <Task pending name='Task-1432' coro=<XEP_0199._keepalive() running at C:\U
 2025-08-20 13:59:38,787 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
 2025-08-20 13:59:38,790 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
 2025-08-20 13:59:38,790 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-20 17:08:21,785 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:21,788 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:21,790 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:21,930 - INFO - JID set to: healthagent@localhost/15013054717311280963226
+2025-08-20 17:08:21,931 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-20 17:08:22,110 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,112 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,115 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,194 - INFO - JID set to: reminderagent@localhost/14143859111986601138290
+2025-08-20 17:08:22,196 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-20 17:08:22,345 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,347 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,348 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,422 - INFO - JID set to: careagent@localhost/8139340546036565505354
+2025-08-20 17:08:22,423 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-20 17:08:22,613 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,616 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,618 - INFO - Authentication failed: not-authorized
+2025-08-20 17:08:22,755 - INFO - JID set to: sensoragent@localhost/16472661019104594289418
+2025-08-20 17:08:22,758 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-20 17:08:31,003 - WARNING - MODERATE DEHYDRATION ALERT at 2025-08-20 17:08:31
+2025-08-20 17:08:50,698 - CRITICAL - SEVERE DEHYDRATION ALERT at 2025-08-20 17:08:50
+2025-08-20 17:08:54,728 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-20 17:08:54,883 - INFO - connection_lost: (None,)
+2025-08-20 17:08:54,886 - INFO - Client disconnected.
+2025-08-20 17:08:54,888 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-20 17:08:55,040 - INFO - connection_lost: (None,)
+2025-08-20 17:08:55,040 - INFO - Client disconnected.
+2025-08-20 17:08:55,042 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-20 17:08:55,190 - INFO - connection_lost: (None,)
+2025-08-20 17:08:55,191 - INFO - Client disconnected.
+2025-08-20 17:08:55,192 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-20 17:08:55,340 - INFO - connection_lost: (None,)
+2025-08-20 17:08:55,341 - INFO - Client disconnected.
+2025-08-20 17:08:55,346 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-20 17:08:55,348 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-20 17:08:55,349 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-20 17:08:55,350 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-20 17:11:56,062 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,066 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,068 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,160 - INFO - JID set to: healthagent@localhost/6659080152994582344482
+2025-08-20 17:11:56,163 - INFO - Agent healthagent@localhost connected and authenticated.
+2025-08-20 17:11:56,393 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,397 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,399 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,499 - INFO - JID set to: reminderagent@localhost/16886081859993236763546
+2025-08-20 17:11:56,501 - INFO - Agent reminderagent@localhost connected and authenticated.
+2025-08-20 17:11:56,735 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,738 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,740 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:56,864 - INFO - JID set to: careagent@localhost/11918160551518026958610
+2025-08-20 17:11:56,869 - INFO - Agent careagent@localhost connected and authenticated.
+2025-08-20 17:11:57,076 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:57,079 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:57,081 - INFO - Authentication failed: not-authorized
+2025-08-20 17:11:57,186 - INFO - JID set to: sensoragent@localhost/1651642147811257320674
+2025-08-20 17:11:57,186 - INFO - Agent sensoragent@localhost connected and authenticated.
+2025-08-20 17:12:09,986 - WARNING - MODERATE DEHYDRATION ALERT at 2025-08-20 17:12:09
+2025-08-20 17:12:27,553 - CRITICAL - SEVERE DEHYDRATION ALERT at 2025-08-20 17:12:27
+2025-08-20 17:12:50,550 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-20 17:12:50,702 - INFO - connection_lost: (None,)
+2025-08-20 17:12:50,703 - INFO - Client disconnected.
+2025-08-20 17:12:50,705 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2025-08-20 17:12:50,857 - INFO - connection_lost: (None,)
+2025-08-20 17:12:50,858 - INFO - Client disconnected.
+2025-08-20 17:12:50,859 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-20 17:12:51,011 - INFO - connection_lost: (None,)
+2025-08-20 17:12:51,012 - INFO - Client disconnected.
+2025-08-20 17:12:51,013 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-20 17:12:51,168 - INFO - connection_lost: (None,)
+2025-08-20 17:12:51,169 - INFO - Client disconnected.
+2025-08-20 17:12:51,171 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2025-08-20 17:12:51,172 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2025-08-20 17:12:51,174 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2025-08-20 17:12:51,174 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
