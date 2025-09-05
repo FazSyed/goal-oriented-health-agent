@@ -66,7 +66,7 @@ def run_planner(risk_status: str):
         print("Not at Risk. No planning needed.")
         return None
 
-    base_path = "C:/Users/Fazila Syed/Documents/COLLEGE/RIT/Coop/Research Coop/GoalOrientedElderlyCare/pddl_planning"
+    base_path = "pddl_planning"
     domain_file = "hydration_domain.pddl"
     problem_file = "hydration_problem.pddl"
     output_file = "hydration_plan.txt"
