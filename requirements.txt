@@ -1,5 +1,6 @@
 fastapi==0.115.12
 joblib==1.5.1
+kafka-python==2.2.15
 keras==3.10.0
 matplotlib==3.9.2
 matplotlib-inline==0.1.7
