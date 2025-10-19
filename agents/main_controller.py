@@ -5,6 +5,8 @@ from agents.care_assisstant_alert_agent import CareAssistantAlertAgent
 
 import asyncio
 import logging
+from threading import Thread
+from kafka_db.consumer_to_csv import consume_and_save_to_csv
 
 logging.basicConfig(
     level=logging.INFO,
@@ -60,6 +62,12 @@ async def main():
         print("✅ Sensor Agent started")
         
         print("Initializing all agents...")
+            
+        # Start Kafka consumer in a separate thread
+        csv_consumer_thread = Thread(target=consume_and_save_to_csv, daemon=True)
+        csv_consumer_thread.start()
+        
+        print("📊 Kafka consumer running in background (saving to sensor_data.csv)")
         
         print("Press Ctrl+C to stop the system at any time.")
 
@@ -98,6 +106,8 @@ async def main():
             print("✅ Alert Agent stopped")
         except:
             pass
+
+        print("✅ Kafka consumer stopped")
             
         print("🏁 System shutdown complete")   
 
