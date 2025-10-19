@@ -7,6 +7,9 @@ from ml_model.model_utils import predict_dehydration_risk
 from ontology.owl_reasoner import infer_risk_and_action
 from pddl_planning.planner_runner import run_planner
 
+from kafka_db.kafka_utils import KafkaLogger
+import ast # for safely evaluating string representations of Python literals
+
 class HealthAgent(Agent):
 
     """
@@ -21,7 +24,7 @@ class HealthAgent(Agent):
     It communicates with the ReminderAgent for mild dehydration and the CareAgent for moderate or severe dehydration
     """
     class Processor(CyclicBehaviour):
-        
+
         # Waiting for a message from the sensor agent
         async def run(self):
             msg = await self.receive(timeout=20)
@@ -31,16 +34,17 @@ class HealthAgent(Agent):
 
                 try:
                     # Split the message body to get baseline and current weight
-                    baseline_str, current_str = msg.body.split(",")
-                    baseline = float(baseline_str.strip())
-                    current = float(current_str.strip())
+                    data = ast.literal_eval(msg.body)
+                    baseline = data.get("baseline")
+                    current = data.get("current")
 
-                    # predict TBW Loss % and risk from the trained ML model
+                    # Predict TBW Loss % and risk from the trained ML model
                     _, _, tbw_pct = predict_dehydration_risk(baseline, current)
+
                     # Infer risk and action from the ontology
                     risk, action = infer_risk_and_action(tbw_pct)
                     print(f"[Health] Risk={risk}, Action={action}")
-                    
+
                     if risk is None:
                         print("[Health] No action required for Euhydrated status.")
                         return
@@ -55,14 +59,19 @@ class HealthAgent(Agent):
 
                     if (risk == "Mild"):
                         to_jid = "reminderagent@localhost"
+                        KafkaLogger(topic='reminders').publish({"risk": risk, "action": action, "plan": plan})
                         print("[Health] Routing to ReminderAgent for Mild Dehydration")
                     elif risk in ["Moderate", "Severe"]:
                         to_jid = "careagent@localhost"
+                        KafkaLogger(topic='care_alerts').publish({"risk": risk, "action": action, "plan": plan})
                         print(f"[Health] Routing to AlertAgent for {risk} Dehydration")
                     else:
                         print("[Health] No action required for Euhydrated status.")
                         return
                     
+                    # Uncomment to debug Kafka publishing
+                    # print(f"[DEBUG] Sent {risk} alert to topic: {'care_alerts' if risk in ['Moderate', 'Severe'] else 'reminders'}")
+
                     m = Message(to=to_jid)
                     m.set_metadata("performative", "inform")
                     m.body = f"{risk},{action},{plan}"
@@ -75,6 +84,8 @@ class HealthAgent(Agent):
 
     async def setup(self):
         print("[Health] HealthAgent starting...")
+
+        print(f"[HealthAgent] Started as {str(self.jid)}")
         processor = self.Processor()
 
         template = Template()
