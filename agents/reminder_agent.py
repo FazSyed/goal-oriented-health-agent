@@ -3,7 +3,6 @@ from spade.behaviour import CyclicBehaviour
 from spade.message import Message
 from spade.template import Template
 import logging
-import logging
 from datetime import datetime
 
 class ReminderAgent(Agent):
