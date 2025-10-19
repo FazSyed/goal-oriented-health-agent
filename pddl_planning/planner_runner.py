@@ -77,7 +77,7 @@ def run_planner(risk_status: str):
     # Step 2: Run Fast Downward planner
     subprocess.run([
         "python",
-        "C:/Users/Fazila Syed/Downloads/FastDownward/downward/fast-downward.py",
+        "C:/Users/fazil/Downloads/FastDownward/downward/fast-downward.py",
         domain_file,
         problem_file,
         "--search", "astar(blind())"
