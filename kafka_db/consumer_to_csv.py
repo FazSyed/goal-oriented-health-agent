@@ -11,7 +11,7 @@ def consume_and_save_to_csv():
     '''
 
     topic = 'vitals_raw'  # Kafka topic to subscribe to
-    csv_file = os.path.join(os.path.dirname(__file__), 'vitals_raw_log.csv')  # Path to CSV file
+    csv_file = os.path.join(os.path.dirname(__file__), '..', 'visualization', 'vitals_raw_log.csv')  # Path to CSV file
 
     # Create CSV file with headers if it doesn't exist
     if not os.path.exists(csv_file):
