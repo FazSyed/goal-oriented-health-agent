@@ -3,18 +3,8 @@ import owlready2
 
 counter = 0
 
-def infer_risk_and_action(tbw_percent: float):
+def infer_risk_and_action(risk_label: str):
 
-    """
-    Infers dehydration risk and action based on TBW Loss Percent using OWL ontology.
-
-    Parameters:
-    - tbw_percent: Total Body Water Loss Percent
-
-    Returns:
-    - risk: Inferred risk status (str)
-    - action: Inferred action to be taken (str)
-    """
     global counter
 
     # Specifying path to Java executable (required for running Pellet reasoner)
@@ -23,14 +13,20 @@ def infer_risk_and_action(tbw_percent: float):
     owlready2.JAVA_MEMORY = 8000
 
     # Loading existing OWL ontology
-    onto = get_ontology("./ontology/healthagent.owl").load()
+    onto = get_ontology("./ontology/healthagent-v2.owl").load()
     
     with onto:
         # Create a new Patient instance with a unique ID to prevent conflicts
         # This ensures that each run creates a fresh patient instance
-        patient_id = f"Patient_1.{counter}"
+        patient_id=f"Patient_1.{counter}"
         p = onto.Patient(patient_id)
-        p.TBWLossPercent = [int(tbw_percent)]
+
+        risk_individual = onto.search_one(iri="*#"+risk_label)
+        if risk_individual is not None:
+            p.hasRiskStatus.append(risk_individual)
+        else:
+            print(f"[ERROR] Risk individual '{risk_label}' not found in ontology.")
+
         counter += 1
 
     # Working within the ontology context to run reasoner
@@ -48,10 +44,12 @@ def infer_risk_and_action(tbw_percent: float):
     print(f"[DEBUG] Action Trigger: {[a.name for a in p.triggersAction]}")
     '''
 
+    valid_risk_names = ["Euhydrated", "Mild", "Moderate", "Severe"]
+
     # Check if the patient has a Risk Status that matches one of the three valid risks
     valid_risks = [
         r for r in p.hasRiskStatus
-        if r != p and hasattr(r, "name") and r.name in ["Mild", "Moderate", "Severe"]
+        if r != p and hasattr(r, "name") and r.name in valid_risk_names
     ]
     # Check if the patient has an Action that matches an existing action provided by the ontology
     valid_actions = [
@@ -68,6 +66,7 @@ def infer_risk_and_action(tbw_percent: float):
 
 # Debugging
 if __name__ == "__main__":
-    for weight in [63.1, 65.54, 70.54, 68.7, 69.32]:
-        tbw = ((72 - weight) / 72) * 100
-        print(infer_risk_and_action(tbw))
+    test_labels = ["Euhydrated", "Mild", "Moderate", "Severe"]
+    for label in test_labels:
+        risk, action = infer_risk_and_action(label)
+        print(f"Input: {label} → Risk: {risk}, Action: {action}")
