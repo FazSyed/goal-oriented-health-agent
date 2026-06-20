@@ -4,6 +4,18 @@ import owlready2
 counter = 0
 
 def infer_risk_and_action(risk_label: str):
+    """"
+    Infers care action based on ML-predicted risk label using OWL ontology.
+    Phase 2: ML model handles classification, ontology handles action inference only.
+
+    Parameters:
+    - risk_label: ML predicted risk label
+                  One of: "Euhydrated", "Mild", "Moderate", "Severe"
+
+    Returns:
+    - risk: Inferred risk status (str)
+    - action: Inferred action to be taken (str)
+    """
 
     global counter
 
@@ -21,6 +33,8 @@ def infer_risk_and_action(risk_label: str):
         patient_id=f"Patient_1.{counter}"
         p = onto.Patient(patient_id)
 
+        # Phase 2 change: set hasRiskStatus directly from ML prediction
+        # instead of setting TBWLossPercent and letting SWRL infer risk
         risk_individual = onto.search_one(iri="*#"+risk_label)
         if risk_individual is not None:
             p.hasRiskStatus.append(risk_individual)
@@ -31,19 +45,10 @@ def infer_risk_and_action(risk_label: str):
 
     # Working within the ontology context to run reasoner
     with onto:
-        # Run the Pellet reasoner and infer new property values (including updated TBWLossPercent data property)
+        # Run Pellet reasoner to infer triggersAction from hasRiskStatus
         sync_reasoner_pellet(infer_property_values=True, infer_data_property_values=True)
 
-    '''
-    # Debugging output to verify the TBW Loss Percent and inferred values
-
-    print(f"[DEBUG] {p.name}")
-    print(f"[DEBUG] Patient1 TBW Loss = {int(tbw_percent)}%")
-    print(f"[DEBUG] Inferred Classes: {[cls.name for cls in p.is_a]}")
-    print(f"[DEBUG] Risk Status: {[r.name for r in p.hasRiskStatus]}")
-    print(f"[DEBUG] Action Trigger: {[a.name for a in p.triggersAction]}")
-    '''
-
+    # List of valid risk names to check against patient's hasRiskStatus
     valid_risk_names = ["Euhydrated", "Mild", "Moderate", "Severe"]
 
     # Check if the patient has a Risk Status that matches one of the three valid risks
