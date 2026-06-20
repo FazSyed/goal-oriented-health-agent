@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 # Load the trained model
-model = joblib.load("ml_model/dehydration_model.pkl")
+model = joblib.load("ml_model/dehydration_model_rf.pkl")
 
 risk_mapping = {
     0: "Euhydrated",
@@ -12,41 +12,42 @@ risk_mapping = {
     3: "Severe" 
 }
 
-def predict_dehydration_risk(baseline_weight, current_weight):
-    """
-    Predict dehydration risk from patient data.
-
-    Parameters:
-    - baseline_weight: Baseline weight in kg
-    - current_weight: Current weight in kg
-
-    Returns:
-    - prediction_code (int)
-    - prediction_label (str)
-    - tbw_loss_percent (float)
-    """
-    absolute_weight_loss = baseline_weight - current_weight
-    tbw_loss_percent = (absolute_weight_loss / baseline_weight) * 100
+def predict_dehydration_risk(sodium, potassium, chloride, bun, creatinine, glucose, age, gender, weight, bmi):
 
     # Match feature order from training
     feature_names = [
-        'Absolute Weight Loss',
-        'TBW Loss % (Elders)'
+        'Sodium',
+        'Potassium',
+        'Chloride',
+        'BUN',
+        'Creatinine',
+        'Glucose',
+        'Age',
+        'Gender',
+        'Weight',
+        'BMI'
     ]
-    features = pd.DataFrame([[absolute_weight_loss, tbw_loss_percent]], columns=feature_names)
+    features = pd.DataFrame([[sodium, potassium, chloride, bun, creatinine, glucose, age, gender, weight, bmi]], columns=feature_names)
 
     prediction_code = model.predict(features)[0]
     prediction_label = risk_mapping.get(int(prediction_code), "Unknown")
 
-    return prediction_code, prediction_label, tbw_loss_percent
+    return prediction_code, prediction_label
 
 # Debugging
 if __name__ == "__main__":
-    baseline_weight = 72  # kg
-    current_weight = 65   # kg
-
-    code, label, percent = predict_dehydration_risk(baseline_weight, current_weight)
-
-    print("Dehydration Risk Code:", code)
-    print("Dehydration Risk Label:", label)
-    print("TBW Loss %:", round(percent, 2))
+    # Example: elderly female patient with mild dehydration indicators
+    code, label = predict_dehydration_risk(
+        sodium=142,
+        potassium=4.1,
+        chloride=103,
+        bun=18,
+        creatinine=0.9,
+        glucose=98,
+        age=72,
+        gender=2,
+        weight=65,
+        bmi=26.5
+    )
+    print(f"Prediction Code: {code}")
+    print(f"Prediction Label: {label}")
