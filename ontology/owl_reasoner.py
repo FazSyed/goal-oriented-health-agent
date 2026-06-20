@@ -25,7 +25,7 @@ def infer_risk_and_action(risk_label: str):
     owlready2.JAVA_MEMORY = 8000
 
     # Loading existing OWL ontology
-    onto = get_ontology("./ontology/healthagent-v2.owl").load()
+    onto = get_ontology("./ontology/healthagent.owl").load()
     
     with onto:
         # Create a new Patient instance with a unique ID to prevent conflicts
