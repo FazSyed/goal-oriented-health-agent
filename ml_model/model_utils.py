@@ -36,18 +36,15 @@ def predict_dehydration_risk(sodium, potassium, chloride, bun, creatinine, gluco
 
 # Debugging
 if __name__ == "__main__":
-    # Example: elderly female patient with mild dehydration indicators
-    code, label = predict_dehydration_risk(
-        sodium=142,
-        potassium=4.1,
-        chloride=103,
-        bun=18,
-        creatinine=0.9,
-        glucose=98,
-        age=72,
-        gender=2,
-        weight=65,
-        bmi=26.5
-    )
-    print(f"Prediction Code: {code}")
-    print(f"Prediction Label: {label}")
+
+    test_cases = [
+        # Label         Na    K    Cl   BUN   Cr    Glu  Age Gender  Wt   BMI
+        ("Euhydrated",  135, 4.0, 103,  16,  0.9,  110,  70,  2,  65, 25.0),
+        ("Mild",        143, 4.4, 104,  37,  2.5,  240,  68,  1,  72, 27.0),
+        ("Moderate",    147, 4.7, 106,  65,  5.7,  182,  75,  2,  60, 24.0),
+        ("Severe",      160, 4.7, 112,  49,  1.7,  114,  80,  1,  55, 22.0),
+    ]
+
+    for expected, na, k, cl, bun, cr, glu, age, gender, wt, bmi in test_cases:
+        code, label = predict_dehydration_risk(na, k, cl, bun, cr, glu, age, gender, wt, bmi)
+        print(f"Expected: {expected:15} → Got: {label}")
