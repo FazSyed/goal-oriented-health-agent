@@ -11,11 +11,18 @@ def consume_and_save_to_csv():
     '''
 
     topic = 'vitals_raw'  # Kafka topic to subscribe to
-    csv_file = os.path.join(os.path.dirname(__file__), '..', 'visualization', 'vitals_raw_log.csv')  # Path to CSV file
+    csv_file = os.path.join(os.path.dirname(__file__), '..', 'visualization', 'vitals_raw_log_phase2.csv')  # Path to CSV file
+
+    updated_columns = [
+        "timestamp", "patient_id",
+        "sodium", "potassium", "chloride",
+        "bun", "creatinine", "glucose",
+        "age", "gender", "weight", "bmi"
+    ]
 
     # Create CSV file with headers if it doesn't exist
     if not os.path.exists(csv_file):
-        pd.DataFrame(columns=["timestamp","patient_id","baseline","current"]).to_csv(csv_file, index=False)
+        pd.DataFrame(columns=updated_columns).to_csv(csv_file, index=False)
 
     # Instantiate the Kafka consumer with desired options
     consumer = KafkaConsumer(  
@@ -36,8 +43,16 @@ def consume_and_save_to_csv():
             row = {  
                 "timestamp": data.get("timestamp"), 
                 "patient_id": data.get("patient_id"), 
-                "baseline": data.get("baseline"), 
-                "current": data.get("current")
+                "sodium": data.get("sodium"),
+                "potassium": data.get("potassium"),
+                "chloride": data.get("chloride"),
+                "bun": data.get("bun"),
+                "creatinine": data.get("creatinine"),
+                "glucose": data.get("glucose"),
+                "age": data.get("age"),
+                "gender": data.get("gender"),
+                "weight": data.get("weight"),
+                "bmi": data.get("bmi")
             }
             # append the row to the CSV without writing the header
             pd.DataFrame([row]).to_csv(csv_file, mode='a', header=False, index=False)  
