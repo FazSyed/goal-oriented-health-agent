@@ -31,7 +31,7 @@ class CareAssistantAlertAgent(Agent):
                         risk, action, plan = msg.body.split(",", 2)
 
                         if (risk == "Moderate"):
-                            print(f"[ALERT] 🟠 MODERATE DEHYDRATION ALERT 🔴")
+                            print(f"[ALERT] 🟠 MODERATE DEHYDRATION ALERT 🟠")
                             print(f"[ALERT] Risk Level: {risk}")
                             print(f"[ALERT] Recommended Action: {action}")
                         elif (risk == "Severe"):
