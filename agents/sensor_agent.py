@@ -7,28 +7,29 @@ from kafka_db.kafka_utils import KafkaLogger
 
 class SensorAgent(Agent):
     class PeriodicSensor(PeriodicBehaviour):
-
-        """
-        The SensorAgent simulates a weight sensor that periodically sends weight readings to the HealthAgent.
-        It uses a periodic behaviour to send readings every 20 seconds.
-        The readings simulate a baseline weight of 72kg, with current values ranging from 63kg to 72kg.
-        The TBW (Total Body Water) Loss percentage for these values would range from 0% to 12.5%.
-        """
         async def run(self):
             try:
-                # Simulate a weight sensor reading
-                baseline = 72.0
-                current = round(max(0, baseline - random.uniform(0, 9)), 2)
                 patient_id = 1
                 timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
 
-                # Prepare data to send to HealthAgent and Kafka logger
+                # Simulate biochemical parameters
+                # Values randomly drawn from ranges covering all 4 risk classes
+                # Based on NHANES training data distributions
                 data = {
                     "patient_id": patient_id,
-                    "baseline": baseline,
-                    "current": current,
-                    "timestamp": timestamp
+                    "timestamp":  timestamp,
+                    "sodium":     round(random.uniform(135, 165), 1),
+                    "potassium":  round(random.uniform(3.5, 5.5),  1),
+                    "chloride":   round(random.uniform(98, 115),   1),
+                    "bun":        round(random.uniform(10, 65),    1),
+                    "creatinine": round(random.uniform(0.6, 6.0),  2),
+                    "glucose":    round(random.uniform(80, 300),   1),
+                    "age":        72,       # fixed patient profile
+                    "sex":        2,        # fixed patient profile (2 = Female)
+                    "weight":     65.0,     # fixed patient profile
+                    "bmi":        26.5      # fixed patient profile
                 }
+
 
                 # Send the message to the health agent
                 msg = Message(
