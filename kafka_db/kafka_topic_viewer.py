@@ -16,8 +16,41 @@ consumer = KafkaConsumer(
 print("Listening to topics:")
 
 try:
-    for msg in consumer: 
-        topic = msg.topic  # topic name of the current message
-        print(f"[{topic.upper()}] {msg.value}")
+    for msg in consumer:
+        topic = msg.topic
+        data = msg.value
+
+        if topic in ['sensor_data', 'vitals_raw']:
+            print(f"\n[{topic.upper()}]")
+            print(f"  Patient ID : {data.get('patient_id')}")
+            print(f"  Timestamp  : {data.get('timestamp')}")
+            print(f"  Sodium     : {data.get('sodium')} mmol/L")
+            print(f"  Potassium  : {data.get('potassium')} mmol/L")
+            print(f"  Chloride   : {data.get('chloride')} mmol/L")
+            print(f"  BUN        : {data.get('bun')} mg/dL")
+            print(f"  Creatinine : {data.get('creatinine')} mg/dL")
+            print(f"  Glucose    : {data.get('glucose')} mg/dL")
+
+        elif topic == 'reminders':
+            print(f"\n[{topic.upper()}] 💧 Mild/Impending Dehydration")
+            print(f"  Risk   : {data.get('risk')}")
+            print(f"  Action : {data.get('action')}")
+            print(f"  Plan   : {data.get('plan')}")
+
+        elif topic == 'care_alerts':
+            
+            if data.get('risk') == 'Severe':
+                icon = "🔴"
+            else:
+                icon = "🟠"
+
+            print(f"\n[{topic.upper()}] {icon} {data.get('risk')} Dehydration Alert")
+            print(f"  Risk   : {data.get('risk')}")
+            print(f"  Action : {data.get('action')}")
+            print(f"  Plan   : {data.get('plan')}")
+
+        else:
+            print(f"[{topic.upper()}] {data}")
+
 except KeyboardInterrupt:
     print("Stopped viewer.")
