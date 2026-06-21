@@ -25,7 +25,7 @@ class SensorAgent(Agent):
                     "creatinine": round(random.uniform(0.6, 6.0),  2),
                     "glucose":    round(random.uniform(80, 300),   1),
                     "age":        72,       # fixed patient profile
-                    "sex":        2,        # fixed patient profile (2 = Female)
+                    "gender":        2,        # fixed patient profile (2 = Female)
                     "weight":     65.0,     # fixed patient profile
                     "bmi":        26.5      # fixed patient profile
                 }
