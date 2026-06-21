@@ -14,7 +14,10 @@ def create_problem_file(risk_status: str, problem_path: str):
 
     init_facts = []
 
-    if risk_status == "Mild":
+    if risk_status == "Euhydrated":
+        init_facts.append("(euhydrated patient1)")
+        init_facts.append("(monitoring_active patient1)")
+    elif risk_status == "Mild":
         init_facts.append("(mildly_dehydrated patient1)")
         init_facts.append("(monitoring_active patient1)")
     elif risk_status == "Moderate":

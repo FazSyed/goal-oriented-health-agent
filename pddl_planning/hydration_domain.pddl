@@ -7,7 +7,7 @@
 
     ;; Conditions or states we care about
     (:predicates
-        (hydrated ?p - patient) ; Patient is well-hydrated
+        (euhydrated ?p - patient) ; Patient is well-hydrated
         (mildly_dehydrated ?p - patient) ; Patient is mildly dehydrated
         (moderately_dehydrated ?p - patient) ; Moderate dehydration
         (severely_dehydrated ?p - patient) ; Severe dehydration
@@ -27,7 +27,7 @@
             (checked ?p)
             ;; Determine if threshold is met based on current hydration state
             (when
-                (hydrated ?p)
+                (euhydrated ?p)
                 (threshold_met ?p))
             (when
                 (mildly_dehydrated ?p)
@@ -41,6 +41,20 @@
         )
     )
 
+    ;; No intervention needed, log and confirm euhydration
+    (:action confirm_euhydration
+        :parameters (?p - patient)
+        :precondition (and 
+            (checked ?p)
+            (euhydrated ?p)
+            (not (threshold_met ?p))
+        )
+        :effect (and 
+            (threshold_met ?p)
+        )
+    )
+    
+
     ;; Action: Remind the patient to drink water (for mild dehydration)
     (:action remind
         :parameters (?p - patient)
@@ -51,7 +65,7 @@
         )
         :effect (and
             (not (mildly_dehydrated ?p))
-            (hydrated ?p)
+            (euhydrated ?p)
             (threshold_met ?p)
         )
     )
@@ -66,7 +80,7 @@
         )
         :effect (and
             (not (moderately_dehydrated ?p))
-            (hydrated ?p)
+            (euhydrated ?p)
             (threshold_met ?p)
         )
     )
@@ -81,7 +95,7 @@
         )
         :effect (and
             (not (severely_dehydrated ?p))
-            (hydrated ?p)
+            (euhydrated ?p)
             (threshold_met ?p)
         )
     )
