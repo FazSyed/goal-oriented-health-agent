@@ -10,7 +10,7 @@ __consumer_offsets 27 0
 __consumer_offsets 7 0
 __consumer_offsets 9 0
 __consumer_offsets 46 0
-sensor_data 0 29
+sensor_data 0 37
 __consumer_offsets 25 0
 __consumer_offsets 35 0
 __consumer_offsets 41 0
@@ -21,7 +21,7 @@ __consumer_offsets 47 0
 __consumer_offsets 16 0
 __consumer_offsets 28 0
 __consumer_offsets 31 0
-__consumer_offsets 36 198
+__consumer_offsets 36 49
 __consumer_offsets 42 0
 __consumer_offsets 3 0
 __consumer_offsets 18 0
@@ -32,7 +32,7 @@ __consumer_offsets 38 0
 __consumer_offsets 17 0
 __consumer_offsets 48 0
 __consumer_offsets 19 0
-vitals_raw 0 29
+vitals_raw 0 38
 __consumer_offsets 11 0
 __consumer_offsets 13 0
 __consumer_offsets 2 0
@@ -42,7 +42,7 @@ __consumer_offsets 14 0
 __consumer_offsets 20 0
 __consumer_offsets 0 0
 __consumer_offsets 44 0
-care_alerts 0 15
+care_alerts 0 19
 __consumer_offsets 39 0
 __consumer_offsets 12 0
 __consumer_offsets 45 0

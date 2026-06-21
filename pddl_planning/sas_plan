@@ -1,3 +1,2 @@
 (check_hydration patient1)
-(alert_caregiver_moderate patient1)
-; cost = 2 (unit cost)
+; cost = 1 (unit cost)
