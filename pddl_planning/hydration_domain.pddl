@@ -1,5 +1,11 @@
 (define (domain care_agent)
-    (:requirements :strips :typing :negative-preconditions :disjunctive-preconditions :conditional-effects)
+    (:requirements 
+        :strips 
+        :typing
+        :negative-preconditions 
+        :disjunctive-preconditions 
+        :conditional-effects
+    )
 
     (:types
         patient
@@ -11,9 +17,27 @@
         (mildly_dehydrated ?p - patient) ; Patient is mildly dehydrated
         (moderately_dehydrated ?p - patient) ; Moderate dehydration
         (severely_dehydrated ?p - patient) ; Severe dehydration
-        (threshold_met ?p - patient) ; Goal: hydration is OK
+
+        (oral_intake_feasible ?p - patient) ; Patient can take oral fluids
+
         (checked ?p - patient) ; Indicates if hydration was checked
+        (status_logged ?p - patient) ; Indicates if hydration status was logged
+        (ORS_consumed ?p - patient) ; Indicates if Oral Rehydration Solution was consumed
+        (intake_monitored ?p - patient) ; Indicates if intake was monitored
+        (hydration_rechecked ?p - patient) ; Indicates if hydration was rechecked
+        (escalated_to_moderate ?p - patient) ; Indicates if care was escalated to moderate dehydration
+        (caregiver_alerted ?p - patient) ; Indicates if caregiver was alerted
+        (transferred_to_hospital ?p - patient) ; Indicates if patient was transferred to hospital
+        (fluids_administered ?p - patient) ; Indicates if fluids were administered
+        (labs_rechecked ?p - patient) ; Indicates if labs were rechecked
+        (vitals_monitored ?p - patient) ; Indicates if vitals were monitored
+        (escalated_to_severe ?p - patient) ; Indicates if care was escalated to severe dehydration
+        (emergency_called ?p - patient) ; Indicates if emergency services were called
+
         (monitoring_active ?p - patient) ; Monitoring is active
+
+        (threshold_met ?p - patient) ; Goal: hydration is OK
+        
     )
 
     ;; Action: Check the patient's hydration level
@@ -25,21 +49,11 @@
         )
         :effect (and
             (checked ?p)
-            ;; Determine if threshold is met based on current hydration state
-            (when
-                (euhydrated ?p)
-                (threshold_met ?p))
-            (when
-                (mildly_dehydrated ?p)
-                (not (threshold_met ?p)))
-            (when
-                (moderately_dehydrated ?p)
-                (not (threshold_met ?p)))
-            (when
-                (severely_dehydrated ?p)
-                (not (threshold_met ?p)))
         )
     )
+
+
+    ;; EUHYDRATION
 
     ;; No intervention needed, log and confirm euhydration
     (:action confirm_euhydration
@@ -47,73 +61,269 @@
         :precondition (and 
             (checked ?p)
             (euhydrated ?p)
-            (not (threshold_met ?p))
+            (not (status_logged ?p)) ;; we're only running this action for logging purposes, so threshold_met should not be true yet
         )
         :effect (and 
+            (status_logged ?p)
             (threshold_met ?p)
         )
     )
     
+    ;; MILD DEHYDRATION
 
     ;; Action: Remind the patient to drink water (for mild dehydration)
-    (:action remind
+    ; (:action remind
+    ;     :parameters (?p - patient)
+    ;     :precondition (and
+    ;         (checked ?p)
+    ;         (mildly_dehydrated ?p)
+    ;         (not (threshold_met ?p))
+    ;     )
+    ;     :effect (and
+    ;         (not (mildly_dehydrated ?p))
+    ;         (euhydrated ?p)
+    ;         (threshold_met ?p)
+    ;     )
+    ; )
+
+    (:action consume_ORS
         :parameters (?p - patient)
-        :precondition (and
+        :precondition (and 
             (checked ?p)
             (mildly_dehydrated ?p)
-            (not (threshold_met ?p))
+            (oral_intake_feasible ?p)
+            (not (ORS_consumed ?p))
         )
-        :effect (and
+        :effect (and 
+            (ORS_consumed ?p)
+        )
+    )
+
+    (:action monitor_intake
+        :parameters (?p - patient)
+        :precondition (and 
+            (ORS_consumed ?p)
+            (not (intake_monitored ?p))
+        )
+        :effect (and 
+            (intake_monitored ?p)
+        )
+    )
+    
+    
+    (:action recheck_hydration
+        :parameters (?p - patient)
+        :precondition (and 
+            (intake_monitored ?p)
+            (not (hydration_rechecked ?p))
+        )
+        :effect (and 
+            (hydration_rechecked ?p)
             (not (mildly_dehydrated ?p))
             (euhydrated ?p)
             (threshold_met ?p)
         )
     )
 
+    (:action log_status_mild
+        :parameters (?p - patient)
+        :precondition (and 
+            (hydration_rechecked ?p)
+            (threshold_met ?p)
+            (not (status_logged ?p))
+        )
+        :effect (and 
+            (status_logged ?p)
+        )
+    )
+    
+    ;; MILD --> MODERATE DEHYDRATION
+    
+    (:action escalate_to_moderate
+        :parameters (?p - patient)
+        :precondition (and 
+            (checked ?p)
+            (mildly_dehydrated ?p)
+            (not (oral_intake_feasible ?p))
+            (not (escalated_to_moderate ?p))
+        )
+        :effect (and 
+            (escalated_to_moderate ?p)
+            (not (mildly_dehydrated ?p))
+            (moderately_dehydrated ?p)
+        )
+    )
+    
+    ;; MODERATE DEHYDRATION
+
     ;; Action: Alert the caregiver for moderate dehydration
-    (:action alert_caregiver_moderate
+    (:action alert_caregiver
         :parameters (?p - patient)
         :precondition (and
             (checked ?p)
             (moderately_dehydrated ?p)
-            (not (threshold_met ?p))
+            (not (caregiver_alerted ?p))
         )
         :effect (and
+            (caregiver_alerted ?p)
+        )
+    )
+
+    (:action transfer_to_hospital_moderate
+        :parameters (?p - patient)
+        :precondition (and 
+            (caregiver_alerted ?p)
+            (moderately_dehydrated ?p)
+            (not (transferred_to_hospital ?p))
+        )
+        :effect (and 
+            (transferred_to_hospital ?p)
+        )
+    )
+    
+    (:action administer_fluids_moderate
+        :parameters (?p - patient)
+        :precondition (and 
+            (transferred_to_hospital ?p)
+            (moderately_dehydrated ?p)
+            (not (fluids_administered ?p))
+        )
+        :effect (and 
+            (fluids_administered ?p)
+        )
+    )
+
+    (:action recheck_labs_moderate
+        :parameters (?p - patient)
+        :precondition (and
+            (fluids_administered ?p)
+            (moderately_dehydrated ?p)
+            (not (labs_rechecked ?p))
+        )
+        :effect (and
+            (labs_rechecked ?p)
+        )
+    )
+    
+    (:action monitor_vitals_moderate
+        :parameters (?p - patient)
+        :precondition (and
+            (labs_rechecked ?p)
+            (moderately_dehydrated ?p)
+            (not (vitals_monitored ?p))
+        )
+        :effect (and
+            (vitals_monitored ?p)
             (not (moderately_dehydrated ?p))
             (euhydrated ?p)
             (threshold_met ?p)
         )
     )
 
-    ;; Action: Emergency alert for severe dehydration
-    (:action alert_caregiver_severe
+    (:action log_status_moderate
+        :parameters (?p - patient)
+        :precondition (and
+            (vitals_monitored ?p)
+            (threshold_met ?p)
+            (transferred_to_hospital ?p)
+            (not (status_logged ?p))
+        )
+        :effect (and
+            (status_logged ?p)
+        )
+    )
+
+    ;; MODERATE --> SEVERE DEHYDRATION
+    (:action escalate_to_severe
+        :parameters (?p - patient)
+        :precondition (and
+            (labs_rechecked ?p)
+            (moderately_dehydrated ?p)
+            (not (escalated_to_severe ?p))
+            (not (vitals_monitored ?p))
+        )
+        :effect (and
+            (escalated_to_severe ?p)
+            (not (moderately_dehydrated ?p))
+            (severely_dehydrated ?p)
+        )
+    )
+
+    ;; SEVERE DEHYDRATION
+
+    (:action call_emergency
         :parameters (?p - patient)
         :precondition (and
             (checked ?p)
             (severely_dehydrated ?p)
-            (not (threshold_met ?p))
+            (not (emergency_called ?p))
         )
         :effect (and
+            (emergency_called ?p)
+        )
+    )
+
+    (:action transfer_to_hospital_severe
+        :parameters (?p - patient)
+        :precondition (and 
+            (emergency_called ?p)
+            (severely_dehydrated ?p)
+            (not (transferred_to_hospital ?p))
+        )
+        :effect (and 
+            (transferred_to_hospital ?p)
+        )
+    )
+    
+    (:action administer_fluids_severe
+        :parameters (?p - patient)
+        :precondition (and 
+            (transferred_to_hospital ?p)
+            (severely_dehydrated ?p)
+            (not (fluids_administered ?p))
+        )
+        :effect (and 
+            (fluids_administered ?p)
+        )
+    )
+
+    (:action recheck_labs_severe
+        :parameters (?p - patient)
+        :precondition (and
+            (fluids_administered ?p)
+            (severely_dehydrated ?p)
+            (not (labs_rechecked ?p))
+        )
+        :effect (and
+            (labs_rechecked ?p)
+        )
+    )
+    
+    (:action monitor_vitals_continuous
+        :parameters (?p - patient)
+        :precondition (and
+            (labs_rechecked ?p)
+            (severely_dehydrated ?p)
+            (not (vitals_monitored ?p))
+        )
+        :effect (and
+            (vitals_monitored ?p)
             (not (severely_dehydrated ?p))
             (euhydrated ?p)
             (threshold_met ?p)
         )
     )
 
-    ;; Action: Recheck hydration after some time
-    ; (:action recheck
-    ;     :parameters (?p - patient)
-    ;     :precondition (and
-    ;         (checked ?p)
-    ;         (not (threshold_met ?p))
-    ;     )
-    ;     :effect (and
-    ;         (not (checked ?p))
-    ;         (when
-    ;             (mildly_dehydrated ?p)
-    ;             (and
-    ;                 (not (mildly_dehydrated ?p))
-    ;                 (moderately_dehydrated ?p)))
-    ;     )
-    ; )
+    (:action log_status_severe
+        :parameters (?p - patient)
+        :precondition (and
+            (vitals_monitored ?p)
+            (threshold_met ?p)
+            (transferred_to_hospital ?p)
+            (not (status_logged ?p))
+        )
+        :effect (and
+            (status_logged ?p)
+        )
+    )
 )
