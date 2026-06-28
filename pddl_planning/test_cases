@@ -1,0 +1,124 @@
+This file includes different Test Cases for the hydration_problem.pddl file.
+To test for a particualar case, COPY PASTE the section specified below and paste it in the hydration_problem.pddl file.
+
+================ EUHYDRATION ================
+
+
+;; Euhydrated Problem Case
+(define (problem care_routine)
+    (:domain care_agent)
+
+    (:objects
+        patient1 - patient
+    )
+
+    (:init
+        (euhydrated patient1)
+        (monitoring_active patient1)
+    )
+
+    (:goal
+        (threshold_met patient1)
+    )
+)
+
+
+================ MILD Dehydration (NO ORS) ================
+
+
+;; Mild (no ORS) Problem Case
+(define (problem care_routine)
+    (:domain care_agent)
+
+    (:objects
+        patient1 - patient
+    )
+
+    (:init
+        (mildly_dehydrated patient1)
+        (monitoring_active patient1)
+        ;; oral_intake_feasible patient1 = False
+    )
+
+    (:goal
+        (threshold_met patient1)
+    )
+)
+
+;; oral_intake_feasible is NOT in :init here
+;; Its absence means the predicate is false {PDDL default}
+;; The escalate_to_moderate action fires because (not (oral_intake_feasible ?p)) is satisfied
+;; After escalation, HealthAgent re-routes to CareAssistantAgent and generates problem_moderate.pddl for the next plan
+
+
+================ MILD DEHYDRATION ================
+
+
+;; Mild Dehydration Problem Case
+(define (problem care_routine)
+    (:domain care_agent)
+
+    (:objects
+        patient1 - patient
+    )
+
+    (:init
+        (mildly_dehydrated patient1)
+        (monitoring_active patient1)
+        (oral_intake_feasible patient1)   ;; set True by HealthAgent
+    )
+
+    (:goal
+        (threshold_met patient1)
+    )
+)
+
+
+================ MODERATE DEHYDRATION ================
+
+
+;; Moderate Dehydration Problem Case
+(define (problem care_routine)
+    (:domain care_agent)
+
+    (:objects
+        patient1 - patient
+    )
+
+    (:init
+        (moderately_dehydrated patient1)
+        (monitoring_active patient1)
+    )
+
+    (:goal
+        (and
+            (transferred_to_hospital patient1)
+            (threshold_met patient1)
+        )
+    )
+)
+
+
+================ SEVERE DEHYDRATION ================
+
+
+;; Severe Dehydration Problem Case
+(define (problem care_routine)
+    (:domain care_agent)
+
+    (:objects
+        patient1 - patient
+    )
+
+    (:init
+        (severely_dehydrated patient1)
+        (monitoring_active patient1)
+    )
+
+    (:goal
+        (and
+            (transferred_to_hospital patient1)
+            (threshold_met patient1)
+        )
+    )
+)
