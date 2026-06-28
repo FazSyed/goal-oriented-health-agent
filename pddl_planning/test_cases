@@ -18,10 +18,12 @@ To test for a particualar case, COPY PASTE the section specified below and paste
     )
 
     (:goal
-        (threshold_met patient1)
+        (and
+            (threshold_met patient1)
+            (status_logged patient1)
+        )
     )
 )
-
 
 ================ MILD Dehydration (NO ORS) ================
 
@@ -41,7 +43,10 @@ To test for a particualar case, COPY PASTE the section specified below and paste
     )
 
     (:goal
-        (threshold_met patient1)
+        (and
+            (threshold_met patient1)
+            (status_logged patient1)
+        )
     )
 )
 
@@ -69,7 +74,10 @@ To test for a particualar case, COPY PASTE the section specified below and paste
     )
 
     (:goal
-        (threshold_met patient1)
+        (and
+            (threshold_met patient1)
+            (status_logged patient1)
+        )
     )
 )
 
@@ -94,6 +102,7 @@ To test for a particualar case, COPY PASTE the section specified below and paste
         (and
             (transferred_to_hospital patient1)
             (threshold_met patient1)
+            (status_logged patient1)
         )
     )
 )
@@ -119,6 +128,7 @@ To test for a particualar case, COPY PASTE the section specified below and paste
         (and
             (transferred_to_hospital patient1)
             (threshold_met patient1)
+            (status_logged patient1)
         )
     )
 )
