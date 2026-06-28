@@ -1,10 +1,4 @@
-;; PDDL Problem definition for the hydration care routine
-;; To run the PDDL planner: Ctrl+Shift+P -> "Run PDDL Planner" -> Select this problem file (Shortcut: Alt+P)
-;; Select ENHSP or BFWS as the planner
 
-;; ================ Paste Test Case Below ================
-
-;; Severe Dehydration Problem Case
 (define (problem care_routine)
     (:domain care_agent)
 
@@ -25,6 +19,3 @@
         )
     )
 )
-
-
-;; ================ Test Case End ========================
