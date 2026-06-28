@@ -58,10 +58,10 @@ class HealthAgent(Agent):
                     # Route to appropriate agent
                     if risk == "Euhydrated":
                         # No agent routing, only logs to Kafka and return
-                        KafkaLogger(topic='vitals_raw').publish(
+                        KafkaLogger(topic='euhydrated_log').publish(
                             {"risk": risk, "action": action, "plan": plan}
                         )
-                        print("[Health] Euhydrated — no agent routing required.")
+                        print("[Health] 🟢 Euhydrated -- No Agent routing required 🟢")
                         return
                     
                     elif risk == "Mild":
