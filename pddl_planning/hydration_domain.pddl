@@ -15,32 +15,34 @@
     (:predicates
         (euhydrated ?p - patient) ; Patient is well-hydrated
         (mildly_dehydrated ?p - patient) ; Patient is mildly dehydrated
-        (moderately_dehydrated ?p - patient) ; Moderate dehydration
-        (severely_dehydrated ?p - patient) ; Severe dehydration
+        (moderately_dehydrated ?p - patient) ; Patient is moderately dehydrated
+        (severely_dehydrated ?p - patient) ; Patient is severely dehydrated
 
         (oral_intake_feasible ?p - patient) ; Patient can take oral fluids
 
         (checked ?p - patient) ; Indicates if hydration was checked
-        (status_logged ?p - patient) ; Indicates if hydration status was logged
         (ORS_consumed ?p - patient) ; Indicates if Oral Rehydration Solution was consumed
         (intake_monitored ?p - patient) ; Indicates if intake was monitored
         (hydration_rechecked ?p - patient) ; Indicates if hydration was rechecked
-        (escalated_to_moderate ?p - patient) ; Indicates if care was escalated to moderate dehydration
         (caregiver_alerted ?p - patient) ; Indicates if caregiver was alerted
         (transferred_to_hospital ?p - patient) ; Indicates if patient was transferred to hospital
         (fluids_administered ?p - patient) ; Indicates if fluids were administered
         (labs_rechecked ?p - patient) ; Indicates if labs were rechecked
         (vitals_monitored ?p - patient) ; Indicates if vitals were monitored
-        (escalated_to_severe ?p - patient) ; Indicates if care was escalated to severe dehydration
         (emergency_called ?p - patient) ; Indicates if emergency services were called
+
+        (escalated_to_moderate ?p - patient) ; Indicates if care was escalated to moderate dehydration
+        (escalated_to_severe ?p - patient) ; Indicates if care was escalated to severe dehydration
 
         (monitoring_active ?p - patient) ; Monitoring is active
 
         (threshold_met ?p - patient) ; Goal: hydration is OK
+
+        (status_logged ?p - patient) ; Indicates if hydration status was logged
         
     )
 
-    ;; Action: Check the patient's hydration level
+    ;; Check the patient's hydration level
     (:action check_hydration
         :parameters (?p - patient)
         :precondition (and
@@ -55,6 +57,8 @@
 
     ;; EUHYDRATION
 
+    ;; log_status_euhydrated
+
     ;; No intervention needed, log and confirm euhydration
     (:action log_status_euhydrated
         :parameters (?p - patient)
@@ -63,7 +67,7 @@
             (euhydrated ?p)
             (not (fluids_administered ?p))
             (not (ORS_consumed ?p))
-            (not (status_logged ?p)) ;; we're only running this action for logging purposes, so threshold_met should not be true yet
+            (not (status_logged ?p))
         )
         :effect (and 
             (status_logged ?p)
@@ -72,6 +76,8 @@
     )
     
     ;; MILD DEHYDRATION
+
+    ;; consume_ORS → monitor_intake → recheck_hydration → log_status_mild
 
     (:action consume_ORS
         :parameters (?p - patient)
@@ -125,6 +131,8 @@
     )
     
     ;; MILD --> MODERATE DEHYDRATION
+
+    ;; escalate_to_moderate → alert_caregiver → transfer_to_hospital → administer_fluids_moderate → recheck_labs_moderate → monitor_vitals_moderate → log_status_moderate
     
     (:action escalate_to_moderate
         :parameters (?p - patient)
@@ -143,7 +151,8 @@
     
     ;; MODERATE DEHYDRATION
 
-    ;; Action: Alert the caregiver for moderate dehydration
+    ;; alert_caregiver → transfer_to_hospital → administer_fluids_moderate → recheck_labs_moderate → monitor_vitals_moderate → log_status_moderate
+
     (:action alert_caregiver
         :parameters (?p - patient)
         :precondition (and
@@ -223,6 +232,9 @@
     )
 
     ;; MODERATE --> SEVERE DEHYDRATION
+
+    ;;  escalate_to_severe → call_emergency → transfer_to_hospital → administer_fluids_severe → recheck_labs_severe → monitor_vitals_continuous → log_status_severe
+
     (:action escalate_to_severe
         :parameters (?p - patient)
         :precondition (and
@@ -239,6 +251,9 @@
     )
 
     ;; SEVERE DEHYDRATION
+
+    ;; call_emergency → transfer_to_hospital → administer_fluids_severe → recheck_labs_severe → monitor_vitals_continuous → log_status_severe
+
 
     (:action call_emergency
         :parameters (?p - patient)
