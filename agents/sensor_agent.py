@@ -36,7 +36,6 @@ class SensorAgent(Agent):
                     "oral_intake_feasible": True  # fixed patient profile
                 }
 
-
                 # Send the message to the health agent
                 msg = Message(
                     to="healthagent@localhost",
