@@ -1,3 +1,8 @@
+;; PDDL Problem definition for the hydration care routine
+
+;; ================ Paste Test Case Below ================
+
+;; Severe Dehydration Problem Case
 (define (problem care_routine)
     (:domain care_agent)
 
@@ -11,6 +16,10 @@
     )
 
     (:goal
-        (threshold_met patient1)
+        (and
+            (transferred_to_hospital patient1)
+            (threshold_met patient1)
+        )
     )
 )
+;; ================ Test Case End ========================
