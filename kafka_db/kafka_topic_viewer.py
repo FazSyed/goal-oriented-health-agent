@@ -4,9 +4,9 @@ import json
 # create a KafkaConsumer subscribed to multiple topics
 consumer = KafkaConsumer(
     'sensor_data',
-    'vitals_raw',
     'reminders',
     'care_alerts',
+    'euhydrated_log',
     bootstrap_servers=['localhost:9092'],  # Kafka broker to connect to
     auto_offset_reset='earliest',  # start reading from the earliest offset if no committed offset
     group_id='viewer_group',  # consumer group id for offset commits and coordination
@@ -20,7 +20,7 @@ try:
         topic = msg.topic
         data = msg.value
 
-        if topic in ['sensor_data', 'vitals_raw']:
+        if topic == 'sensor_data':
             print(f"\n[{topic.upper()}]")
             print(f"  Patient ID : {data.get('patient_id')}")
             print(f"  Timestamp  : {data.get('timestamp')}")
@@ -31,8 +31,14 @@ try:
             print(f"  Creatinine : {data.get('creatinine')} mg/dL")
             print(f"  Glucose    : {data.get('glucose')} mg/dL")
 
+        elif topic == 'euhydrated_log':
+            print(f"\n[{topic.upper()}] 🟢 Euhydrated")
+            print(f"  Risk   : {data.get('risk')}")
+            print(f"  Action : {data.get('action')}")
+            print(f"  Plan   : {data.get('plan')}")
+
         elif topic == 'reminders':
-            print(f"\n[{topic.upper()}] 💧 Mild/Impending Dehydration")
+            print(f"\n[{topic.upper()}] 🔵 Mild/Impending Dehydration")
             print(f"  Risk   : {data.get('risk')}")
             print(f"  Action : {data.get('action')}")
             print(f"  Plan   : {data.get('plan')}")
