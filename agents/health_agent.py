@@ -30,37 +30,41 @@ class HealthAgent(Agent):
                     creatinine = data.get("creatinine")
                     glucose    = data.get("glucose")
                     age        = data.get("age")
-                    sex        = data.get("sex")
+                    gender        = data.get("gender")
                     weight     = data.get("weight")
                     bmi        = data.get("bmi")
+                    oral_intake_feasible = data.get("oral_intake_feasible")
 
-                    # Phase 2: Predict risk from biochemical parameters
+                    # Predict risk from biochemical parameters
                     _, prediction_label = predict_dehydration_risk(
                         sodium, potassium, chloride, bun,
-                        creatinine, glucose, age, sex, weight, bmi
+                        creatinine, glucose, age, gender, weight, bmi
                     )
                     print(f"[Health] ML Prediction: {prediction_label}")
 
-                    # Phase 2: Pass ML label directly to ontology
+                    # Pass ML label directly to ontology
                     # Ontology infers triggersAction from hasRiskStatus
                     risk, action = infer_risk_and_action(prediction_label)
                     print(f"[Health] Risk={risk}, Action={action}")
 
-                    # --- Everything below is identical to Phase 1 ---
-
-                    if risk is None:
-                        print("[Health] No action required for Euhydrated status.")
-                        return
-
                     # Run PDDL planner
-                    plan = run_planner(risk)
-                    if plan is not None:
-                        plan = plan.replace("\n", " ")
-                    else:
+                    plan = run_planner(
+                        risk_status = risk,
+                        oral_intake_feasible = oral_intake_feasible
+                    )
+                    if plan is None:
                         plan = ""
 
                     # Route to appropriate agent
-                    if risk == "Mild":
+                    if risk == "Euhydrated":
+                        # No agent routing, only logs to Kafka and return
+                        KafkaLogger(topic='vitals_raw').publish(
+                            {"risk": risk, "action": action, "plan": plan}
+                        )
+                        print("[Health] Euhydrated — no agent routing required.")
+                        return
+                    
+                    elif risk == "Mild":
                         to_jid = "reminderagent@localhost"
                         KafkaLogger(topic='reminders').publish(
                             {"risk": risk, "action": action, "plan": plan}
@@ -75,7 +79,7 @@ class HealthAgent(Agent):
                         print(f"[Health] Routing to AlertAgent for {risk} Dehydration")
 
                     else:
-                        print("[Health] No action required for Euhydrated status.")
+                        print(f"[Health] Unknown risk label: {risk}. No routing performed.")
                         return
 
                     m = Message(to=to_jid)

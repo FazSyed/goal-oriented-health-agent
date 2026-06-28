@@ -27,7 +27,13 @@ class SensorAgent(Agent):
                     "age":        72,       # fixed patient profile
                     "gender":     2,        # fixed patient profile (2 = Female)
                     "weight":     65.0,     # fixed patient profile
-                    "bmi":        26.5      # fixed patient profile
+                    "bmi":        26.5,     # fixed patient profile
+
+                    # Patient capability flag (from patient profile) -- used in PDDL planning
+                    # True  = patient can swallow safely → ORS path for Mild
+                    # False = dysphagia / altered consciousness → escalate
+                    
+                    "oral_intake_feasible": True  # fixed patient profile
                 }
 
 
