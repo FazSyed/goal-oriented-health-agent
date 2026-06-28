@@ -56,11 +56,13 @@
     ;; EUHYDRATION
 
     ;; No intervention needed, log and confirm euhydration
-    (:action confirm_euhydration
+    (:action log_status_euhydrated
         :parameters (?p - patient)
         :precondition (and 
             (checked ?p)
             (euhydrated ?p)
+            (not (fluids_administered ?p))
+            (not (ORS_consumed ?p))
             (not (status_logged ?p)) ;; we're only running this action for logging purposes, so threshold_met should not be true yet
         )
         :effect (and 
@@ -70,21 +72,6 @@
     )
     
     ;; MILD DEHYDRATION
-
-    ;; Action: Remind the patient to drink water (for mild dehydration)
-    ; (:action remind
-    ;     :parameters (?p - patient)
-    ;     :precondition (and
-    ;         (checked ?p)
-    ;         (mildly_dehydrated ?p)
-    ;         (not (threshold_met ?p))
-    ;     )
-    ;     :effect (and
-    ;         (not (mildly_dehydrated ?p))
-    ;         (euhydrated ?p)
-    ;         (threshold_met ?p)
-    ;     )
-    ; )
 
     (:action consume_ORS
         :parameters (?p - patient)
@@ -224,8 +211,10 @@
         :parameters (?p - patient)
         :precondition (and
             (vitals_monitored ?p)
-            (threshold_met ?p)
+            (caregiver_alerted ?p)
+            (not (emergency_called ?p))
             (transferred_to_hospital ?p)
+            (threshold_met ?p)
             (not (status_logged ?p))
         )
         :effect (and
@@ -318,8 +307,9 @@
         :parameters (?p - patient)
         :precondition (and
             (vitals_monitored ?p)
-            (threshold_met ?p)
             (transferred_to_hospital ?p)
+            (emergency_called ?p)
+            (threshold_met ?p)
             (not (status_logged ?p))
         )
         :effect (and
