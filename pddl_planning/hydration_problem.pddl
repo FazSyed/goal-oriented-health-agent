@@ -1,4 +1,6 @@
 ;; PDDL Problem definition for the hydration care routine
+;; To run the PDDL planner: Ctrl+Shift+P -> "Run PDDL Planner" -> Select this problem file (Shortcut: Alt+P)
+;; Select ENHSP or BFWS as the planner
 
 ;; ================ Paste Test Case Below ================
 
@@ -19,7 +21,10 @@
         (and
             (transferred_to_hospital patient1)
             (threshold_met patient1)
+            (status_logged patient1)
         )
     )
 )
+
+
 ;; ================ Test Case End ========================
