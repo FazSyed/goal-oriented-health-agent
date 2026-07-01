@@ -1,0 +1,8 @@
+(check_hydration patient1)
+(alert_caregiver patient1)
+(transfer_to_hospital_moderate patient1)
+(administer_fluids_moderate patient1)
+(recheck_labs_moderate patient1)
+(monitor_vitals_moderate patient1)
+(log_status_moderate patient1)
+; cost = 7 (unit cost)
