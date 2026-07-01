@@ -3,10 +3,14 @@ from agents.health_agent import HealthAgent
 from agents.reminder_agent import ReminderAgent
 from agents.care_assisstant_alert_agent import CareAssistantAlertAgent
 
+import os
 import asyncio
 import logging
 from threading import Thread
 from kafka_db.consumer_to_csv import consume_and_save_to_csv
+
+# Create logs directory if it doesn't exist
+os.makedirs("logs", exist_ok=True)
 
 logging.basicConfig(
     level=logging.INFO,
