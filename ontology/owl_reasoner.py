@@ -30,7 +30,7 @@ def infer_risk_and_action(risk_label: str):
     try:
 
         # Specifying path to Java executable (required for running Pellet reasoner)
-        owlready2.JAVA_EXE = "C:/Program Files/Common Files/Oracle/Java/javapath/java.exe"
+        owlready2.JAVA_EXE = "C:/Program Files/ Files/Oracle/Java/javapath/java.exe"
         # Set amount of memory (in MB) that Java can use
         owlready2.JAVA_MEMORY = 8000
 
@@ -84,8 +84,6 @@ def infer_risk_and_action(risk_label: str):
             print(f"[Ontology] WARNING: Reasoner produced no valid inference for '{risk_label}'. Using fallback mapping.")
             return _use_fallback(risk_label, reason="empty reasoner inference")
 
-        print(f"Input: {label} → Risk: {risk}, Action: {action}")
-
         return risk, action, {"fallback_used": False, "fallback_reason": None}
 
     except Exception as e:
@@ -120,4 +118,5 @@ def _use_fallback(risk_label: str, reason: str):
 if __name__ == "__main__":
     test_labels = ["Euhydrated", "Mild", "Moderate", "Severe"]
     for label in test_labels:
-        risk, action = infer_risk_and_action(label)
+        risk, action, meta = infer_risk_and_action(label)
+        print(f"Input: {label} → Risk: {risk}, Action: {action} | Fallback: {meta['fallback_used']}")
