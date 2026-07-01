@@ -86,8 +86,8 @@ def infer_risk_and_action(risk_label: str):
 
         print(f"Input: {label} → Risk: {risk}, Action: {action}")
 
-        return risk, action
-    
+        return risk, action, {"fallback_used": False, "fallback_reason": None}
+
     except Exception as e:
         #  Catches: Java not found, ontology file missing/corrupt,
         # Pellet timeout/crash, or any other unexpected reasoner failure
@@ -111,10 +111,10 @@ def _use_fallback(risk_label: str, reason: str):
  
     if action is None:
         print(f"[Ontology] FALLBACK FAILED: Unrecognised risk label '{risk_label}'. Reason for fallback: {reason}")
-        return None, None
- 
+        return None, None, {"fallback_used": True, "fallback_reason": reason}
+
     print(f"[Ontology] FALLBACK USED (reason: {reason}) — Input: {risk_label} → Risk: {risk_label}, Action: {action}")
-    return risk_label, action
+    return risk_label, action, {"fallback_used": True, "fallback_reason": reason}
 
 # Debugging
 if __name__ == "__main__":
