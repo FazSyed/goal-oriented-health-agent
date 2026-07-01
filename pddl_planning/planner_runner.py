@@ -6,7 +6,15 @@ BASE_PATH = "pddl_planning"
 DOMAIN_FILE = "hydration_domain.pddl"
 PROBLEM_FILE = "hydration_problem.pddl"
 OUTPUT_FILE = "hydration_plan.txt"
+PLANNER_TIMEOUT_SEC = 30  # max time to wait for Fast Downward before giving up
 
+# Hardcoded fallback plans for each risk status in case the planner fails or no plan is found
+FALLBACK_PLANS = {
+    "Euhydrated": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+    "Mild":       "(check_hydration patient1)\n(consume_ORS patient1)\n(monitor_intake patient1)",
+    "Moderate":   "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)",
+    "Severe":     "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)",
+}
 
 def create_problem_file(risk_status: str, problem_path: str, oral_intake_feasible: bool = True):
     """
@@ -143,33 +151,55 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
 
     if risk_status is None:
         print("[Planner] No risk status provided. No planning needed.")
-        return None
+        return None, {"fallback_used": False, "fallback_reason": None}
 
     problem_path = os.path.join(BASE_PATH, PROBLEM_FILE)
     output_path = os.path.join(BASE_PATH, OUTPUT_FILE)
     sas_path = os.path.join(BASE_PATH, "sas_plan")
 
+    # Step 0: Remove any stale sas_plan from a previous run
+    # Prevents reading an old successful plan after a new run has actually failed
+    if os.path.exists(sas_path):
+        try:
+            os.remove(sas_path)
+        except OSError as e:
+            print(f"[Planner] WARNING: Could not remove stale sas_plan: {e}")
+
     # Step 1: Generate problem file dynamically
-    create_problem_file(
-        risk_status = risk_status,
-        problem_path = problem_path,
-        oral_intake_feasible = oral_intake_feasible
-    )
+    try:
+        create_problem_file(
+            risk_status = risk_status,
+            problem_path = problem_path,
+            oral_intake_feasible = oral_intake_feasible
+        )
+    except OSError as e:
+        print(f"[Planner] ERROR: Could not write problem file: {e}")
+        return _use_fallback(risk_status, reason="problem file write failed")
 
     # Step 2: Run Fast Downward planner
     print(f"[Planner] Running Fast Downward for risk={risk_status}...")
-    subprocess.run(
-        [
-            "python",
-            FAST_DOWNWARD_PATH,
-            DOMAIN_FILE,
-            PROBLEM_FILE,
-            "--search", "astar(blind())"
-        ],
-        cwd = BASE_PATH,
-        stdout=subprocess.PIPE,  # suppress Fast Downward stdout
-        stderr=subprocess.PIPE   # suppress Fast Downward stderr
-    )
+    try:
+        subprocess.run(
+            [
+                "python",
+                FAST_DOWNWARD_PATH,
+                DOMAIN_FILE,
+                PROBLEM_FILE,
+                "--search", "astar(blind())"
+            ],
+            cwd = BASE_PATH,
+            stdout=subprocess.PIPE,  # suppress Fast Downward stdout
+            stderr=subprocess.PIPE   # suppress Fast Downward stderr
+        )
+    except FileNotFoundError:
+        print(f"[Planner] ERROR: Fast Downward not found at {FAST_DOWNWARD_PATH}")
+        return _use_fallback(risk_status, reason="Fast Downward executable not found")
+    except subprocess.TimeoutExpired:
+        print(f"[Planner] ERROR: Fast Downward timed out after {PLANNER_TIMEOUT_SEC}s")
+        return _use_fallback(risk_status, reason="planner timeout")
+    except Exception as e:
+        print(f"[Planner] ERROR: Unexpected error running Fast Downward: {e}")
+        return _use_fallback(risk_status, reason=str(e))
 
     # Step 3: Capture and return the plan
     try:
@@ -182,6 +212,11 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
             line for line in raw_plan.splitlines()
             if line.strip() and not line.strip().startswith(";")
         ]
+
+        # sas_plan existed but contained no usable action lines — treat as failure
+        if not plan_lines:
+            print(f"[Planner] WARNING: sas_plan was empty for risk={risk_status}.")
+            return _use_fallback(risk_status, reason="empty sas_plan")
 
         plan = "\n".join(plan_lines)
 
@@ -197,11 +232,37 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
         print(f"[Planner] ----------")
         print(f"[Planner] Total steps: {len(plan_lines)}")
 
-        return plan
+        return plan, {"fallback_used": False, "fallback_reason": None}
 
     except FileNotFoundError:
-        print("[Planner] No plan found. Check domain/problem file validity.")
-        return None
+        print(f"[Planner] No plan found for risk={risk_status}. Problem may be unsolvable, or domain/problem files are invalid.")
+        return _use_fallback(risk_status, reason="no sas_plan produced (unsolvable or invalid PDDL)")
+
+def _use_fallback(risk_status: str, reason: str) -> str | None:
+    """
+    Fallback mechanism to return a predefined plan based on the risk status when planner fails or produces no plan.
+
+    Parameters:
+    - risk_status: The dehydration risk status ("Euhydrated", "Mild", "Moderate", "Severe").
+    - reason: Reason for using fallback (for logging purposes)
+
+    Returns:
+    - plan (str): The fallback PDDL plan as a string.
+    - None: If no fallback plan is defined for the given risk status.
+    """
+    plan = FALLBACK_PLANS.get(risk_status)
+ 
+    if plan is None:
+        print(f"[Planner] FALLBACK FAILED: No fallback plan available for risk_status='{risk_status}'. Reason for fallback: {reason}")
+        return None, {"fallback_used": True, "fallback_reason": f"no fallback for: {risk_status}"}
+ 
+    print(f"[Planner] FALLBACK PLAN USED (reason: {reason}) for risk={risk_status}:")
+    print(f"[Planner] ----------")
+    for line in plan.splitlines():
+        print(f"[Planner] {line}")
+    print(f"[Planner] ----------")
+ 
+    return plan, {"fallback_used": True, "fallback_reason": reason}
 
 # Debugging
 if __name__ == "__main__":
@@ -218,8 +279,8 @@ if __name__ == "__main__":
         print(f"\n{'='*50}")
         print(f"TEST: risk={risk} | oral_intake_feasible={feasible}")
         print('='*50)
-        plan = run_planner(risk_status=risk, oral_intake_feasible=feasible)
+        plan, meta = run_planner(risk_status=risk, oral_intake_feasible=feasible)
         if plan:
-            print(f"Plan returned ({len(plan.splitlines())} lines)")
+            print(f"Plan returned ({len(plan.splitlines())} lines) | Fallback: {meta['fallback_used']}")
         else:
             print("No plan returned.")
