@@ -30,7 +30,7 @@ def infer_risk_and_action(risk_label: str):
     try:
 
         # Specifying path to Java executable (required for running Pellet reasoner)
-        owlready2.JAVA_EXE = "C:/Program Files/ Files/Oracle/Java/javapath/java.exe"
+        owlready2.JAVA_EXE = "C:/Program Files/Common Files/Oracle/Java/javapath/java.exe"
         # Set amount of memory (in MB) that Java can use
         owlready2.JAVA_MEMORY = 8000
 
