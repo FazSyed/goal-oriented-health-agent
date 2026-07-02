@@ -27,7 +27,7 @@ class ReminderAgent(Agent):
                     
                     try:
                         # Split the message body into risk, action, and plan
-                        risk, action, plan = msg.body.split(",", 2)
+                        risk, action, plan, patient_id = msg.body.split(",", 3)
 
                         print(f"[Reminder] 🔵 MILD/IMPENDING DEHYDRATION ALERT 🔵")
                         print(f"[Reminder] Risk Level: {risk}")
@@ -37,7 +37,7 @@ class ReminderAgent(Agent):
                         print(f"[Reminder] === END REMINDER ===\n")
 
                         # Logging the Reminder
-                        logging.info(f"HYDRATION REMINDER at {timestamp}")
+                        logging.info(f"HYDRATION REMINDER at {timestamp} for patient {patient_id}")
                     
                     except Exception as e:
                         print(f"[Reminder] Failed to process message: {e}")

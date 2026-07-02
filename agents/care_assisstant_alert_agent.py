@@ -28,7 +28,7 @@ class CareAssistantAlertAgent(Agent):
 
                     try:
                         # Split the message body into risk, action, and plan
-                        risk, action, plan = msg.body.split(",", 2)
+                        risk, action, plan, patient_id = msg.body.split(",", 3)
 
                         if (risk == "Moderate"):
                             print(f"[ALERT] 🟠 MODERATE DEHYDRATION ALERT 🟠")
@@ -44,9 +44,9 @@ class CareAssistantAlertAgent(Agent):
 
                         # Logging the Alert
                         if risk == "Severe":
-                            logging.critical(f"SEVERE DEHYDRATION ALERT at {timestamp}")
+                            logging.critical(f"SEVERE DEHYDRATION ALERT at {timestamp} for patient {patient_id}")
                         else:
-                            logging.warning(f"MODERATE DEHYDRATION ALERT at {timestamp}")
+                            logging.warning(f"MODERATE DEHYDRATION ALERT at {timestamp} for patient {patient_id}")
 
                     except Exception as e:
                         print(f"[ALERT] Failed to process message: {e}")

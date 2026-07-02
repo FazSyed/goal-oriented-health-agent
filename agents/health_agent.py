@@ -85,7 +85,7 @@ class HealthAgent(Agent):
                         # Update routing result for logging
                         routing_result.update({"routed_to": None, "kafka_topic": "euhydrated_log", "kafka_publish_success": kafka_sucess})
 
-                        print("[Health] 🟢 Euhydrated -- No Agent routing required 🟢")
+                        print(f"[Health] 🟢 Euhydrated -- No Agent routing required for patient {patient_id} 🟢")
 
                         # Log the entire pipeline run for this patient
                         log_pipeline_run(
@@ -136,7 +136,7 @@ class HealthAgent(Agent):
 
                     m = Message(to=to_jid)
                     m.set_metadata("performative", "inform")
-                    m.body = f"{risk},{action},{plan}"
+                    m.body = f"{risk},{action},{plan},{patient_id}"
 
                     await self.send(m)
                     print(f"[Health] Sent Message to {to_jid}")
