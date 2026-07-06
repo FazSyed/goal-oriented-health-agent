@@ -64,4 +64,4 @@ class SensorAgent(Agent):
         print("[Sensor] SensorAgent ready to collect data")
 
         self.kafka_logger = KafkaLogger(topic='vitals_raw') # log in csv file
-        self.add_behaviour(self.PeriodicSensor(period=10))  # 10 seconds interval for sensor readings
+        self.add_behaviour(self.PeriodicSensor(period=20))  # 20 seconds interval for sensor readings
