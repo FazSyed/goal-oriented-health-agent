@@ -373,7 +373,15 @@ sidebar = html.Div([
     }),
     dcc.Dropdown(
         id="patient-selector",
-        options=[{"label": "Patient 1", "value": 1}],
+        options=[
+            # {"label": f"Patient {p['patient_id']}", "value": p['patient_id']}
+            # for p in ALL_PROFILES
+
+            {"label": "Patient 1", "value": 1},
+            {"label": "Patient 2", "value": 2},
+            {"label": "Patient 3", "value": 3},
+            {"label": "Patient 4", "value": 4},
+        ],
         value=1,
         clearable=False,
         style={"marginBottom": "2rem", "fontSize": "0.9rem", "color": "#252525"}
@@ -596,6 +604,13 @@ def update_all(n, risk_filter, patient_id):
     # Load the latest dataset and any log entries for the dashboard update cycle
     df = load_chart_data()
     log_df = load_json_logs()
+
+    # Filter both data sources to selected patient
+    if not df.empty:
+        df = df[df["patient_id"] == patient_id].reset_index(drop=True)
+
+    if not log_df.empty:
+        log_df = log_df[log_df["patient_id"] == patient_id].reset_index(drop=True)
 
     # Prepare fallback UI elements when no data is available.
     empty_fig = go.Figure().update_layout(
