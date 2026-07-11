@@ -3,6 +3,8 @@ from agents.health_agent import HealthAgent
 from agents.reminder_agent import ReminderAgent
 from agents.care_assisstant_alert_agent import CareAssistantAlertAgent
 
+from patients import ALL_PROFILES
+
 import os
 import asyncio
 import logging
@@ -32,7 +34,8 @@ async def main():
     The system runs for 2 minutes before shutting down all agents.
 
     The following agents are utilized:
-        - SensorAgent: Simulates biochemical parameters (Na, K, BUN, Cr, Glucose, etc.)
+        - SensorAgent x N: Simulates biochemical parameters (Na, K, BUN, Cr, Glucose, etc.).
+                        One per patient profile (loaded from patients/)
         - HealthAgent: Predicts dehydration risk from biochemical parameters,
                        infers care actions via OWL ontology, generates PDDL care plans
         - ReminderAgent: Sends reminders for Mild/Impending dehydration
@@ -46,8 +49,20 @@ async def main():
     print("🤖 Multi-Agent System Starting...")
     print("=" * 60)
 
+    sensors = []
+
     try:
-        sensor = SensorAgent("sensoragent@localhost", "sensoragentforpassword")
+
+        sensors = [
+            SensorAgent(
+                jid = f"sensoragent{p['patient_id']}@localhost",
+                password = f"sensoragent{p['patient_id']}forpassword",
+                patient_profile = p
+            )
+            for p in ALL_PROFILES
+        ]
+
+        # sensor = SensorAgent("sensoragent@localhost", "sensoragentforpassword")
         health = HealthAgent("healthagent@localhost", "agentforpassword")
         reminder = ReminderAgent("reminderagent@localhost", "reminderagentforpassword")
         alert = CareAssistantAlertAgent("careagent@localhost", "careagentforpassword")
@@ -64,8 +79,10 @@ async def main():
         await alert.start(auto_register=True)
         print("✅ Alert Agent started")
 
-        await sensor.start(auto_register=True)
-        print("✅ Sensor Agent started")
+        for sensor in sensors:
+            pid = sensor.patient_profile["patient_id"]
+            await sensor.start(auto_register=True)
+            print(f"✅ Sensor Agent started for Patient {pid}-{sensor.patient_profile.get('name', 'Unknown')}")
         
         print("Initializing all agents...")
             
@@ -73,7 +90,7 @@ async def main():
         csv_consumer_thread = Thread(target=consume_and_save_to_csv, daemon=True)
         csv_consumer_thread.start()
         
-        print("📊 Kafka consumer running in background (saving to sensor_data.csv)")
+        print("📊 Kafka consumer running in background (saving to vitals_raw_log_phase2.csv)")
         
         print("Press Ctrl+C to stop the system at any time.")
 
@@ -89,11 +106,17 @@ async def main():
     
     finally:
         print("\n🛑 Shutting down agents...")
-        try:
-            await sensor.stop()
-            print("✅ Sensor Agent stopped")
-        except:
-            pass
+
+        for sensor in sensors:
+            try:
+                pid = sensor.patient_profile["patient_id"]
+                await sensor.stop()
+                print(f"✅ Sensor Agent {pid} stopped")
+            except:
+                pass
+
+        # wait for in-flight messages to drain
+        await asyncio.sleep(2)
             
         try:
             await health.stop()
