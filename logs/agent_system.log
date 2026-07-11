@@ -10469,3 +10469,952 @@ ConnectionResetError: [WinError 10054] An existing connection was forcibly close
 2026-07-08 11:15:52,342 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
 2026-07-08 11:15:52,342 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
 2026-07-08 11:15:52,343 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:50:00,507 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,512 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,515 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,729 - INFO - JID set to: healthagent@localhost/33165510245473441303714
+2026-07-11 13:50:00,730 - INFO - Agent healthagent@localhost connected and authenticated.
+2026-07-11 13:50:00,797 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,800 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,802 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,890 - INFO - JID set to: reminderagent@localhost/17877599817890304883842
+2026-07-11 13:50:00,892 - INFO - Agent reminderagent@localhost connected and authenticated.
+2026-07-11 13:50:00,959 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,963 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:00,966 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:01,041 - INFO - JID set to: careagent@localhost/177481266599113941153970
+2026-07-11 13:50:01,042 - INFO - Agent careagent@localhost connected and authenticated.
+2026-07-11 13:50:01,108 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:01,111 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:01,114 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:01,192 - INFO - JID set to: sensoragent1@localhost/86209902745835446904098
+2026-07-11 13:50:01,193 - INFO - Agent sensoragent1@localhost connected and authenticated.
+2026-07-11 13:50:06,202 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:08,250 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:13,269 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:15,340 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:15,344 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:15,346 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:15,422 - INFO - JID set to: sensoragent2@localhost/7141590824159869284226
+2026-07-11 13:50:15,423 - INFO - Agent sensoragent2@localhost connected and authenticated.
+2026-07-11 13:50:20,428 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:22,481 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:26,611 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:26,623 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:50:26,623 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:50:26,748 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:50:26,750 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:50:26,750 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:50:26,798 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:50:26,831 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:26,833 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:26,835 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:26,902 - INFO - JID set to: sensoragent3@localhost/103234112044230335814354
+2026-07-11 13:50:26,903 - INFO - Agent sensoragent3@localhost connected and authenticated.
+2026-07-11 13:50:31,906 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:31,910 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:50:31,910 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:50:32,061 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:50:32,062 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:50:32,063 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:50:32,071 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:32,075 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:50:32,075 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:50:32,181 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:50:32,181 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:50:32,182 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:50:32,189 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:50:34,267 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:34,270 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:50:34,271 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:50:34,376 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:50:34,377 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:50:34,377 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:50:34,384 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:50:34,420 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:34,423 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:34,426 - INFO - Authentication failed: not-authorized
+2026-07-11 13:50:34,497 - INFO - JID set to: sensoragent4@localhost/50558597864554460494482
+2026-07-11 13:50:34,499 - INFO - Agent sensoragent4@localhost connected and authenticated.
+2026-07-11 13:50:38,215 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 13:50:38,221 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:38,225 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:50:38,226 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:50:38,332 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:50:38,333 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:50:38,334 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:50:38,341 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:50:40,371 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:50:40,374 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:50:40,375 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:50:40,482 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:50:40,484 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:50:40,484 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:50:40,490 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:50:40,505 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 13:50:40,506 - INFO - connection_lost: (None,)
+2026-07-11 13:50:40,508 - INFO - Client disconnected.
+2026-07-11 13:50:40,508 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:50:40,657 - INFO - connection_lost: (None,)
+2026-07-11 13:50:40,658 - INFO - Client disconnected.
+2026-07-11 13:50:40,658 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 13:50:40,805 - INFO - connection_lost: (None,)
+2026-07-11 13:50:40,806 - INFO - Client disconnected.
+2026-07-11 13:50:40,807 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 13:50:40,808 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:53:36,334 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,340 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,343 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,576 - INFO - JID set to: healthagent@localhost/36503623577525217463778
+2026-07-11 13:53:36,578 - INFO - Agent healthagent@localhost connected and authenticated.
+2026-07-11 13:53:36,647 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,651 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,653 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,725 - INFO - JID set to: reminderagent@localhost/87556661934612946313906
+2026-07-11 13:53:36,726 - INFO - Agent reminderagent@localhost connected and authenticated.
+2026-07-11 13:53:36,795 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,799 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,802 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,877 - INFO - JID set to: careagent@localhost/107123693602950474404034
+2026-07-11 13:53:36,878 - INFO - Agent careagent@localhost connected and authenticated.
+2026-07-11 13:53:36,946 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,948 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:36,950 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:37,022 - INFO - JID set to: sensoragent1@localhost/124281367478386086934162
+2026-07-11 13:53:37,023 - INFO - Agent sensoragent1@localhost connected and authenticated.
+2026-07-11 13:53:42,036 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:53:44,070 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:53:48,544 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:53:50,596 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:50,599 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:50,601 - INFO - Authentication failed: not-authorized
+2026-07-11 13:53:50,674 - INFO - JID set to: sensoragent2@localhost/51963585738358869674290
+2026-07-11 13:53:50,675 - INFO - Agent sensoragent2@localhost connected and authenticated.
+2026-07-11 13:53:55,681 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:53:57,723 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:53:59,739 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 13:54:01,864 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:54:03,874 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 13:54:03,876 - INFO - connection_lost: (None,)
+2026-07-11 13:54:03,878 - INFO - Client disconnected.
+2026-07-11 13:54:03,878 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:54:03,907 - INFO - Authentication failed: not-authorized
+2026-07-11 13:54:03,910 - INFO - Authentication failed: not-authorized
+2026-07-11 13:54:03,912 - INFO - Authentication failed: not-authorized
+2026-07-11 13:54:03,993 - INFO - JID set to: sensoragent3@localhost/172824430775788214004354
+2026-07-11 13:54:04,031 - INFO - connection_lost: (None,)
+2026-07-11 13:54:04,032 - INFO - Client disconnected.
+2026-07-11 13:54:04,033 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 13:54:04,182 - INFO - connection_lost: (None,)
+2026-07-11 13:54:04,183 - INFO - Client disconnected.
+2026-07-11 13:54:04,184 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 13:54:04,184 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:54:14,042 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent1@localhost" thread="None" metadata={'performative': 'inform', 'ontology': 'vitals'}>
+{'patient_id': 1, 'timestamp': '2026-07-11 13:54:14', 'sodium': 143.6, 'potassium': 3.9, 'chloride': 103.8, 'bun': 20.9, 'creatinine': 0.63, 'glucose': 100.4, 'age': 72, 'gender': 2, 'weight': 65.0, 'bmi': 26.5, 'oral_intake_feasible': True}
+</message>
+2026-07-11 13:54:14,046 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:32,183 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,185 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,188 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,373 - INFO - JID set to: healthagent@localhost/31488647659005969084482
+2026-07-11 13:56:32,374 - INFO - Agent healthagent@localhost connected and authenticated.
+2026-07-11 13:56:32,444 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,447 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,449 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,517 - INFO - JID set to: reminderagent@localhost/16766268974370786214610
+2026-07-11 13:56:32,518 - INFO - Agent reminderagent@localhost connected and authenticated.
+2026-07-11 13:56:32,579 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,581 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,584 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,652 - INFO - JID set to: careagent@localhost/151439628802440840884738
+2026-07-11 13:56:32,653 - INFO - Agent careagent@localhost connected and authenticated.
+2026-07-11 13:56:32,710 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,712 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,714 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:32,780 - INFO - JID set to: sensoragent1@localhost/35176881830418440934866
+2026-07-11 13:56:32,782 - INFO - Agent sensoragent1@localhost connected and authenticated.
+2026-07-11 13:56:37,790 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:37,815 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:37,816 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:37,958 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:37,960 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:37,960 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:38,047 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:38,052 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:38,052 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:38,173 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:38,174 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:38,175 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:38,185 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:56:40,335 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:40,339 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:40,339 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:40,466 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:40,467 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:40,468 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:40,476 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:56:40,524 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:40,527 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:40,530 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:40,601 - INFO - JID set to: sensoragent2@localhost/68758989509252843244994
+2026-07-11 13:56:40,602 - INFO - Agent sensoragent2@localhost connected and authenticated.
+2026-07-11 13:56:45,610 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:45,614 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:45,614 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:45,765 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:45,766 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:45,767 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:45,785 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:45,790 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:45,791 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:45,907 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:45,908 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:45,908 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:45,925 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:56:48,028 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:48,033 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:48,033 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:48,146 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:48,148 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:48,148 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:48,156 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:56:48,191 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:48,193 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:48,196 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:48,268 - INFO - JID set to: sensoragent3@localhost/94590592010168799685122
+2026-07-11 13:56:48,270 - INFO - Agent sensoragent3@localhost connected and authenticated.
+2026-07-11 13:56:53,285 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:53,290 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:53,291 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:53,439 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:53,440 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:53,441 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:53,451 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:53,454 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:53,454 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:53,565 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:53,567 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:53,567 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:53,574 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:56:55,665 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:56:55,669 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:56:55,670 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:56:55,787 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:56:55,789 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:56:55,790 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:56:55,800 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:56:55,869 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:55,874 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:55,878 - INFO - Authentication failed: not-authorized
+2026-07-11 13:56:55,961 - INFO - JID set to: sensoragent4@localhost/117936602319671903635186
+2026-07-11 13:56:55,963 - INFO - Agent sensoragent4@localhost connected and authenticated.
+2026-07-11 13:57:00,977 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:00,980 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:00,981 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:00,990 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:00,995 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:00,995 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:00,996 - INFO - Updating subscribed topics to: ('vitals_raw',)
+2026-07-11 13:57:01,001 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:01,002 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:01,002 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:01,095 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:01,096 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:01,096 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:01,115 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:01,119 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:01,119 - INFO - Coordinator for group/csv_writer_group is BrokerMetadata(nodeId='coordinator-0', host='host.docker.internal', port=9092, rack=None)
+2026-07-11 13:57:01,119 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:01,120 - INFO - Discovered coordinator coordinator-0 for group csv_writer_group
+2026-07-11 13:57:01,121 - INFO - Starting new heartbeat thread
+2026-07-11 13:57:01,123 - INFO - Revoking previously assigned partitions set() for group csv_writer_group
+2026-07-11 13:57:01,123 - INFO - Failed to join group csv_writer_group: NodeNotReadyError: coordinator-0
+2026-07-11 13:57:01,126 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:01,126 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:01,228 - INFO - (Re-)joining group csv_writer_group
+2026-07-11 13:57:01,229 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:01,230 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:01,230 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:01,239 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:01,265 - INFO - Received member id kafka-python-2.2.15-db68e929-47c8-4c1b-b73a-2a636b922204 for group csv_writer_group; will retry join-group
+2026-07-11 13:57:01,266 - INFO - Failed to join group csv_writer_group: [Error 79] MemberIdRequiredError
+2026-07-11 13:57:01,266 - INFO - (Re-)joining group csv_writer_group
+2026-07-11 13:57:01,293 - INFO - Successfully joined group csv_writer_group <Generation 1 (member_id: kafka-python-2.2.15-db68e929-47c8-4c1b-b73a-2a636b922204, protocol: range)>
+2026-07-11 13:57:01,294 - INFO - Elected group leader -- performing partition assignments using range
+2026-07-11 13:57:01,330 - INFO - Updated partition assignment: [TopicPartition(topic='vitals_raw', partition=0)]
+2026-07-11 13:57:01,332 - INFO - Setting newly assigned partitions {TopicPartition(topic='vitals_raw', partition=0)} for group csv_writer_group
+2026-07-11 13:57:01,359 - INFO - Resetting offset for partition TopicPartition(topic='vitals_raw', partition=0) to offset 0.
+2026-07-11 13:57:03,259 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:03,262 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:03,263 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:03,381 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:03,382 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:03,383 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:03,388 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:03,394 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 13:57:03 for patient 4 | Action: SendEmergencySignal
+2026-07-11 13:57:07,846 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:07,854 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:07,854 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:07,971 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:07,972 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:07,973 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:07,982 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:10,205 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:10,209 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:10,210 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:10,327 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:10,328 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:10,329 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:10,336 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:15,639 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:15,644 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:15,645 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:15,758 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:15,759 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:15,759 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:15,767 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:17,989 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:17,993 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:17,993 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:18,105 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:18,107 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:18,107 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:18,114 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:23,327 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:23,331 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:23,331 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:23,452 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:23,453 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:23,454 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:23,461 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:25,568 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:25,571 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:25,571 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:25,696 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:25,698 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:25,698 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:25,707 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:31,003 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:31,010 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:31,012 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:31,132 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:31,133 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:31,134 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:31,142 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:33,404 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:33,409 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:33,410 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:33,518 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:33,520 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:33,520 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:33,537 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:33,544 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 13:57:33 for patient 4 | Action: SendEmergencySignal
+2026-07-11 13:57:37,830 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:37,833 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:37,833 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:37,944 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:37,946 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:37,946 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:37,952 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:40,274 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:40,277 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:40,277 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:40,391 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:40,392 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:40,392 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:40,398 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:45,632 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:45,635 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:45,635 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:45,747 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:45,749 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:45,749 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:45,755 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:47,971 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:47,973 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:47,973 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:48,087 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:48,089 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:48,089 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:48,098 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:53,318 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:53,322 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:53,322 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:53,435 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:53,436 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:53,436 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:53,444 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:55,717 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:57:55,719 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:57:55,720 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:57:55,832 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:57:55,833 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:57:55,833 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:57:55,838 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:57:55,843 - WARNING - MODERATE DEHYDRATION ALERT at 2026-07-11 13:57:55 for patient 3 | Action: SendIVRequiredAlert
+2026-07-11 13:58:01,009 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:01,014 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:01,015 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:01,136 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:01,137 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:01,137 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:01,145 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:03,508 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:03,511 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:03,511 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:03,625 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:03,626 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:03,626 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:03,631 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:03,637 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 13:58:03 for patient 4 | Action: SendEmergencySignal
+2026-07-11 13:58:07,839 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:07,842 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:07,843 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:07,953 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:07,954 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:07,954 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:07,960 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:10,269 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:10,273 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:10,273 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:10,396 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:10,397 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:10,398 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:10,404 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:15,634 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:15,636 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:15,637 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:15,753 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:15,754 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:15,755 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:15,762 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:18,128 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:18,132 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:18,132 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:18,241 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:18,243 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:18,243 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:18,252 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:23,318 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:23,322 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:23,323 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:23,433 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:23,434 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:23,435 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:23,441 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:25,850 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:25,853 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:25,853 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:25,969 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:25,970 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:25,970 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:25,977 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:30,997 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:31,004 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:31,004 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:31,126 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:31,127 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:31,127 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:31,134 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:33,612 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:33,614 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:33,615 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:33,719 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:33,721 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:33,721 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:33,729 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:33,735 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 13:58:33 for patient 4 | Action: SendEmergencySignal
+2026-07-11 13:58:37,836 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:37,841 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:37,841 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:37,953 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:37,955 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:37,955 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:37,964 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:40,399 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:40,401 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:40,402 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:40,513 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:40,514 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:40,514 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:40,520 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:43,336 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 13:58:43,487 - INFO - connection_lost: (None,)
+2026-07-11 13:58:43,488 - INFO - Client disconnected.
+2026-07-11 13:58:43,488 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 13:58:43,640 - INFO - connection_lost: (None,)
+2026-07-11 13:58:43,640 - INFO - Client disconnected.
+2026-07-11 13:58:43,641 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:58:43,791 - INFO - connection_lost: (None,)
+2026-07-11 13:58:43,792 - INFO - Client disconnected.
+2026-07-11 13:58:43,793 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 13:58:43,942 - INFO - connection_lost: (None,)
+2026-07-11 13:58:43,943 - INFO - Client disconnected.
+2026-07-11 13:58:43,944 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 13:58:43,944 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 13:58:43,945 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 13:58:43,945 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 13:58:45,628 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent2@localhost" thread="None" metadata={'performative': 'inform', 'ontology': 'vitals'}>
+{'patient_id': 2, 'timestamp': '2026-07-11 13:58:45', 'sodium': 141.5, 'potassium': 4.0, 'chloride': 103.4, 'bun': 22.0, 'creatinine': 0.81, 'glucose': 85.0, 'age': 80, 'gender': 1, 'weight': 72.0, 'bmi': 24.8, 'oral_intake_feasible': False}
+</message>
+2026-07-11 13:58:45,644 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:45,648 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:45,649 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:45,779 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:45,780 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:45,780 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:45,787 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:58:53,307 - WARNING - No behaviour matched for message: <message to="healthagent@localhost" from="sensoragent3@localhost" thread="None" metadata={'performative': 'inform', 'ontology': 'vitals'}>
+{'patient_id': 3, 'timestamp': '2026-07-11 13:58:53', 'sodium': 149.2, 'potassium': 4.2, 'chloride': 109.7, 'bun': 29.0, 'creatinine': 1.19, 'glucose': 139.2, 'age': 68, 'gender': 2, 'weight': 58.0, 'bmi': 23.1, 'oral_intake_feasible': True}
+</message>
+2026-07-11 13:58:53,317 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 13:58:53,320 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 13:58:53,320 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 13:58:53,433 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 13:58:53,435 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 13:58:53,435 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 13:58:53,442 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:59:07,833 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:59:07,833 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:59:07,834 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 13:59:07,835 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:11:40,566 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:40,570 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:40,573 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:40,777 - INFO - JID set to: healthagent@localhost/18745693078685831015314
+2026-07-11 14:11:40,778 - INFO - Agent healthagent@localhost connected and authenticated.
+2026-07-11 14:11:40,851 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:40,853 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:40,856 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:40,924 - INFO - JID set to: reminderagent@localhost/162082521722670884705442
+2026-07-11 14:11:40,925 - INFO - Agent reminderagent@localhost connected and authenticated.
+2026-07-11 14:11:41,003 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:41,006 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:41,008 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:41,080 - INFO - JID set to: careagent@localhost/6839348921670762765570
+2026-07-11 14:11:41,081 - INFO - Agent careagent@localhost connected and authenticated.
+2026-07-11 14:11:41,156 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:41,158 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:41,161 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:41,233 - INFO - JID set to: sensoragent1@localhost/135349152071539552815698
+2026-07-11 14:11:41,234 - INFO - Agent sensoragent1@localhost connected and authenticated.
+2026-07-11 14:11:46,253 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:11:46,276 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:11:46,277 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:11:46,419 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:11:46,420 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:11:46,421 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:11:46,457 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:11:46,462 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:11:46,462 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:11:46,573 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:11:46,575 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:11:46,575 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:11:46,594 - INFO - <BrokerConnection client_id=kafka-python-producer-2, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:11:48,865 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:11:48,869 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:11:48,869 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:11:48,986 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:11:48,987 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:11:48,987 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:11:48,994 - INFO - <BrokerConnection client_id=kafka-python-producer-3, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:11:49,047 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:49,050 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:49,053 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:49,126 - INFO - JID set to: sensoragent2@localhost/76778503676672011345826
+2026-07-11 14:11:49,127 - INFO - Agent sensoragent2@localhost connected and authenticated.
+2026-07-11 14:11:54,139 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:11:54,143 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:11:54,143 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:11:54,279 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:11:54,280 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:11:54,281 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:11:54,292 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:11:54,297 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:11:54,297 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:11:54,419 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:11:54,420 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:11:54,421 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:11:54,428 - INFO - <BrokerConnection client_id=kafka-python-producer-5, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:11:56,489 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:11:56,492 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:11:56,492 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:11:56,607 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:11:56,608 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:11:56,609 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:11:56,615 - INFO - <BrokerConnection client_id=kafka-python-producer-6, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:11:56,646 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:56,648 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:56,650 - INFO - Authentication failed: not-authorized
+2026-07-11 14:11:56,729 - INFO - JID set to: sensoragent3@localhost/143417408397101754125954
+2026-07-11 14:11:56,730 - INFO - Agent sensoragent3@localhost connected and authenticated.
+2026-07-11 14:12:01,743 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:01,747 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:01,747 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:01,882 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:01,884 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:01,884 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:01,892 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:01,896 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:01,896 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:02,009 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:02,010 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:02,010 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:02,017 - INFO - <BrokerConnection client_id=kafka-python-producer-8, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:04,177 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:04,181 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:04,181 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:04,301 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:04,303 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:04,303 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:04,310 - INFO - <BrokerConnection client_id=kafka-python-producer-9, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:04,373 - INFO - Authentication failed: not-authorized
+2026-07-11 14:12:04,376 - INFO - Authentication failed: not-authorized
+2026-07-11 14:12:04,379 - INFO - Authentication failed: not-authorized
+2026-07-11 14:12:04,453 - INFO - JID set to: sensoragent4@localhost/96066572584629029426082
+2026-07-11 14:12:04,454 - INFO - Agent sensoragent4@localhost connected and authenticated.
+2026-07-11 14:12:09,466 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:09,470 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:09,471 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:09,476 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:09,479 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:09,479 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:09,480 - INFO - Updating subscribed topics to: ('vitals_raw',)
+2026-07-11 14:12:09,494 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:09,496 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:09,496 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:09,588 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:09,589 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:09,589 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:09,599 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:09,600 - INFO - Coordinator for group/csv_writer_group is BrokerMetadata(nodeId='coordinator-0', host='host.docker.internal', port=9092, rack=None)
+2026-07-11 14:12:09,600 - INFO - Discovered coordinator coordinator-0 for group csv_writer_group
+2026-07-11 14:12:09,601 - INFO - Starting new heartbeat thread
+2026-07-11 14:12:09,603 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:09,604 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:09,605 - INFO - Revoking previously assigned partitions set() for group csv_writer_group
+2026-07-11 14:12:09,606 - INFO - Failed to join group csv_writer_group: NodeNotReadyError: coordinator-0
+2026-07-11 14:12:09,608 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:09,609 - INFO - <BrokerConnection client_id=kafka-python-2.2.15, node_id=coordinator-0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:09,710 - INFO - (Re-)joining group csv_writer_group
+2026-07-11 14:12:09,714 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:09,715 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:09,715 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:09,723 - INFO - Received member id kafka-python-2.2.15-4e58cf7e-55cd-4e6b-9071-a2bd51131d70 for group csv_writer_group; will retry join-group
+2026-07-11 14:12:09,724 - INFO - Failed to join group csv_writer_group: [Error 79] MemberIdRequiredError
+2026-07-11 14:12:09,725 - INFO - (Re-)joining group csv_writer_group
+2026-07-11 14:12:09,728 - INFO - <BrokerConnection client_id=kafka-python-producer-11, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:09,738 - INFO - Successfully joined group csv_writer_group <Generation 3 (member_id: kafka-python-2.2.15-4e58cf7e-55cd-4e6b-9071-a2bd51131d70, protocol: range)>
+2026-07-11 14:12:09,739 - INFO - Elected group leader -- performing partition assignments using range
+2026-07-11 14:12:09,748 - INFO - Updated partition assignment: [TopicPartition(topic='vitals_raw', partition=0)]
+2026-07-11 14:12:09,749 - INFO - Setting newly assigned partitions {TopicPartition(topic='vitals_raw', partition=0)} for group csv_writer_group
+2026-07-11 14:12:11,911 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:11,915 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:11,915 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:12,022 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:12,023 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:12,023 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:12,030 - INFO - <BrokerConnection client_id=kafka-python-producer-12, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:12,046 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 14:12:12 for patient 4 | Action: SendEmergencySignal
+2026-07-11 14:12:16,298 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:16,303 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:16,304 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:16,414 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:16,415 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:16,415 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:16,423 - INFO - <BrokerConnection client_id=kafka-python-producer-13, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:18,563 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:18,567 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:18,567 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:18,687 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:18,688 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:18,688 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:18,695 - INFO - <BrokerConnection client_id=kafka-python-producer-14, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:24,170 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:24,175 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:24,176 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:24,291 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:24,292 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:24,292 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:24,300 - INFO - <BrokerConnection client_id=kafka-python-producer-15, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:26,475 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:26,478 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:26,478 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:26,597 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:26,599 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:26,599 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:26,606 - INFO - <BrokerConnection client_id=kafka-python-producer-16, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:31,769 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:31,774 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:31,775 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:31,884 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:31,886 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:31,886 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:31,893 - INFO - <BrokerConnection client_id=kafka-python-producer-17, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:34,083 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:34,087 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:34,087 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:34,193 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:34,195 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:34,195 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:34,202 - INFO - <BrokerConnection client_id=kafka-python-producer-18, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:39,493 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:39,496 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:39,496 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:39,616 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:39,617 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:39,618 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:39,626 - INFO - <BrokerConnection client_id=kafka-python-producer-19, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:41,867 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:41,870 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:41,870 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:41,990 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:41,991 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:41,991 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:41,998 - INFO - <BrokerConnection client_id=kafka-python-producer-20, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:42,004 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 14:12:42 for patient 4 | Action: SendEmergencySignal
+2026-07-11 14:12:46,296 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:46,299 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:46,299 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:46,415 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:46,416 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:46,417 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:46,424 - INFO - <BrokerConnection client_id=kafka-python-producer-21, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:48,597 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:48,600 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:48,600 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:48,713 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:48,715 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:48,715 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:48,721 - INFO - <BrokerConnection client_id=kafka-python-producer-22, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:54,163 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:54,167 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:54,167 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:54,284 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:54,286 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:54,286 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:54,294 - INFO - <BrokerConnection client_id=kafka-python-producer-23, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:12:56,531 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:12:56,534 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:12:56,534 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:12:56,647 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:12:56,649 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:12:56,649 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:12:56,655 - INFO - <BrokerConnection client_id=kafka-python-producer-24, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:01,758 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:01,761 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:01,761 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:01,871 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:01,872 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:01,872 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:01,878 - INFO - <BrokerConnection client_id=kafka-python-producer-25, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:03,914 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:03,917 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:03,917 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:04,028 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:04,029 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:04,029 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:04,034 - INFO - <BrokerConnection client_id=kafka-python-producer-26, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:09,494 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:09,497 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:09,497 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:09,613 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:09,614 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:09,614 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:09,622 - INFO - <BrokerConnection client_id=kafka-python-producer-27, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:11,876 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:11,879 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:11,879 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:11,986 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:11,988 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:11,988 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:11,994 - INFO - <BrokerConnection client_id=kafka-python-producer-28, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:12,003 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 14:13:11 for patient 4 | Action: SendEmergencySignal
+2026-07-11 14:13:16,299 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:16,303 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:16,303 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:16,417 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:16,418 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:16,419 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:16,426 - INFO - <BrokerConnection client_id=kafka-python-producer-29, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:18,793 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:18,796 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:18,796 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:18,902 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:18,904 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:18,904 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:18,911 - INFO - <BrokerConnection client_id=kafka-python-producer-30, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:24,158 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:24,160 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:24,161 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:24,287 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:24,288 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:24,289 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:24,296 - INFO - <BrokerConnection client_id=kafka-python-producer-31, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:26,624 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:26,626 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:26,626 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:26,743 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:26,744 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:26,744 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:26,749 - INFO - <BrokerConnection client_id=kafka-python-producer-32, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:31,764 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:31,766 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:31,767 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:31,876 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:31,877 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:31,877 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:31,884 - INFO - <BrokerConnection client_id=kafka-python-producer-33, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:34,210 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:34,213 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:34,213 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:34,328 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:34,330 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:34,330 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:34,336 - INFO - <BrokerConnection client_id=kafka-python-producer-34, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:39,494 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:39,497 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:39,498 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:39,618 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:39,619 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:39,620 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:39,626 - INFO - <BrokerConnection client_id=kafka-python-producer-35, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:41,932 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:41,935 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:41,936 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:42,043 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:42,044 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:42,044 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:42,051 - INFO - <BrokerConnection client_id=kafka-python-producer-36, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:42,060 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 14:13:42 for patient 4 | Action: SendEmergencySignal
+2026-07-11 14:13:46,306 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:46,309 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:46,309 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:46,416 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:46,417 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:46,418 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:46,426 - INFO - <BrokerConnection client_id=kafka-python-producer-37, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:48,876 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:48,878 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:48,878 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:48,984 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:48,985 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:48,985 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:48,990 - INFO - <BrokerConnection client_id=kafka-python-producer-38, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:54,161 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:54,164 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:54,164 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:54,278 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:54,279 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:54,279 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:54,285 - INFO - <BrokerConnection client_id=kafka-python-producer-39, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:13:56,518 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:13:56,521 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:13:56,521 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:13:56,627 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:13:56,628 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:13:56,629 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:13:56,634 - INFO - <BrokerConnection client_id=kafka-python-producer-40, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:01,758 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:01,761 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:01,761 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:01,872 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:01,873 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:01,873 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:01,878 - INFO - <BrokerConnection client_id=kafka-python-producer-41, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:04,234 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:04,237 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:04,237 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:04,348 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:04,349 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:04,349 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:04,355 - INFO - <BrokerConnection client_id=kafka-python-producer-42, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:09,486 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:09,489 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:09,490 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:09,609 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:09,611 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:09,611 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:09,618 - INFO - <BrokerConnection client_id=kafka-python-producer-43, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:11,991 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:11,994 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:11,994 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:12,097 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:12,098 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:12,099 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:12,104 - INFO - <BrokerConnection client_id=kafka-python-producer-44, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:12,109 - CRITICAL - SEVERE DEHYDRATION ALERT at 2026-07-11 14:14:12 for patient 4 | Action: SendEmergencySignal
+2026-07-11 14:14:16,295 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:16,298 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:16,299 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:16,415 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:16,416 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:16,416 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:16,423 - INFO - <BrokerConnection client_id=kafka-python-producer-45, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:18,905 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:18,908 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:18,908 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:19,018 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:19,019 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:19,020 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:19,026 - INFO - <BrokerConnection client_id=kafka-python-producer-46, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:24,161 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:24,164 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:24,164 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:24,294 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:24,295 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:24,296 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:24,303 - INFO - <BrokerConnection client_id=kafka-python-producer-47, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:26,773 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:26,776 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:26,776 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:26,883 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:26,884 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:26,884 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:26,891 - INFO - <BrokerConnection client_id=kafka-python-producer-48, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:31,761 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:31,765 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:31,765 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:31,877 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:31,878 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:31,878 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:31,885 - INFO - <BrokerConnection client_id=kafka-python-producer-49, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:34,325 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+2026-07-11 14:14:34,327 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=bootstrap-0 host=localhost:9092 <checking_api_versions_recv> [IPv6 ('::1', 9092, 0, 0)]>: Broker version identified as 2.6
+2026-07-11 14:14:34,327 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+2026-07-11 14:14:34,439 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=0 host=host.docker.internal:9092 <connecting> [IPv4 ('192.168.1.194', 9092)]>: connecting to host.docker.internal:9092 [('192.168.1.194', 9092) IPv4]
+2026-07-11 14:14:34,440 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Connection complete.
+2026-07-11 14:14:34,440 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+2026-07-11 14:14:34,447 - INFO - <BrokerConnection client_id=kafka-python-producer-50, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:36,459 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:36,607 - INFO - connection_lost: (None,)
+2026-07-11 14:14:36,616 - INFO - Client disconnected.
+2026-07-11 14:14:36,617 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:36,766 - INFO - connection_lost: (None,)
+2026-07-11 14:14:36,767 - INFO - Client disconnected.
+2026-07-11 14:14:36,768 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:36,919 - INFO - connection_lost: (None,)
+2026-07-11 14:14:36,920 - INFO - Client disconnected.
+2026-07-11 14:14:36,921 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:37,070 - INFO - connection_lost: (None,)
+2026-07-11 14:14:37,071 - INFO - Client disconnected.
+2026-07-11 14:14:37,071 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 14:14:37,220 - INFO - connection_lost: (None,)
+2026-07-11 14:14:37,220 - INFO - Client disconnected.
+2026-07-11 14:14:37,221 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 14:14:37,370 - INFO - connection_lost: (None,)
+2026-07-11 14:14:37,371 - INFO - Client disconnected.
+2026-07-11 14:14:37,371 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 14:14:37,519 - INFO - connection_lost: (None,)
+2026-07-11 14:14:37,519 - INFO - Client disconnected.
+2026-07-11 14:14:37,520 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:37,520 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:37,521 - INFO - Killing behavior CyclicBehaviour/AlertBehaviour with exit code: None
+2026-07-11 14:14:37,521 - INFO - Killing behavior CyclicBehaviour/Processor with exit code: None
+2026-07-11 14:14:37,521 - INFO - Killing behavior CyclicBehaviour/ReminderBehaviour with exit code: None
+2026-07-11 14:14:37,521 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:37,522 - INFO - Killing behavior PeriodicBehaviour/PeriodicSensor with exit code: None
+2026-07-11 14:14:37,523 - INFO - <BrokerConnection client_id=kafka-python-producer-7, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:37,523 - INFO - <BrokerConnection client_id=kafka-python-producer-10, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:37,524 - INFO - <BrokerConnection client_id=kafka-python-producer-4, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 
+2026-07-11 14:14:37,524 - INFO - <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=host.docker.internal:9092 <connected> [IPv4 ('192.168.1.194', 9092)]>: Closing connection. 

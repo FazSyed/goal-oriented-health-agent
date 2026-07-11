@@ -3568,5 +3568,481 @@
       "kafka_topic": "care_alerts",
       "kafka_publish_success": true
     }
+  },
+  {
+    "timestamp": "2026-07-11 13:50:15",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 143.9,
+      "potassium": 4.1,
+      "chloride": 98.7,
+      "bun": 20.1,
+      "creatinine": 0.87,
+      "glucose": 122.2,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": false
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:50:40",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 143.2,
+      "potassium": 3.7,
+      "chloride": 104.8,
+      "bun": 21.1,
+      "creatinine": 0.95,
+      "glucose": 88.4,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:53:50",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.8,
+      "potassium": 4.5,
+      "chloride": 101.3,
+      "bun": 21.4,
+      "creatinine": 0.7,
+      "glucose": 136.8,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": false
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:56:40",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 143.4,
+      "potassium": 4.0,
+      "chloride": 105.5,
+      "bun": 24.6,
+      "creatinine": 0.75,
+      "glucose": 123.9,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:57:10",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.0,
+      "potassium": 4.5,
+      "chloride": 102.6,
+      "bun": 19.9,
+      "creatinine": 0.95,
+      "glucose": 131.9,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:57:40",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 143.0,
+      "potassium": 3.6,
+      "chloride": 100.0,
+      "bun": 22.8,
+      "creatinine": 0.64,
+      "glucose": 105.3,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:58:10",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 143.3,
+      "potassium": 4.0,
+      "chloride": 99.5,
+      "bun": 24.1,
+      "creatinine": 0.79,
+      "glucose": 116.4,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 13:58:40",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.4,
+      "potassium": 4.3,
+      "chloride": 105.2,
+      "bun": 24.4,
+      "creatinine": 0.94,
+      "glucose": 133.1,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 14:11:48",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 140.6,
+      "potassium": 3.9,
+      "chloride": 101.5,
+      "bun": 21.2,
+      "creatinine": 0.72,
+      "glucose": 122.7,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 14:12:18",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 142.3,
+      "potassium": 4.3,
+      "chloride": 100.1,
+      "bun": 20.3,
+      "creatinine": 0.78,
+      "glucose": 111.8,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 14:12:48",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 142.2,
+      "potassium": 4.3,
+      "chloride": 101.8,
+      "bun": 23.6,
+      "creatinine": 0.95,
+      "glucose": 98.8,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 14:13:18",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 143.4,
+      "potassium": 3.6,
+      "chloride": 98.6,
+      "bun": 22.3,
+      "creatinine": 0.66,
+      "glucose": 89.7,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 14:13:48",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.0,
+      "potassium": 4.0,
+      "chloride": 100.1,
+      "bun": 22.0,
+      "creatinine": 0.9,
+      "glucose": 133.1,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 14:14:19",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.8,
+      "potassium": 4.3,
+      "chloride": 105.9,
+      "bun": 19.3,
+      "creatinine": 0.97,
+      "glucose": 119.0,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    }
   }
 ]
