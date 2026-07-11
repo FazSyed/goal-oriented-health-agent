@@ -304,5 +304,175 @@
       "kafka_topic": "care_alerts",
       "kafka_publish_success": true
     }
+  },
+  {
+    "timestamp": "2026-07-11 16:30:57",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 156.8,
+      "potassium": 4.5,
+      "chloride": 107.5,
+      "bun": 31.8,
+      "creatinine": 2.28,
+      "glucose": 158.4,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 16:31:28",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 156.3,
+      "potassium": 4.5,
+      "chloride": 111.8,
+      "bun": 36.3,
+      "creatinine": 2.97,
+      "glucose": 174.5,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 16:31:58",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 160.6,
+      "potassium": 4.8,
+      "chloride": 110.7,
+      "bun": 38.6,
+      "creatinine": 2.12,
+      "glucose": 147.8,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 16:32:28",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 156.5,
+      "potassium": 4.1,
+      "chloride": 113.5,
+      "bun": 46.2,
+      "creatinine": 1.81,
+      "glucose": 130.0,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    }
+  },
+  {
+    "timestamp": "2026-07-11 16:32:58",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 156.9,
+      "potassium": 4.4,
+      "chloride": 105.3,
+      "bun": 33.3,
+      "creatinine": 2.76,
+      "glucose": 169.4,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    }
   }
 ]

@@ -7,12 +7,13 @@
     )
 
     (:init
-        (euhydrated patient1)
+        (moderately_dehydrated patient1)
         (monitoring_active patient1)
     )
 
     (:goal
         (and
+            (transferred_to_hospital patient1)
             (threshold_met patient1)
             (status_logged patient1)
         )
