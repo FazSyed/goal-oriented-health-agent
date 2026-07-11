@@ -19,11 +19,14 @@ def load_all_profiles() -> list:
                 profile = json.load(f)
             profiles.append(profile)
             pid = profile.get("patient_id", "?")
-            print(f"[Profiles] Loaded patient_{pid}.json (Patient {pid}, age={profile.get('age')}, oral_intake_feasible={profile.get('oral_intake_feasible')})")
+
+            # DEBUGGING
+            # print(f"[Profiles] Loaded patient_{pid}.json (Patient {pid}, age={profile.get('age')}, oral_intake_feasible={profile.get('oral_intake_feasible')})")
         except Exception as e:
             print(f"[Profiles] WARNING: Could not load {path}: {e}")
 
-    print(f"[Profiles] {len(profiles)} patient profile(s) loaded.")
+    # DEBUGGING
+    # print(f"[Profiles] {len(profiles)} patient profile(s) loaded.")
     return profiles
 
 

@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import glob
 import datetime
 
@@ -8,6 +9,10 @@ import plotly.graph_objects as go # Plotly for creating interactive visualizatio
 
 from dash import Dash, dcc, html, Input, Output, dash_table
 import dash_bootstrap_components as dbc
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from patients import ALL_PROFILES
 
 # File path constants and refresh interval for live dashboard updates
 LOGS_DIR = "logs"
@@ -373,16 +378,12 @@ sidebar = html.Div([
     }),
     dcc.Dropdown(
         id="patient-selector",
-        options=[
-            # {"label": f"Patient {p['patient_id']}", "value": p['patient_id']}
-            # for p in ALL_PROFILES
 
-            {"label": "Patient 1", "value": 1},
-            {"label": "Patient 2", "value": 2},
-            {"label": "Patient 3", "value": 3},
-            {"label": "Patient 4", "value": 4},
+        options=[
+            {"label": f"Patient {p['patient_id']}" ,"value": p["patient_id"]}
+            for p in ALL_PROFILES
         ],
-        value=1,
+        value=ALL_PROFILES[0]["patient_id"],
         clearable=False,
         style={"marginBottom": "2rem", "fontSize": "0.9rem", "color": "#252525"}
     ),
