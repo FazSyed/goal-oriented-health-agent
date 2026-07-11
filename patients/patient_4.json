@@ -1,0 +1,20 @@
+{
+    "patient_id": 4,
+    "name": "Robert Mensah",
+    "age": 75,
+    "gender": 1,
+    "weight": 68.0,
+    "bmi": 25.2,
+    "oral_intake_feasible": true,
+    "period": 30,
+
+    "sodium_range":     [155, 162],
+    "bun_range":        [30, 50],
+    "creatinine_range": [1.5, 3.0],
+    "glucose_range":    [120, 220],
+    "potassium_range":  [4.0, 5.5],
+    "chloride_range":   [105, 114],
+
+    "pathway": "Severe dehydration → emergency transfer, IV bolus/IO",
+    "notes": "Sodium >155 mmol/L (severe hypernatremia, +2 points). BUN:Cr ratio consistently above 30 (+2 points). Composite score >= 3 → Severe classification. System generates call_emergency → transfer_to_hospital_severe care plan."
+}

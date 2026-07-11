@@ -1,0 +1,20 @@
+{
+    "patient_id": 2,
+    "name": "Ahmed Hassan",
+    "age": 80,
+    "gender": 1,
+    "weight": 72.0,
+    "bmi": 24.8,
+    "oral_intake_feasible": false,
+    "period": 30,
+
+    "sodium_range":     [141, 143],
+    "bun_range":        [40, 45],
+    "creatinine_range": [2.0, 3.0],
+    "glucose_range":    [180, 250],
+    "potassium_range":  [4.5, 5.5],
+    "chloride_range":   [113, 114],
+
+    "pathway": "Mild → escalation path (no ORS)",
+    "notes": "Same sodium range as Patient 1 — Mild prediction. oral_intake_feasible=false due to dysphagia. System generates escalate_to_moderate care plan instead of ORS path. Demonstrates personalised planning based on patient capability."
+}

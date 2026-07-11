@@ -1,0 +1,20 @@
+{
+    "patient_id": 3,
+    "name": "Margaret Osei",
+    "age": 68,
+    "gender": 2,
+    "weight": 58.0,
+    "bmi": 23.1,
+    "oral_intake_feasible": true,
+    "period": 30,
+
+    "sodium_range":     [147, 150],
+    "bun_range":        [40, 55],
+    "creatinine_range": [1.5, 2.5],
+    "glucose_range":    [100, 180],
+    "potassium_range":  [3.8, 5.0],
+    "chloride_range":   [103, 110],
+
+    "pathway": "Moderate dehydration → hospital transfer, IV/hypodermoclysis",
+    "notes": "Sodium 145-150 mmol/L (mild hypernatremia zone). BUN elevated but BUN:Cr ratio below severe threshold (score < 3). Composite severity score maps to Moderate. System generates alert_caregiver → transfer_to_hospital_moderate care plan."
+}
