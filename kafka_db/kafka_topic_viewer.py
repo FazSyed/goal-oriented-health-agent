@@ -33,15 +33,17 @@ try:
 
         elif topic == 'euhydrated_log':
             print(f"\n[{topic.upper()}] 🟢 Euhydrated")
-            print(f"  Risk   : {data.get('risk')}")
-            print(f"  Action : {data.get('action')}")
-            print(f"  Plan   : {data.get('plan')}")
+            print(f"  Patient ID : {data.get('patient_id')}")
+            print(f"  Risk       : {data.get('risk')}")
+            print(f"  Action     : {data.get('action')}")
+            print(f"  Plan       : {data.get('plan')}")
 
         elif topic == 'reminders':
             print(f"\n[{topic.upper()}] 🔵 Mild/Impending Dehydration")
-            print(f"  Risk   : {data.get('risk')}")
-            print(f"  Action : {data.get('action')}")
-            print(f"  Plan   : {data.get('plan')}")
+            print(f"  Patient ID : {data.get('patient_id')}")
+            print(f"  Risk       : {data.get('risk')}")
+            print(f"  Action     : {data.get('action')}")
+            print(f"  Plan       : {data.get('plan')}")
 
         elif topic == 'care_alerts':
             
@@ -51,9 +53,10 @@ try:
                 icon = "🟠"
 
             print(f"\n[{topic.upper()}] {icon} {data.get('risk')} Dehydration Alert")
-            print(f"  Risk   : {data.get('risk')}")
-            print(f"  Action : {data.get('action')}")
-            print(f"  Plan   : {data.get('plan')}")
+            print(f"  Patient ID : {data.get('patient_id')}")
+            print(f"  Risk       : {data.get('risk')}")
+            print(f"  Action     : {data.get('action')}")
+            print(f"  Plan       : {data.get('plan')}")
 
         else:
             print(f"[{topic.upper()}] {data}")

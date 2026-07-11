@@ -79,7 +79,7 @@ class HealthAgent(Agent):
                     if risk == "Euhydrated":
                         # No agent routing, only logs to Kafka and return
                         kafka_sucess = KafkaLogger(topic='euhydrated_log').publish(
-                            {"risk": risk, "action": action, "plan": plan}
+                            {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
                         )
                         
                         # Update routing result for logging
@@ -103,7 +103,7 @@ class HealthAgent(Agent):
                         to_jid = "reminderagent@localhost"
                         # Send to Kafka topic for reminders
                         kafka_success = KafkaLogger(topic='reminders').publish(
-                            {"risk": risk, "action": action, "plan": plan}
+                            {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
                         )
 
                         # Update routing result for logging
@@ -114,7 +114,7 @@ class HealthAgent(Agent):
                         to_jid = "careagent@localhost"
                         # Send to Kafka topic for care alerts
                         kafka_success = KafkaLogger(topic='care_alerts').publish(
-                            {"risk": risk, "action": action, "plan": plan}
+                            {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
                         )
                         # Update routing result for logging
                         routing_result.update({"routed_to": to_jid, "kafka_topic": "care_alerts", "kafka_publish_success": kafka_success})
