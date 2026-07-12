@@ -54,10 +54,15 @@ This project provides a framework for goal-oriented elderly care using intellige
 
 Register the following agent accounts on your XMPP server:
 
-- `healthagent@localhost` / `agentforpassword`
-- `sensoragent@localhost` / `sensoragentforpassword`
-- `reminderagent@localhost` / `reminderagentforpassword`
-- `careagent@localhost` / `careagentforpassword`
+- `healthagent@localhost`
+- `sensoragent1@localhost`
+- `sensoragent2@localhost`
+- `sensoragent3@localhost`
+- `sensoragent4@localhost`
+- `reminderagent@localhost`
+- `careagent@localhost`
+
+See .env.example for configuration. Copy to .env and fill in your values.
 
 ## Usage
 
