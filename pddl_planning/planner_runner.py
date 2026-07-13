@@ -1,11 +1,18 @@
 import subprocess
 import os
+from dotenv import load_dotenv
 
-FAST_DOWNWARD_PATH = "C:/Users/fazil/Downloads/FastDownward/downward/fast-downward.py"
+load_dotenv()
+
+FAST_DOWNWARD_PATH = os.getenv("FAST_DOWNWARD_PATH")
+if not FAST_DOWNWARD_PATH:
+    raise EnvironmentError("[Security] FAST_DOWNWARD_PATH not found in .env")
+
 BASE_PATH = "pddl_planning"
 DOMAIN_FILE = "hydration_domain.pddl"
 PROBLEM_FILE = "hydration_problem.pddl"
 OUTPUT_FILE = "hydration_plan.txt"
+
 PLANNER_TIMEOUT_SEC = 30  # max time to wait for Fast Downward before giving up
 
 # Hardcoded fallback plans for each risk status in case the planner fails or no plan is found
@@ -189,7 +196,8 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
             ],
             cwd = BASE_PATH,
             stdout=subprocess.PIPE,  # suppress Fast Downward stdout
-            stderr=subprocess.PIPE   # suppress Fast Downward stderr
+            stderr=subprocess.PIPE,   # suppress Fast Downward stderr
+            timeout=PLANNER_TIMEOUT_SEC
         )
     except FileNotFoundError:
         print(f"[Planner] ERROR: Fast Downward not found at {FAST_DOWNWARD_PATH}")

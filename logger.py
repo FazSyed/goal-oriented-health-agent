@@ -1,8 +1,11 @@
 import json
 import os
 from datetime import datetime
+from dotenv import load_dotenv
 
-LOGS_DIR = "logs"
+load_dotenv()
+
+LOGS_DIR = os.getenv("LOGS_DIR", "logs")
 
 def _ensure_logs_dir_exists():
     if not os.path.exists(LOGS_DIR):

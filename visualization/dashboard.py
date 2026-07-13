@@ -1,22 +1,44 @@
-import json
-import os
 import sys
+import os
+ 
+# Add project root to path so patients/ and other modules can be imported
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ 
+import json
 import glob
 import datetime
-
+ 
 import pandas as pd
-import plotly.graph_objects as go # Plotly for creating interactive visualizations
-
+import plotly.graph_objects as go
+ 
 from dash import Dash, dcc, html, Input, Output, dash_table
 import dash_bootstrap_components as dbc
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+from cryptography.fernet import Fernet, InvalidToken
+from dotenv import load_dotenv
+ 
 from patients import ALL_PROFILES
 
+# Load .env from project root
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
+
 # File path constants and refresh interval for live dashboard updates
-LOGS_DIR = "logs"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOGS_DIR = os.path.join(ROOT, os.getenv("LOGS_DIR", "logs"))
+CSV_PATH = os.path.join(ROOT, os.getenv("CSV_PATH", "visualization/vitals_raw_log_phase2.csv"))
+KEY_PATH = os.path.join(ROOT, "secret.key")
 REFRESH_MS = 10_000 # Refresh interval in milliseconds (10 seconds)
+
+# Loading Encryption key
+# Dashboard reads secret.key to decrypt CSV rows written by consumer_to_csv.py
+# If key is missing, falls back to reading CSV as plaintext
+def load_encryption_key():
+    if os.path.exists(KEY_PATH):
+        with open(KEY_PATH, "rb") as f:
+            return Fernet(f.read())
+    print("[Dashboard] WARNING: secret.key not found. CSV will be read as plaintext.")
+    return None
+ 
+FERNET = load_encryption_key()
 
 # Color mapping for hydration risk categories
 RISK_COLORS = {
@@ -614,10 +636,7 @@ def update_all(n, risk_filter, patient_id):
         log_df = log_df[log_df["patient_id"] == patient_id].reset_index(drop=True)
 
     # Prepare fallback UI elements when no data is available.
-    empty_fig = go.Figure().update_layout(
-        title="No data — run the MAS to generate readings",
-        **_layout()
-    )
+    empty_fig = go.Figure().update_layout(title="No data. Run the MAS to generate readings", **_layout())
     no_data   = html.P("No data available.", style={"color": "#7F8C8D"})
     last_upd  = f"Updated {datetime.datetime.now().strftime('%H:%M:%S')}"
 

@@ -1,16 +1,26 @@
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
+from dotenv import load_dotenv
 import json
 import time
+import os
 
+load_dotenv()  # Load environment variables from .env file
+
+KAFKA_SERVER = os.getenv("KAFKA_SERVER", "localhost:9092")  # Default to localhost if not set
 class KafkaLogger:
     '''
     Logger class to publish messages to a specified Kafka topic.
     Utilizes KafkaProducer to send JSON-serialized messages.
     '''
-    def __init__(self, topic='vitals_raw', bootstrap_servers=['localhost:9092']):
+    def __init__(self, topic='vitals_raw', bootstrap_servers=None):
+        # Kafka Bootstrap server is read from .env
         self.topic = topic # store the topic name on the instance
         self.producer = None # initialize producer to None
+
+        # Use env var if no explicit bootstrap_servers passed
+        if bootstrap_servers is None:
+            bootstrap_servers = [KAFKA_SERVER]
 
         # create a KafkaProducer instance and store it
         try:

@@ -1,15 +1,60 @@
+import os
+import asyncio
+import logging
+import threading
+from threading import Thread
+from cryptography.fernet import Fernet
+from dotenv import load_dotenv
+
+# Load environment variables from .env file before other imports that require the env vars
+load_dotenv()
+
 from agents.sensor_agent import SensorAgent
 from agents.health_agent import HealthAgent
 from agents.reminder_agent import ReminderAgent
 from agents.care_assisstant_alert_agent import CareAssistantAlertAgent
-
 from patients import ALL_PROFILES
-
-import os
-import asyncio
-import logging
-from threading import Thread
 from kafka_db.consumer_to_csv import consume_and_save_to_csv
+
+# ENCRYPTION SETUP
+
+# Key is generated on first run and saved to secret.key
+# Both .env and secret.key are gitignored
+KEY_PATH = "secret.key"
+
+def load_or_generate_key() -> bytes:
+    """
+    Loads the Fernet encryption key from secret.key if it exists.
+    Generates and saves a new key on first run.
+ 
+    WARNING: Losing secret.key means losing access to all
+    encrypted CSV data. Back it up securely.
+    """
+    if os.path.exists(KEY_PATH):
+        with open(KEY_PATH, "rb") as f:
+            key = f.read()
+        print("[Security] Encryption key loaded from secret.key")
+    else:
+        key = Fernet.generate_key()
+        with open(KEY_PATH, "wb") as f:
+            f.write(key)
+        print("[Security] New encryption key generated and saved to secret.key")
+        print("[Security] WARNING: Back up secret.key; Losing it means losing access to all encrypted data.")
+    return key
+ 
+ENCRYPTION_KEY = load_or_generate_key()
+
+# Suppress daemon thread stderr lock error on Windows shutdown
+original_excepthook = threading.excepthook
+
+def suppress_shutdown_errors(args):
+    if "could not acquire lock" in str(args.exc_value):
+        return
+    original_excepthook(args)
+ 
+threading.excepthook = suppress_shutdown_errors
+
+# LOGGING SETUP
 
 # Create logs directory if it doesn't exist
 os.makedirs("logs", exist_ok=True)
@@ -22,6 +67,32 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
+# AGENT CREDENTIALS
+
+HEALTH_AGENT_JID = os.getenv("HEALTH_AGENT_JID", "healthagent@localhost")
+HEALTH_AGENT_PASSWORD = os.getenv("HEALTH_AGENT_PASSWORD")
+if not HEALTH_AGENT_PASSWORD:
+    raise EnvironmentError("[Security] HEALTH_AGENT_PASSWORD not found in .env")
+ 
+REMINDER_AGENT_JID = os.getenv("REMINDER_AGENT_JID", "reminderagent@localhost")
+REMINDER_AGENT_PASSWORD = os.getenv("REMINDER_AGENT_PASSWORD")
+if not REMINDER_AGENT_PASSWORD:
+    raise EnvironmentError("[Security] REMINDER_AGENT_PASSWORD not found in .env")
+ 
+ALERT_AGENT_JID = os.getenv("ALERT_AGENT_JID", "careagent@localhost")
+ALERT_AGENT_PASSWORD = os.getenv("ALERT_AGENT_PASSWORD")
+if not ALERT_AGENT_PASSWORD:
+    raise EnvironmentError("[Security] ALERT_AGENT_PASSWORD not found in .env")
+ 
+ 
+def get_sensor_credentials(patient_id: int) -> tuple:
+    '''Read per-patient sensor agent JID and password from .env.'''
+    jid = os.getenv(f"SENSOR_AGENT_{patient_id}_JID", f"sensoragent{patient_id}@localhost")
+    password = os.getenv(f"SENSOR_AGENT_{patient_id}_PASSWORD")
+    if not password:
+        raise EnvironmentError(f"[Security] SENSOR_AGENT_{patient_id}_PASSWORD not found in .env")
+    return jid, password
 
 async def main():
 
@@ -54,18 +125,18 @@ async def main():
     try:
 
         sensors = [
-            SensorAgent(
-                jid = f"sensoragent{p['patient_id']}@localhost",
-                password = f"sensoragent{p['patient_id']}forpassword",
+             SensorAgent(
+                jid = get_sensor_credentials(p["patient_id"])[0],
+                password = get_sensor_credentials(p["patient_id"])[1],
                 patient_profile = p
             )
             for p in ALL_PROFILES
         ]
 
         # sensor = SensorAgent("sensoragent@localhost", "sensoragentforpassword")
-        health = HealthAgent("healthagent@localhost", "agentforpassword")
-        reminder = ReminderAgent("reminderagent@localhost", "reminderagentforpassword")
-        alert = CareAssistantAlertAgent("careagent@localhost", "careagentforpassword")
+        health = HealthAgent(HEALTH_AGENT_JID, HEALTH_AGENT_PASSWORD)
+        reminder = ReminderAgent(REMINDER_AGENT_JID, REMINDER_AGENT_PASSWORD)
+        alert = CareAssistantAlertAgent(ALERT_AGENT_JID, ALERT_AGENT_PASSWORD)
         
         # Start all agents
         print("🚀 Starting agents...")
@@ -87,7 +158,11 @@ async def main():
         print("Initializing all agents...")
             
         # Start Kafka consumer in a separate thread
-        csv_consumer_thread = Thread(target=consume_and_save_to_csv, daemon=True)
+        csv_consumer_thread = Thread(
+            target=consume_and_save_to_csv,
+            args=(ENCRYPTION_KEY,),
+            daemon=True
+        )
         csv_consumer_thread.start()
         
         print("📊 Kafka consumer running in background (saving to vitals_raw_log_phase2.csv)")

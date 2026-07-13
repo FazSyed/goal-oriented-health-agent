@@ -1,5 +1,13 @@
 from owlready2 import *
 import owlready2
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+JAVA_PATH = os.getenv("JAVA_PATH")
+if not JAVA_PATH:
+    raise EnvironmentError("[Security] JAVA_PATH not found in .env")
 
 counter = 0
 
@@ -11,10 +19,10 @@ FALLBACK_ACTION_MAP = {
     "Severe":     "SendEmergencySignal",
 }
 
-def infer_risk_and_action(risk_label: str):
+def infer_risk_and_action(risk_label: str, patient_id: int = 1):
     """"
     Infers care action based on ML-predicted risk label using OWL ontology.
-    Phase 2: ML model handles classification, ontology handles action inference only.
+    ML model handles classification, ontology handles action inference only.
 
     Parameters:
     - risk_label: ML predicted risk label
@@ -30,7 +38,7 @@ def infer_risk_and_action(risk_label: str):
     try:
 
         # Specifying path to Java executable (required for running Pellet reasoner)
-        owlready2.JAVA_EXE = "C:/Program Files/Common Files/Oracle/Java/javapath/java.exe"
+        owlready2.JAVA_EXE = JAVA_PATH
         # Set amount of memory (in MB) that Java can use
         owlready2.JAVA_MEMORY = 8000
 
@@ -40,12 +48,12 @@ def infer_risk_and_action(risk_label: str):
         with onto:
             # Create a new Patient instance with a unique ID to prevent conflicts
             # This ensures that each run creates a fresh patient instance
-            patient_id=f"Patient_1.{counter}"
-            p = onto.Patient(patient_id)
-
-            # Phase 2 change: set hasRiskStatus directly from ML prediction
+            onto_patient_id=f"Patient_{patient_id}.{counter}"
+            p = onto.Patient(onto_patient_id)
+            # Set hasRiskStatus directly from ML prediction
             # instead of setting TBWLossPercent and letting SWRL infer risk
             risk_individual = onto.search_one(iri="*#"+risk_label)
+
             if risk_individual is not None:
                 p.hasRiskStatus.append(risk_individual)
             else:
