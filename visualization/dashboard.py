@@ -24,7 +24,7 @@ load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file_
 # File path constants and refresh interval for live dashboard updates
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOGS_DIR = os.path.join(ROOT, os.getenv("LOGS_DIR", "logs"))
-CSV_PATH = os.path.join(ROOT, os.getenv("CSV_PATH", "visualization/vitals_raw_log_phase2.csv"))
+CSV_PATH = os.path.join(ROOT, os.getenv("CSV_PATH", "visualization/vitals_raw_log.csv"))
 KEY_PATH = os.path.join(ROOT, "secret.key")
 REFRESH_MS = 10_000 # Refresh interval in milliseconds (10 seconds)
 
