@@ -51,7 +51,7 @@ class HealthAgent(Agent):
 
                     # Pass ML label directly to ontology
                     # Ontology infers triggersAction from hasRiskStatus
-                    risk, action, ontology_meta = infer_risk_and_action(prediction_label)
+                    risk, action, ontology_meta = infer_risk_and_action(prediction_label, patient_id=patient_id)
                     print(f"[Health] Risk={risk}, Action={action}")
 
                     # Log the ontology result for this patient
