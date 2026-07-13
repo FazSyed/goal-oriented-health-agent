@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 KAFKA_SERVER = os.getenv("KAFKA_SERVER", "localhost:9092")
-CSV_PATH = os.getenv("CSV_PATH", os.path.join(os.path.dirname(__file__), '..', 'visualization', 'vitals_raw_log_phase2.csv'))
+CSV_PATH = os.getenv("CSV_PATH", os.path.join(os.path.dirname(__file__), '..', 'visualization', 'vitals_raw_log.csv'))
 
 UPDATED_COLUMNS = [
     "timestamp", "patient_id",

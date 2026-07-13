@@ -165,7 +165,7 @@ async def main():
         )
         csv_consumer_thread.start()
         
-        print("📊 Kafka consumer running in background (saving to vitals_raw_log_phase2.csv)")
+        print("📊 Kafka consumer running in background (saving to vitals_raw_log.csv)")
         
         print("Press Ctrl+C to stop the system at any time.")
 
