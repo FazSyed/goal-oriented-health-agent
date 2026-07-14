@@ -1,5 +1,10 @@
 import subprocess
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from alerting.alert_mailer import report_fallback
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -140,7 +145,7 @@ def create_problem_file(risk_status: str, problem_path: str, oral_intake_feasibl
     print(f"[Planner] Risk={risk_status} | oral_intake_feasible={oral_intake_feasible}")
 
 
-def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | None:
+def run_planner(risk_status: str, oral_intake_feasible: bool = True, patient_id=None) -> tuple:
     """
     Runs the Fast Downward planner for the given risk status and patient capability flag. 
     Returns the generated plan as a string.
@@ -181,7 +186,7 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
         )
     except OSError as e:
         print(f"[Planner] ERROR: Could not write problem file: {e}")
-        return _use_fallback(risk_status, reason="problem file write failed")
+        return _use_fallback(risk_status, patient_id, reason="problem file write failed")
 
     # Step 2: Run Fast Downward planner
     print(f"[Planner] Running Fast Downward for risk={risk_status}...")
@@ -201,13 +206,13 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
         )
     except FileNotFoundError:
         print(f"[Planner] ERROR: Fast Downward not found at {FAST_DOWNWARD_PATH}")
-        return _use_fallback(risk_status, reason="Fast Downward executable not found")
+        return _use_fallback(risk_status, patient_id, reason="Fast Downward executable not found")
     except subprocess.TimeoutExpired:
         print(f"[Planner] ERROR: Fast Downward timed out after {PLANNER_TIMEOUT_SEC}s")
-        return _use_fallback(risk_status, reason="planner timeout")
+        return _use_fallback(risk_status, patient_id, reason="planner timeout")
     except Exception as e:
         print(f"[Planner] ERROR: Unexpected error running Fast Downward: {e}")
-        return _use_fallback(risk_status, reason=str(e))
+        return _use_fallback(risk_status, patient_id, reason=str(e))
 
     # Step 3: Capture and return the plan
     try:
@@ -224,7 +229,7 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
         # sas_plan existed but contained no usable action lines — treat as failure
         if not plan_lines:
             print(f"[Planner] WARNING: sas_plan was empty for risk={risk_status}.")
-            return _use_fallback(risk_status, reason="empty sas_plan")
+            return _use_fallback(risk_status, patient_id, reason="empty sas_plan")
 
         plan = "\n".join(plan_lines)
 
@@ -244,9 +249,9 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True) -> str | No
 
     except FileNotFoundError:
         print(f"[Planner] No plan found for risk={risk_status}. Problem may be unsolvable, or domain/problem files are invalid.")
-        return _use_fallback(risk_status, reason="no sas_plan produced (unsolvable or invalid PDDL)")
+        return _use_fallback(risk_status, patient_id, reason="no sas_plan produced (unsolvable or invalid PDDL)")
 
-def _use_fallback(risk_status: str, reason: str) -> str | None:
+def _use_fallback(risk_status: str, patient_id, reason: str) -> tuple:
     """
     Fallback mechanism to return a predefined plan based on the risk status when planner fails or produces no plan.
 
@@ -258,6 +263,9 @@ def _use_fallback(risk_status: str, reason: str) -> str | None:
     - plan (str): The fallback PDDL plan as a string.
     - None: If no fallback plan is defined for the given risk status.
     """
+
+    report_fallback("planner", reason, patient_id)
+
     plan = FALLBACK_PLANS.get(risk_status)
  
     if plan is None:
