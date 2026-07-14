@@ -13,7 +13,7 @@ import plotly.graph_objects as go
  
 from dash import Dash, dcc, html, Input, Output, dash_table
 import dash_bootstrap_components as dbc
-from cryptography.fernet import Fernet, InvalidToken
+from cryptography.fernet import Fernet
 from dotenv import load_dotenv
  
 from patients import ALL_PROFILES
@@ -27,6 +27,9 @@ LOGS_DIR = os.path.join(ROOT, os.getenv("LOGS_DIR", "logs"))
 CSV_PATH = os.path.join(ROOT, os.getenv("CSV_PATH", "visualization/vitals_raw_log.csv"))
 KEY_PATH = os.path.join(ROOT, "secret.key")
 REFRESH_MS = 10_000 # Refresh interval in milliseconds (10 seconds)
+
+FALLBACK_WINDOW = int(os.getenv("DASHBOARD_FALLBACK_WINDOW", "20"))
+FALLBACK_THRESHOLD = int(os.getenv("ALERT_FALLBACK_THRESHOLD", "3"))
 
 # Loading Encryption key
 # Dashboard reads secret.key to decrypt CSV rows written by consumer_to_csv.py
@@ -165,6 +168,28 @@ def load_chart_data():
     df = df.dropna(subset=["sodium", "bun", "creatinine"])
     # Sort by timestamp and reset index for clean sequential indexing
     return df.sort_values("timestamp").reset_index(drop=True)
+
+def check_recent_fallbacks(log_df: pd.DataFrame) -> dict:
+    """
+    Checks the last FALLBACK_WINDOW log entries for fallback activity.
+    Returns counts per component for the dashboard banner.
+    """
+    if log_df.empty:
+        return {"ontology": 0, "planner": 0, "kafka": 0, "total": 0}
+ 
+    recent = log_df.tail(FALLBACK_WINDOW)
+    onto_fb = int(recent["ontology_fallback"].eq(True).sum())
+    plan_fb  = int(recent["planner_fallback"].eq(True).sum())
+    kafka_fail = int(recent["kafka_success"].eq(False).sum())
+    total = onto_fb + plan_fb + kafka_fail
+ 
+    return {
+        "ontology": onto_fb,
+        "planner": plan_fb,
+        "kafka": kafka_fail,
+        "total": total,
+    }
+
 
 def latest_summary(df: pd.DataFrame):  
     ''' function to summarize the latest reading'''
@@ -318,6 +343,60 @@ def fig_prediction_bar(log_df: pd.DataFrame) -> go.Figure:
         ylabel="Count"  # y-axis label
     )
 
+def build_fallback_banner(fallbacks: dict):
+    """
+    Returns a bold red warning banner if fallbacks detected
+    in last FALLBACK_WINDOW readings, or None if system is clean.
+    First thing visible when Researcher view opens.
+    """
+    if fallbacks["total"] == 0:
+        return html.Div(
+            "✅ System Health: All components operating normally (last {FALLBACK_WINDOW} readings)",
+            style={
+                "backgroundColor": "#1A3A1A",
+                "border": "2px solid #2ECC71",
+                "borderRadius": "8px",
+                "padding": "1rem 1.5rem",
+                "marginBottom": "1rem",
+                "color": "#2ECC71",
+                "fontWeight": "700",
+                "fontSize": "1rem",
+            }
+        )
+ 
+    details = []
+    if fallbacks["ontology"] > 0:
+        details.append(f"Ontology: {fallbacks['ontology']}")
+    if fallbacks["planner"] > 0:
+        details.append(f"Planner: {fallbacks['planner']}")
+    if fallbacks["kafka"] > 0:
+        details.append(f"Kafka: {fallbacks['kafka']}")
+ 
+    return html.Div([
+        html.Div(
+            f"⚠️  SYSTEM ALERT - Fallbacks detected in last {FALLBACK_WINDOW} readings",
+            style={"fontWeight": "900", "fontSize": "1.1rem", "marginBottom": "0.4rem"}
+        ),
+        html.Div(
+            " | ".join(details),
+            style={"fontWeight": "700", "fontSize": "0.95rem", "marginBottom": "0.3rem"}
+        ),
+        html.Div(
+            "The system is running on fallback logic for one or more "
+            "components. Check agent_system.log and patient log files "
+            "for details. An alert email has been sent if threshold was crossed.",
+            style={"fontWeight": "600", "fontSize": "0.85rem",
+                   "opacity": "0.9"}
+        ),
+    ], style={
+        "backgroundColor": "#7B1A1A",
+        "border": "3px solid #E74C3C",
+        "borderRadius": "8px",
+        "padding": "1.2rem 1.5rem",
+        "marginBottom": "1rem",
+        "color":"#FFFFFF",
+    })
+
 # CSS Styles for Sidebar
 SIDEBAR_STYLE = {
     "position": "fixed", "top": 0, "left": 0, "bottom": 0,
@@ -346,11 +425,11 @@ CARD_STYLE = {
 
 # CSS Styles for Metric Cards
 METRIC_STYLE = {
-    "backgroundColor": "#16213E",
+    "backgroundColor":"#16213E",
     "borderRadius": "10px",
-    "padding": "1rem",
+    "padding":"1rem",
     "textAlign": "center",
-    "border": "1px solid #2C2C4A",
+    "border":"1px solid #2C2C4A",
 }
 
 # Initialize the Dash application with external stylesheets for Bootstrap and Google Fonts
@@ -524,6 +603,9 @@ content = html.Div([
 
     # Researcher dashboard section with analytics and raw data display
     html.Div(id="researcher-view", children=[
+        # Fallback warning banner
+        html.Div(id="fallback-banner", style={"marginTop": "1rem"}),
+
         html.H4("System Analytics", style={
             "color": "#E0E0E0", "fontWeight": "700",
             "marginTop": "1rem", "marginBottom": "1rem"
@@ -614,6 +696,7 @@ def toggle_views(role):
     Output("prediction-bar", "figure"),
     Output("fallback-bar", "figure"),
     Output("raw-table", "children"),
+    Output("fallback-banner", "children"),
     # Sidebar
     Output("last-updated", "children"),
     Input("refresh-interval", "n_intervals"),
@@ -640,6 +723,11 @@ def update_all(n, risk_filter, patient_id):
     no_data   = html.P("No data available.", style={"color": "#7F8C8D"})
     last_upd  = f"Updated {datetime.datetime.now().strftime('%H:%M:%S')}"
 
+    # Build fallback banner from all patients' logs (not filtered by patient)
+    all_log_df = load_json_logs()
+    fallback_counts = check_recent_fallbacks(all_log_df)
+    banner = build_fallback_banner(fallback_counts)
+
     # If there is no data, return placeholders for all outputs
     if df.empty:
         return (
@@ -649,7 +737,7 @@ def update_all(n, risk_filter, patient_id):
             empty_fig, empty_fig, empty_fig,
             empty_fig, empty_fig, no_data,
             empty_fig, empty_fig, no_data,
-            "No data loaded"
+            banner, "No data loaded"
         )
 
     # Classify each record by risk and summarize the latest patient state
@@ -886,7 +974,7 @@ def update_all(n, risk_filter, patient_id):
         sodium_chart, bun_chart, creatinine_chart,
         glucose_chart, potassium_chart, chloride_chart,
         risk_donut, risk_scatter, care_plan_section,
-        prediction_bar, fallback_bar, raw_table,
+        prediction_bar, fallback_bar, raw_table, banner,
         last_upd,
     )
 

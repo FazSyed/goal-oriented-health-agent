@@ -1,9 +1,15 @@
-from kafka import KafkaProducer
-from kafka.errors import KafkaError
-from dotenv import load_dotenv
 import json
 import time
 import os
+import sys
+
+from kafka import KafkaProducer
+from kafka.errors import KafkaError
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from alerting.alert_mailer import report_fallback
+from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
 
@@ -71,7 +77,19 @@ class KafkaLogger:
                 
             if attempt < max_attempts:
                 time.sleep(retry_delay_sec)
+
+        reason = f"publish failed after {max_attempts} attempts"
  
         print(f"[KafkaLogger] FAILED to publish to {self.topic} after {max_attempts} attempts. Message lost: {data}")
+
+        self._report_failure(data, reason=reason)
         
         return False
+
+    def _report_failure(self, data: dict, reason: str):
+        '''Report Kafka publish failure to alert_mailer.'''
+        try:
+            patient_id = data.get("patient_id") if isinstance(data, dict) else None
+            report_fallback("kafka", reason, patient_id)
+        except Exception:
+            pass  # never let alerting crash the publisher

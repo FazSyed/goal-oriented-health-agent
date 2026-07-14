@@ -1,7 +1,11 @@
 from owlready2 import *
 import owlready2
-from dotenv import load_dotenv
 import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from dotenv import load_dotenv
+from alerting.alert_mailer import report_fallback
 
 load_dotenv()
 
@@ -58,7 +62,7 @@ def infer_risk_and_action(risk_label: str, patient_id: int = 1):
                 p.hasRiskStatus.append(risk_individual)
             else:
                 print(f"[ERROR] Risk individual '{risk_label}' not found in ontology.")
-                return _use_fallback(risk_label, reason="risk individual not found in ontology")
+                return _use_fallback(risk_label, patient_id, reason="risk individual not found in ontology")
 
             counter += 1
         
@@ -90,7 +94,7 @@ def infer_risk_and_action(risk_label: str, patient_id: int = 1):
         # and fall back rather than returning (None, None) to HealthAgent
         if risk is None or action is None:
             print(f"[Ontology] WARNING: Reasoner produced no valid inference for '{risk_label}'. Using fallback mapping.")
-            return _use_fallback(risk_label, reason="empty reasoner inference")
+            return _use_fallback(risk_label, patient_id, reason="empty reasoner inference")
 
         return risk, action, {"fallback_used": False, "fallback_reason": None}
 
@@ -98,9 +102,9 @@ def infer_risk_and_action(risk_label: str, patient_id: int = 1):
         #  Catches: Java not found, ontology file missing/corrupt,
         # Pellet timeout/crash, or any other unexpected reasoner failure
         print(f"[Ontology] ERROR: Reasoner failed for '{risk_label}': {e}")
-        return _use_fallback(risk_label, reason=str(e))
+        return _use_fallback(risk_label, patient_id, reason=str(e))
 
-def _use_fallback(risk_label: str, reason: str):
+def _use_fallback(risk_label: str, patient_id, reason: str):
     """
     Fallback mechanism to return a predefined action based on the risk label when ontology inference fails.
 
@@ -113,13 +117,15 @@ def _use_fallback(risk_label: str, reason: str):
     - action: Fallback action corresponding to the risk label (str)
     """
 
+    report_fallback("ontology", reason, patient_id)
+
     action = FALLBACK_ACTION_MAP.get(risk_label)
  
     if action is None:
         print(f"[Ontology] FALLBACK FAILED: Unrecognised risk label '{risk_label}'. Reason for fallback: {reason}")
         return None, None, {"fallback_used": True, "fallback_reason": reason}
 
-    print(f"[Ontology] FALLBACK USED (reason: {reason}) — Input: {risk_label} → Risk: {risk_label}, Action: {action}")
+    print(f"[Ontology] FALLBACK USED (reason: {reason}) - Input: {risk_label} → Risk: {risk_label}, Action: {action}")
     return risk_label, action, {"fallback_used": True, "fallback_reason": reason}
 
 # Debugging

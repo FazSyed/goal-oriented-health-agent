@@ -137,6 +137,16 @@ async def main():
         health = HealthAgent(HEALTH_AGENT_JID, HEALTH_AGENT_PASSWORD)
         reminder = ReminderAgent(REMINDER_AGENT_JID, REMINDER_AGENT_PASSWORD)
         alert = CareAssistantAlertAgent(ALERT_AGENT_JID, ALERT_AGENT_PASSWORD)
+
+        # Start Kafka consumer in a separate thread
+        csv_consumer_thread = Thread(
+            target=consume_and_save_to_csv,
+            args=(ENCRYPTION_KEY,),
+            daemon=True
+        )
+        csv_consumer_thread.start()
+        
+        print("📊 Kafka consumer running in background (saving to vitals_raw_log.csv)")
         
         # Start all agents
         print("🚀 Starting agents...")
@@ -156,16 +166,6 @@ async def main():
             print(f"✅ Sensor Agent started for Patient {pid}-{sensor.patient_profile.get('name', 'Unknown')}")
         
         print("Initializing all agents...")
-            
-        # Start Kafka consumer in a separate thread
-        csv_consumer_thread = Thread(
-            target=consume_and_save_to_csv,
-            args=(ENCRYPTION_KEY,),
-            daemon=True
-        )
-        csv_consumer_thread.start()
-        
-        print("📊 Kafka consumer running in background (saving to vitals_raw_log.csv)")
         
         print("Press Ctrl+C to stop the system at any time.")
 

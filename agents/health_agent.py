@@ -34,7 +34,7 @@ class HealthAgent(Agent):
                     creatinine = data.get("creatinine")
                     glucose    = data.get("glucose")
                     age        = data.get("age")
-                    gender        = data.get("gender")
+                    gender     = data.get("gender")
                     weight     = data.get("weight")
                     bmi        = data.get("bmi")
                     oral_intake_feasible = data.get("oral_intake_feasible")
@@ -60,7 +60,8 @@ class HealthAgent(Agent):
                     # Run PDDL planner
                     plan, planner_meta = run_planner(
                         risk_status = risk,
-                        oral_intake_feasible = oral_intake_feasible
+                        oral_intake_feasible = oral_intake_feasible,
+                        patient_id = patient_id
                     )
 
                     if plan is None:
