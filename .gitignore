@@ -29,6 +29,9 @@ data/*.XPT
 # ML model (large binary)
 ml_model/*.pkl
 
+# Plaintext CSV vitals data file
+visualization/plaintext_vitals_raw_log.csv
+
 # Jupyter checkpoints
 .ipynb_checkpoints/
 
