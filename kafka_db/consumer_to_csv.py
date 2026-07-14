@@ -9,6 +9,7 @@ load_dotenv()
 
 KAFKA_SERVER = os.getenv("KAFKA_SERVER", "localhost:9092")
 CSV_PATH = os.getenv("CSV_PATH", os.path.join(os.path.dirname(__file__), '..', 'visualization', 'vitals_raw_log.csv'))
+PLAINTEXT_CSV_PATH = os.getenv("PLAINTEXT_CSV_PATH")
 
 UPDATED_COLUMNS = [
     "timestamp", "patient_id",
@@ -36,11 +37,16 @@ def consume_and_save_to_csv(encryption_key: bytes = None):
     fernet = Fernet(encryption_key) if encryption_key else None
 
     csv_file = os.path.abspath(CSV_PATH)
+    plaintext_csv_file = os.path.abspath(PLAINTEXT_CSV_PATH)
 
     # Create CSV file with headers if it doesn't exist
     if not os.path.exists(csv_file):
         pd.DataFrame(columns=UPDATED_COLUMNS).to_csv(csv_file, index=False)
         print(f"[CSV Consumer] Created new CSV at {csv_file}")
+
+    if not os.path.exists(plaintext_csv_file):
+        pd.DataFrame(columns=UPDATED_COLUMNS).to_csv(plaintext_csv_file, index=False)
+        print(f"[Plaintext CSV Consumer] Created new plaintext CSV at {plaintext_csv_file}")
 
     # Instantiate the Kafka consumer with desired options
     consumer = KafkaConsumer(  
@@ -82,11 +88,11 @@ def consume_and_save_to_csv(encryption_key: bytes = None):
                 enc_df.to_csv(csv_file, mode='a', header=False, index=False)
                 print(f"[CSV Consumer] Encrypted row appended for patient_id={row.get('patient_id')}")
 
-            else:
-                # append the row to the CSV without writing the header
-                pd.DataFrame([row]).to_csv(csv_file, mode='a', header=False, index=False)
-                # log the appended row for visibility
-                print(f"[CSV Consumer] Appended to CSV: {row}")
+            
+            # append the row to the CSV without writing the header
+            pd.DataFrame([row]).to_csv(plaintext_csv_file, mode='a', header=False, index=False)
+            # log the appended row for visibility
+            print(f"[CSV Consumer] Appended to CSV: {row}")
 
     except KeyboardInterrupt:
         print("[CSV consumer] Stopped.")
