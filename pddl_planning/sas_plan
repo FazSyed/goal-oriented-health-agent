@@ -1,3 +1,6 @@
 (check_hydration patient1)
-(log_status_euhydrated patient1)
-; cost = 2 (unit cost)
+(consume_ors patient1)
+(monitor_intake patient1)
+(recheck_hydration patient1)
+(log_status_mild patient1)
+; cost = 5 (unit cost)

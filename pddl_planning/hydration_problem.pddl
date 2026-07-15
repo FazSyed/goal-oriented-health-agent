@@ -7,8 +7,9 @@
     )
 
     (:init
-        (euhydrated patient1)
+        (mildly_dehydrated patient1)
         (monitoring_active patient1)
+        (oral_intake_feasible patient1)
     )
 
     (:goal

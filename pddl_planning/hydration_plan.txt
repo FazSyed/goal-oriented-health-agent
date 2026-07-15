@@ -1,2 +1,5 @@
 (check_hydration patient1)
-(log_status_euhydrated patient1)
+(consume_ors patient1)
+(monitor_intake patient1)
+(recheck_hydration patient1)
+(log_status_mild patient1)
