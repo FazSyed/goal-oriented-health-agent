@@ -6,15 +6,48 @@ from spade.template import Template
 from ml_model.model_utils import predict_dehydration_risk
 from ontology.owl_reasoner import infer_risk_and_action
 from pddl_planning.planner_runner import run_planner
+from patients import ALL_PROFILES
 
 from kafka_db.kafka_utils import KafkaLogger
 
 from logger import log_pipeline_run, build_vitals_dict
 
-import ast
+import ast, os, logging
+
+# Risk label -> target sensor polling interval (seconds)
+INTERVAL_MAP = {
+    "Euhydrated": 60,
+    "Mild": 30,
+    "Moderate": 20,
+    "Severe": 10,
+}
+
+SENSOR_JID_BY_PATIENT = {
+    p["patient_id"]: os.getenv(f"SENSOR_AGENT_{p['patient_id']}_JID") for p in ALL_PROFILES
+}
 
 class HealthAgent(Agent):
     class Processor(CyclicBehaviour):
+        
+        async def update_sensor_interval(self, patient_id, risk):
+            target_period = INTERVAL_MAP.get(risk)
+            if target_period is None:
+                print(f"[Health] Unknown risk '{risk}' for patient {patient_id} -- skipping interval update")
+                return
+
+            sensor_jid = SENSOR_JID_BY_PATIENT.get(patient_id)
+            if not sensor_jid:
+                print(f"[Health] No sensor JID configured for patient {patient_id} -- skipping interval update")
+                logging.warning(f"[Health] No sensor JID configured for patient {patient_id}")
+                return
+
+            m = Message(to=sensor_jid)
+            m.set_metadata("performative", "inform")
+            m.set_metadata("ontology", "interval_control")
+            m.body = str(target_period)
+
+            await self.send(m)
+            print(f"[Health] Sent interval_update({target_period}s) to {sensor_jid} (risk={risk})")
 
         async def run(self):
             msg = await self.receive(timeout=20)
@@ -53,6 +86,10 @@ class HealthAgent(Agent):
                     # Ontology infers triggersAction from hasRiskStatus
                     risk, action, ontology_meta = infer_risk_and_action(prediction_label, patient_id=patient_id)
                     print(f"[Health] Risk={risk}, Action={action}")
+
+                    # Update this patient's sensor polling interval based on risk
+                    # Runs for every risk label (Euhydrated included), before any branch-specific routing logic below.
+                    await self.update_sensor_interval(patient_id, risk)
 
                     # Log the ontology result for this patient
                     ontology_result = {"risk": risk, "action": action, "fallback_used": ontology_meta["fallback_used"], "fallback_reason": ontology_meta["fallback_reason"]}

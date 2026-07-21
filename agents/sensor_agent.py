@@ -1,6 +1,7 @@
 from spade.agent import Agent
-from spade.behaviour import PeriodicBehaviour
+from spade.behaviour import PeriodicBehaviour, CyclicBehaviour
 from spade.message import Message
+from spade.template import Template
 import asyncio, random, time, logging
 
 from kafka_db.kafka_utils import KafkaLogger
@@ -15,6 +16,8 @@ DEFAULT_RANGES = {
     "glucose_range":    [80, 300],
 }
 
+VALID_PERIODS = {60, 30, 20, 10}
+
 class SensorAgent(Agent):
 
     def __init__(self, jid, password, patient_profile, **kwargs):
@@ -22,6 +25,7 @@ class SensorAgent(Agent):
         # super() calls the parent class constructor to set up the agent with its JID and password
         super().__init__(jid, password, **kwargs)
         self.patient_profile = patient_profile
+        self.sensor_behaviour = None
     
     class PeriodicSensor(PeriodicBehaviour):
         async def run(self):
@@ -78,6 +82,42 @@ class SensorAgent(Agent):
                 print(f"[SensorAgent-{pid}] Error in sensor reading: {e}")
                 logging.error(f"[SensorAgent-{pid}] Error: {e}")
 
+    class IntervalListener(CyclicBehaviour):
+        '''Listens for interval_update messages from HealthAgent and updates PeriodicSensor's periods directly'''
+
+        async def run(self):
+            msg = await self.receive(timeout=5)
+            if msg is None:
+                return
+            
+            behaviour = self.agent.sensor_behaviour
+            if behaviour is None:
+                pid = self.agent.patient_profile.get("patient_id", "?")
+                print(f"[SensorAgent-{pid}] Received interval_update before sensor_behaviour was ready — dropping")
+                return
+
+            pid = self.agent.patient_profile.get("patient_id", "?")
+
+            try:
+                new_period = int(msg.body)
+            except (TypeError, ValueError):
+                print(f"[SensorAgent-{pid}] Malformed interval_update body: {msg.body!r}")
+                logging.warning(f"[SensorAgent-{pid}] Malformed interval_update body: {msg.body!r}")
+                return
+
+            if new_period not in VALID_PERIODS:
+                print(f"[SensorAgent-{pid}] Rejected out-of-range interval: {new_period}")
+                logging.warning(f"[SensorAgent-{pid}] Rejected out-of-range interval: {new_period}")
+                return
+
+            if behaviour.period == new_period:
+                return  # avoid log spam when risk is stable
+
+            old_period = behaviour.period
+            behaviour.period = new_period
+            print(f"[SensorAgent-{pid}] Interval changed: {old_period}s -> {new_period}s")
+            logging.info(f"[SensorAgent-{pid}] Interval changed: {old_period}s -> {new_period}s")
+
     async def setup(self):
         pid = self.patient_profile.get("patient_id")
 
@@ -90,4 +130,11 @@ class SensorAgent(Agent):
         print(f"[SensorAgent-{pid}] SensorAgent ready to collect data")
 
         self.kafka_logger = KafkaLogger(topic='vitals_raw') # log in csv file
-        self.add_behaviour(self.PeriodicSensor(period=30))  # 30 seconds interval for sensor readings
+        
+        self.sensor_behaviour = self.PeriodicSensor(period=60)
+        self.add_behaviour(self.sensor_behaviour)  # 60 seconds interval for sensor readings
+
+        interval_template = Template()
+        interval_template.set_metadata("performative", "inform")
+        interval_template.set_metadata("ontology", "interval_control")
+        self.add_behaviour(self.IntervalListener(), interval_template)
