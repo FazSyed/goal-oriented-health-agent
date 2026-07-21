@@ -6,7 +6,6 @@
     "weight": 68.0,
     "bmi": 25.2,
     "oral_intake_feasible": true,
-    "period": 30,
 
     "sodium_range":     [155, 162],
     "bun_range":        [30, 50],

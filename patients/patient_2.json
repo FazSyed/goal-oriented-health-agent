@@ -6,13 +6,12 @@
     "weight": 72.0,
     "bmi": 24.8,
     "oral_intake_feasible": false,
-    "period": 30,
 
     "sodium_range":     [141, 143],
     "bun_range":        [40, 45],
     "creatinine_range": [2.0, 3.0],
     "glucose_range":    [180, 250],
-    "potassium_range":  [4.5, 5.5],
+    "potassium_range":  [4.5, 4.9],
     "chloride_range":   [113, 114],
 
     "pathway": "Mild → escalation path (no ORS)",
