@@ -153,11 +153,14 @@ The Plotly Dash dashboard (`visualization/dashboard.py`, dark/CYBORG theme, auto
 - **Family/Caretaker** — status badge, plain message, and simple charts
 - **Clinician** — full biomarker trends, risk distribution, and recent care plans
 - **Researcher** — everything in Clinician, plus a fallback-health banner, ML prediction breakdown, and a filterable raw data table
+
 ## Security
  
 - All credentials and paths are kept in `.env` (never committed; see `.env.example` for the template)
 - Sensor data logged to CSV is encrypted at rest using Fernet (`secret.key`, auto-generated on first run, also never committed)
 - `.gitignore` excludes `.env`, `secret.key`, `logs/`, `kafka-logs/`, `__pycache__/`, and `venv/`
+
+***Remember to save your `secret.key` file in a secure location. If lost, you will not be able to decrypt your logged sensor data.***
 
 ## Error Handling
  
