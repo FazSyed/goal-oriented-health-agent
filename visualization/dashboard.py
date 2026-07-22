@@ -11,7 +11,7 @@ import datetime
 import pandas as pd
 import plotly.graph_objects as go
  
-from dash import Dash, dcc, html, Input, Output, dash_table
+from dash import Dash, dcc, html, Input, Output, State, dash_table, ctx
 import dash_bootstrap_components as dbc
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
@@ -30,6 +30,10 @@ REFRESH_MS = 10_000 # Refresh interval in milliseconds (10 seconds)
 
 FALLBACK_WINDOW = int(os.getenv("DASHBOARD_FALLBACK_WINDOW", "20"))
 FALLBACK_THRESHOLD = int(os.getenv("ALERT_FALLBACK_THRESHOLD", "3"))
+
+RAW_TABLE_PAGE_SIZE = 15
+
+RAW_TABLE_DISPLAY_COLS = ["timestamp", "sodium", "potassium", "chloride", "bun", "creatinine", "glucose", "RISK_STATUS"]
 
 # Loading Encryption key
 # Dashboard reads secret.key to decrypt CSV rows written by consumer_to_csv.py
@@ -640,7 +644,35 @@ content = html.Div([
                     }
                 ),
             ], style={"marginBottom": "0.75rem"}),
-            html.Div(id="raw-table"),
+            dash_table.DataTable(
+                id="raw-datatable",
+                data=[],
+                columns=[{"name": c, "id": c} for c in RAW_TABLE_DISPLAY_COLS],
+                style_table={"overflowX": "auto"},
+                style_header={
+                    "backgroundColor": "#0F0F1A", "color": "#E0E0E0",
+                    "fontWeight": "600", "border": "1px solid #2C2C4A"
+                },
+                style_cell={
+                    "backgroundColor": "#1A1A2E", "color": "#BDC3C7",
+                    "border": "1px solid #2C2C4A",
+                    "fontSize": "0.82rem", "padding": "6px 12px"
+                },
+                style_data_conditional=[
+                    {"if": {"filter_query": '{RISK_STATUS} = "Severe"'},
+                     "backgroundColor": "#2C1515", "color": "#E74C3C"},
+                    {"if": {"filter_query": '{RISK_STATUS} = "Moderate"'},
+                     "backgroundColor": "#2C1E0F", "color": "#E67E22"},
+                    {"if": {"filter_query": '{RISK_STATUS} = "Mild"'},
+                     "backgroundColor": "#2C2008", "color": "#F39C12"},
+                    {"if": {"filter_query": '{RISK_STATUS} = "Euhydrated"'},
+                     "backgroundColor": "#0F2C15", "color": "#2ECC71"},
+                ],
+                page_size=RAW_TABLE_PAGE_SIZE,
+                page_current=0,
+                sort_action="native",
+                filter_action="native",
+            ),
         ], style=CARD_STYLE),
     ]),
 
@@ -695,17 +727,22 @@ def toggle_views(role):
     # Researcher view
     Output("prediction-bar", "figure"),
     Output("fallback-bar", "figure"),
-    Output("raw-table", "children"),
+    Output("raw-datatable", "data"),
+    Output("raw-datatable", "page_current"),
     Output("fallback-banner", "children"),
     # Sidebar
     Output("last-updated", "children"),
     Input("refresh-interval", "n_intervals"),
     Input("risk-filter", "value"),
     Input("patient-selector", "value"),
+    State("raw-datatable", "page_current"),
 )
 
-def update_all(n, risk_filter, patient_id):
+def update_all(n, risk_filter, patient_id, current_page):
     '''Update all dashboard components based on the latest data and user selections'''
+
+    if ctx.triggered_id in ("risk-filter", "patient-selector"):
+        current_page = 0
 
     # Load the latest dataset and any log entries for the dashboard update cycle
     df = load_chart_data()
@@ -736,7 +773,7 @@ def update_all(n, risk_filter, patient_id):
             [], empty_fig, empty_fig, empty_fig,
             empty_fig, empty_fig, empty_fig,
             empty_fig, empty_fig, no_data,
-            empty_fig, empty_fig, no_data,
+            empty_fig, empty_fig, [], 0,
             banner, "No data loaded"
         )
 
@@ -934,37 +971,17 @@ def update_all(n, risk_filter, patient_id):
         "bun", "creatinine", "glucose", "RISK_STATUS"
     ]
     table_df = table_df[display_cols].tail(100).copy()
+    table_df = table_df.iloc[::-1].reset_index(drop=True) # newest first
     table_df["timestamp"] = table_df["timestamp"].astype(str)
 
-    # Dash DataTable component for the latest patient readings
-    raw_table = dash_table.DataTable(
-        data=table_df.to_dict("records"),  # convert filtered dataframe rows to list of dicts
-        columns=[{"name": c, "id": c} for c in display_cols],  # define visible columns
-        style_table={"overflowX": "auto"},  # enable horizontal scrolling if needed
-        style_header={
-            "backgroundColor": "#0F0F1A", "color": "#E0E0E0",
-            "fontWeight": "600", "border": "1px solid #2C2C4A"
-        },
-        style_cell={
-            "backgroundColor": "#1A1A2E", "color": "#BDC3C7",
-            "border": "1px solid #2C2C4A",
-            "fontSize": "0.82rem", "padding": "6px 12px"
-        },
-        style_data_conditional=[
-            # Use risk status to color rows for quick visual scanning
-            {"if": {"filter_query": '{RISK_STATUS} = "Severe"'},
-             "backgroundColor": "#2C1515", "color": "#E74C3C"},
-            {"if": {"filter_query": '{RISK_STATUS} = "Moderate"'},
-             "backgroundColor": "#2C1E0F", "color": "#E67E22"},
-            {"if": {"filter_query": '{RISK_STATUS} = "Mild"'},
-             "backgroundColor": "#2C2008", "color": "#F39C12"},
-            {"if": {"filter_query": '{RISK_STATUS} = "Euhydrated"'},
-             "backgroundColor": "#0F2C15", "color": "#2ECC71"},
-        ],
-        page_size=15,  # show up to 15 rows per page
-        sort_action="native",  # allow client-side sorting
-        filter_action="native",  # allow client-side filtering
-    )
+    # compute how many pages exist for the current data/filter, then clamp the
+    # previously-selected page into that range so we never point past the last page
+    page_count = max(1, -(-len(table_df) // RAW_TABLE_PAGE_SIZE))  # ceil division
+    if current_page is None:
+        current_page = 0
+    current_page = max(0, min(current_page, page_count - 1))
+ 
+    raw_table_data = table_df.to_dict("records")
 
     # Return all the generated components to update the dashboard in one callback
     return (
@@ -974,7 +991,7 @@ def update_all(n, risk_filter, patient_id):
         sodium_chart, bun_chart, creatinine_chart,
         glucose_chart, potassium_chart, chloride_chart,
         risk_donut, risk_scatter, care_plan_section,
-        prediction_bar, fallback_bar, raw_table, banner,
+        prediction_bar, fallback_bar, raw_table_data, current_page, banner,
         last_upd,
     )
 
