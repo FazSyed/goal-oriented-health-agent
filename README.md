@@ -104,7 +104,7 @@ Four patient profiles are provided under `patients/`, each demonstrating a disti
 | No. | Patient | Pathway | Notes |
 |---|---|---|---|
 | 1 | Fatima Al-Rashid | Mild → ORS | Oral rehydration feasible |
-| 2 | Ahmed Hassan | Mild → escalation | Dysphagia; no ORS, escalates to Moderate pathway |
+| 2 | Zelma Valencia | Mild → escalation | Dysphagia; no ORS, escalates to Moderate pathway |
 | 3 | Margaret Osei | Moderate → hospital transfer | IV / Hypodermoclysis |
 | 4 | Robert Mensah | Severe → emergency transfer | IV bolus / IO |
 | 5 | Salman Mehfuz | Euhydrated | No Action Required |

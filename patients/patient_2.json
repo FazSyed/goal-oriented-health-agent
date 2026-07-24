@@ -1,8 +1,8 @@
 {
     "patient_id": 2,
-    "name": "Ahmed Hassan",
+    "name": "Zelma Valencia",
     "age": 80,
-    "gender": 1,
+    "gender": 2,
     "weight": 72.0,
     "bmi": 24.8,
     "oral_intake_feasible": false,
