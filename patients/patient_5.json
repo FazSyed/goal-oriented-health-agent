@@ -1,0 +1,19 @@
+{
+    "patient_id": 5,
+    "name": "Salman Mehfuz",
+    "age": 85,
+    "gender": 1,
+    "weight": 78.0,
+    "bmi": 26.5,
+    "oral_intake_feasible": true,
+
+    "sodium_range":     [135, 140],
+    "bun_range":        [10, 20],
+    "creatinine_range": [0.6, 2.0],
+    "glucose_range":    [80, 180],
+    "potassium_range":  [3.5, 4.0],
+    "chloride_range":   [98, 113],
+
+    "pathway": "Euhydrated → log euhydration, monitor",
+    "notes": "Sodium < 140 mmol/L. BUN:Cr ratio consistently less than 20. System generates log_euhydration → monitor care plan."
+}
