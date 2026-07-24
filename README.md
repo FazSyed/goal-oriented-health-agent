@@ -24,7 +24,7 @@ This project implements a Goal-Oriented Multi-Agent System (MAS) for real-time d
 - **Multi-agent system** implemented with [Spade](https://spade-mas.readthedocs.io/en/latest/) for distributed reasoning, alerting, and coordination
 - **Streaming Database** for real-time vitals, reminders, care alerts, and euhydrated logs, powered by [Apache Kafka](https://kafka.apache.org/)
 - **Dynamic monitoring intervals** automatically adjusts each patient's sensor polling rate based on their current risk level
-- **Multi-Patient Management** using 4 dehydration profiles providing distinct pathways (Mild w/ ORS, Mild w/o ORS, Moderate, Severe) for demonstrating personalized care planning
+- **Multi-Patient Management** using 5 dehydration profiles providing distinct pathways (Euhydrated, Mild w/ ORS, Mild w/o ORS, Moderate, Severe) for demonstrating personalized care planning
 - **Role-based dashboard** built using [Plotly Dash](https://dash.plotly.com/) with separate Patient, Family/Caretaker, Clinician, and Researcher views
 - **Encrypted logging**: sensor data logged to CSV, encrypted at rest with Fernet
 - **Error handling & fallbacks**: retry logic and fallback behavior for Kafka, ontology reasoning, and PDDL planning, with proactive email alerting on repeated failures
@@ -91,6 +91,7 @@ Register the following agent accounts on your XMPP server (JIDs and passwords co
 - `sensoragent2@localhost`
 - `sensoragent3@localhost`
 - `sensoragent4@localhost`
+- `sensoragent5@localhost`
 - `reminderagent@localhost`
 - `careagent@localhost`
 
@@ -106,6 +107,7 @@ Four patient profiles are provided under `patients/`, each demonstrating a disti
 | 2 | Ahmed Hassan | Mild → escalation | Dysphagia; no ORS, escalates to Moderate pathway |
 | 3 | Margaret Osei | Moderate → hospital transfer | IV / Hypodermoclysis |
 | 4 | Robert Mensah | Severe → emergency transfer | IV bolus / IO |
+| 5 | Salman Mehfuz | Euhydrated | No Action Required |
  
 Profiles are auto-loaded from `patients/*.json` via `patients/__init__.py`.
  
