@@ -1,5 +1,6 @@
 import itertools
 import joblib
+from numpy import rint
 import pandas as pd
 
 MODEL_PATH = "ml_model/dehydration_model_rf.pkl"
@@ -21,7 +22,7 @@ K_VALUES = [3.5, 4.5, 5.5]
 CL_VALUES = [98, 106, 114]
 
 # Set True to also print a summary block for Euhydrated combinations found
-INCLUDE_EUHYDRATED = False
+INCLUDE_EUHYDRATED = True
 
 
 def load_model():
