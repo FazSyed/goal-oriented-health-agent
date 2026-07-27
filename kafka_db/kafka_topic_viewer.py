@@ -49,8 +49,10 @@ try:
             
             if data.get('risk') == 'Severe':
                 icon = "🔴"
-            else:
+            elif data.get('risk') == "Moderate":
                 icon = "🟠"
+            else:
+                icon = "🟡"
 
             print(f"\n[{topic.upper()}] {icon} {data.get('risk')} Dehydration Alert")
             print(f"  Patient ID : {data.get('patient_id')}")

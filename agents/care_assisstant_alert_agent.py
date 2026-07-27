@@ -34,7 +34,13 @@ class CareAssistantAlertAgent(Agent):
                         # PATIENT VIEW
                         print(f"\n{'='*50}")
 
-                        if risk == "Moderate":
+                        if risk == "Mild":
+                            print(f"🟡 [WARNING] Your hydration levels are mild.")
+                            print(f"🟡 Please contact your healthcare provider.")
+                            print(f"🟡 Do not attempt to self-treat, you may need medical fluids.")
+                            print(f"🟡 If you feel faint or confused, call for help now.")                       
+
+                        elif risk == "Moderate":
                             print(f"🟠 [WARNING] Your hydration levels are concerning.")
                             print(f"🟠 Please contact your healthcare provider immediately.")
                             print(f"🟠 Do not attempt to self-treat, you may need medical fluids.")
@@ -51,7 +57,12 @@ class CareAssistantAlertAgent(Agent):
                         # HEALTHCARE PROVIDER VIEW
                         plan_steps = [line.strip() for line in plan.split("\n") if line.strip()]
  
-                        icon = "🔴" if risk == "Severe" else "🟠"
+                        if risk == "Severe":
+                            icon = "🔴" 
+                        elif risk == "Moderate":
+                            icon = "🟠" 
+                        else:
+                            icon = "🟡"
  
                         print(f"{'='*50}")
                         print(f"{icon} [PROVIDER ALERT] {risk} Dehydration — Patient ID: {patient_id}")

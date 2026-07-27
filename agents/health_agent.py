@@ -150,15 +150,25 @@ class HealthAgent(Agent):
                         return
                     
                     elif risk == "Mild":
-                        to_jid = "reminderagent@localhost"
-                        # Send to Kafka topic for reminders
-                        kafka_success = KafkaLogger(topic='reminders').publish(
-                            {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
-                        )
-
-                        # Update routing result for logging
-                        routing_result.update({"routed_to": to_jid, "kafka_topic": "reminders", "kafka_publish_success": kafka_success})
-                        print("[Health] Routing to ReminderAgent for Mild Dehydration")
+                        if oral_intake_feasible:
+                            to_jid = "reminderagent@localhost"
+                            # Send to Kafka topic for reminders
+                            kafka_success = KafkaLogger(topic='reminders').publish(
+                                {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
+                            )
+                            # Update routing result for logging
+                            routing_result.update({"routed_to": to_jid, "kafka_topic": "reminders", "kafka_publish_success": kafka_success})
+                            print("[Health] Routing to ReminderAgent for Mild Dehydration")
+                            
+                        else:
+                            to_jid = "careagent@localhost"
+                            # Send to Kafka topic for care alerts
+                            kafka_success = KafkaLogger(topic='care_alerts').publish(
+                                {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
+                            )
+                            # Update routing result for logging
+                            routing_result.update({"routed_to": to_jid, "kafka_topic": "care_alerts", "kafka_publish_success": kafka_success})
+                            print(f"[Health] Routing to AlertAgent for {risk} Dehydration")
 
                     elif risk in ["Moderate", "Severe"]:
                         to_jid = "careagent@localhost"
