@@ -123,9 +123,11 @@ class HealthAgent(Agent):
 
                     # Route to appropriate agent
                     if risk == "Euhydrated":
+                        display_action = action # default action from ontology
+
                         # No agent routing, only logs to Kafka and return
                         kafka_sucess = KafkaLogger(topic='euhydrated_log').publish(
-                            {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
+                            {"patient_id": patient_id, "risk": risk, "action": display_action, "plan": plan}
                         )
                         
                         # Update routing result for logging
@@ -150,11 +152,13 @@ class HealthAgent(Agent):
                         return
                     
                     elif risk == "Mild":
+                        display_action = action # default action from ontology
+
                         if oral_intake_feasible:
                             to_jid = "reminderagent@localhost"
                             # Send to Kafka topic for reminders
                             kafka_success = KafkaLogger(topic='reminders').publish(
-                                {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
+                                {"patient_id": patient_id, "risk": risk, "action": display_action, "plan": plan}
                             )
                             # Update routing result for logging
                             routing_result.update({"routed_to": to_jid, "kafka_topic": "reminders", "kafka_publish_success": kafka_success})
@@ -162,19 +166,23 @@ class HealthAgent(Agent):
                             
                         else:
                             to_jid = "careagent@localhost"
+                            display_action = "EscalateToModerateCare" # OVERRIDEN only for outgoing message/Kafka payload
+
                             # Send to Kafka topic for care alerts
                             kafka_success = KafkaLogger(topic='care_alerts').publish(
-                                {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
+                                {"patient_id": patient_id, "risk": risk, "action": display_action, "plan": plan}
                             )
                             # Update routing result for logging
                             routing_result.update({"routed_to": to_jid, "kafka_topic": "care_alerts", "kafka_publish_success": kafka_success})
                             print(f"[Health] Routing to AlertAgent for {risk} Dehydration")
 
                     elif risk in ["Moderate", "Severe"]:
+                        display_action = action # default action from ontology
+
                         to_jid = "careagent@localhost"
                         # Send to Kafka topic for care alerts
                         kafka_success = KafkaLogger(topic='care_alerts').publish(
-                            {"patient_id": patient_id, "risk": risk, "action": action, "plan": plan}
+                            {"patient_id": patient_id, "risk": risk, "action": display_action, "plan": plan}
                         )
                         # Update routing result for logging
                         routing_result.update({"routed_to": to_jid, "kafka_topic": "care_alerts", "kafka_publish_success": kafka_success})
@@ -200,7 +208,7 @@ class HealthAgent(Agent):
 
                     m = Message(to=to_jid)
                     m.set_metadata("performative", "inform")
-                    m.body = f"{risk},{action},{plan},{patient_id}"
+                    m.body = f"{risk},{display_action},{plan},{patient_id}"
 
                     await self.send(m)
                     print(f"[Health] Sent Message to {to_jid}")
