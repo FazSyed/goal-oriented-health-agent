@@ -12,7 +12,7 @@ from kafka_db.kafka_utils import KafkaLogger
 
 from logger import log_pipeline_run, build_vitals_dict
 
-import ast, os, logging
+import ast, os, logging, time
 
 # Risk label -> target sensor polling interval (seconds)
 INTERVAL_MAP = {
@@ -53,6 +53,8 @@ class HealthAgent(Agent):
             msg = await self.receive(timeout=20)
 
             if msg:
+
+                t_recieved = time.time() # Timestamp when message was received
                 print(f"[Health] Received vitals: {msg.body}")
 
                 try:
@@ -80,11 +82,15 @@ class HealthAgent(Agent):
                         sodium, potassium, chloride, bun,
                         creatinine, glucose, age, gender, weight, bmi
                     )
+
+                    t_ml_done = time.time() # Timestamp when ML prediction is done
                     print(f"[Health] ML Prediction: {prediction_label}")
 
                     # Pass ML label directly to ontology
                     # Ontology infers triggersAction from hasRiskStatus
                     risk, action, ontology_meta = infer_risk_and_action(prediction_label, patient_id=patient_id)
+
+                    t_ontology_done = time.time() # Timestamp when ontology reasoning is done
                     print(f"[Health] Risk={risk}, Action={action}")
 
                     # Update this patient's sensor polling interval based on risk
@@ -100,6 +106,8 @@ class HealthAgent(Agent):
                         oral_intake_feasible = oral_intake_feasible,
                         patient_id = patient_id
                     )
+
+                    t_planner_done = time.time() # Timestamp when planner is done
 
                     if plan is None:
                         plan = ""
@@ -125,6 +133,9 @@ class HealthAgent(Agent):
 
                         print(f"[Health] 🟢 Euhydrated -- No Agent routing required for patient {patient_id} 🟢")
 
+                        t_routed = time.time() # Timestamp when routing is done
+                        timing_result = self._build_timing(t_recieved, t_ml_done, t_ontology_done, t_planner_done, t_routed)
+                        
                         # Log the entire pipeline run for this patient
                         log_pipeline_run(
                             patient_id      = patient_id,
@@ -133,6 +144,7 @@ class HealthAgent(Agent):
                             ontology_result = ontology_result,
                             planner_result  = planner_result,
                             routing_result  = routing_result,
+                            timing_result   = timing_result,
                         )
 
                         return
@@ -161,6 +173,9 @@ class HealthAgent(Agent):
                     else:
                         print(f"[Health] Unknown risk label: {risk}. No routing performed.")
 
+                        t_routed = time.time()
+                        timing_result = self._build_timing(t_recieved, t_ml_done, t_ontology_done, t_planner_done, t_routed)
+
                         # Log the entire pipeline run for this patient even if routing failed
                         log_pipeline_run(
                             patient_id      = patient_id,
@@ -169,6 +184,7 @@ class HealthAgent(Agent):
                             ontology_result = ontology_result,
                             planner_result  = planner_result,
                             routing_result  = routing_result,
+                            timing_result   = timing_result,
                         )
                         return
 
@@ -178,6 +194,9 @@ class HealthAgent(Agent):
 
                     await self.send(m)
                     print(f"[Health] Sent Message to {to_jid}")
+
+                    t_routed = time.time()
+                    timing_result = self._build_timing(t_recieved, t_ml_done, t_ontology_done, t_planner_done, t_routed)
                     
                     # Log the entire pipeline run for this patient
                     log_pipeline_run(
@@ -187,10 +206,29 @@ class HealthAgent(Agent):
                         ontology_result = ontology_result,
                         planner_result  = planner_result,
                         routing_result  = routing_result,
+                        timing_result   = timing_result,
                     )
 
                 except Exception as e:
                     print(f"[Health] Error processing message: {e}")
+
+        @staticmethod
+        def _build_timing(t_received, t_ml_done, t_ontology_done, t_planner_done, t_routed):
+            '''Helper function that turns 5 raw checkpoint timestamps into per-stage durations(ms)
+            plus total end-to-end latency. Raw epoch timestamps are kept too (can be used for absolute timings if needed)'''
+
+            return {
+                "received_ts": t_received,
+                "ml_done_ts": t_ml_done,
+                "ontology_done_ts": t_ontology_done,
+                "planner_done_ts": t_planner_done,
+                "routed_ts": t_routed,
+                "ml_latency_ms": round((t_ml_done - t_received) * 1000, 2),
+                "ontology_latency_ms": round((t_ontology_done - t_ml_done) * 1000, 2),
+                "planner_latency_ms": round((t_planner_done - t_ontology_done) * 1000, 2),
+                "routing_latency_ms": round((t_routed - t_planner_done) * 1000, 2),
+                "total_latency_ms": round((t_routed - t_received) * 1000, 2),
+            }
 
     async def setup(self):
         print("[Health] HealthAgent starting...")
