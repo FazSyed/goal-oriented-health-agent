@@ -60,7 +60,7 @@ class HealthAgent(Agent):
                 try:
                     # Unpack biochemical parameters from message
                     data = ast.literal_eval(msg.body)
-
+                    sensor_timestamp = data.get("timestamp")
                     patient_id = data.get("patient_id")
                     sodium     = data.get("sodium")
                     potassium  = data.get("potassium")
@@ -147,6 +147,7 @@ class HealthAgent(Agent):
                             planner_result  = planner_result,
                             routing_result  = routing_result,
                             timing_result   = timing_result,
+                            sensor_timestamp= sensor_timestamp,
                         )
 
                         return
@@ -203,6 +204,7 @@ class HealthAgent(Agent):
                             planner_result  = planner_result,
                             routing_result  = routing_result,
                             timing_result   = timing_result,
+                            sensor_timestamp= sensor_timestamp,
                         )
                         return
 
@@ -225,6 +227,7 @@ class HealthAgent(Agent):
                         planner_result  = planner_result,
                         routing_result  = routing_result,
                         timing_result   = timing_result,
+                        sensor_timestamp= sensor_timestamp,
                     )
 
                 except Exception as e:
