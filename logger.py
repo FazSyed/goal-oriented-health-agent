@@ -21,7 +21,7 @@ def _log_path(patient_id) -> str:
     return os.path.join(LOGS_DIR, f"patient_{patient_id}_log.json")
 
 # Function to log a pipeline run with patient data
-def log_pipeline_run(patient_id, vitals: dict, ml_prediction: str, ontology_result: dict, planner_result: dict, routing_result: dict, timing_result: dict = None):
+def log_pipeline_run(patient_id, vitals: dict, ml_prediction: str, ontology_result: dict, planner_result: dict, routing_result: dict, timing_result: dict = None, sensor_timestamp: str=None):
     
     # Ensure logs directory exists before writing
     _ensure_logs_dir_exists()
@@ -29,6 +29,7 @@ def log_pipeline_run(patient_id, vitals: dict, ml_prediction: str, ontology_resu
     # Create entry dictionary with current timestamp and pipeline data
     entry = {
         "timestamp":      datetime.now().strftime("%Y-%m-%d %H:%M:%S"),  # Current timestamp
+        "sensor_timestamp": sensor_timestamp,
         "patient_id":     patient_id,  # Patient ID
         "vitals":         vitals,  # Vital signs data
         "ml_prediction":  ml_prediction,  # ML model prediction
