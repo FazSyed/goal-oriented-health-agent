@@ -2,6 +2,7 @@ import os
 import asyncio
 import logging
 import threading
+import time
 from threading import Thread
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
@@ -21,6 +22,8 @@ from kafka_db.consumer_to_csv import consume_and_save_to_csv
 # Key is generated on first run and saved to secret.key
 # Both .env and secret.key are gitignored
 KEY_PATH = "secret.key"
+RUN_DURATION_SECONDS = int(os.getenv("RUN_DURATION_SECONDS", "600"))
+DRAIN_WAIT_SECONDS = int(os.getenv("DRAIN_WAIT_SECONDS", "10"))
 
 def load_or_generate_key() -> bytes:
     """
@@ -119,6 +122,7 @@ async def main():
     print("🏥 ELDERLY DEHYDRATION MONITORING SYSTEM")
     print("🤖 Multi-Agent System Starting...")
     print("=" * 60)
+    print(f"⏱️  Timed run: {RUN_DURATION_SECONDS} seconds") # Comment out for infinite run
 
     sensors = []
 
@@ -167,10 +171,17 @@ async def main():
         
         print("Initializing all agents...")
         
-        print("Press Ctrl+C to stop the system at any time.")
+        print("Press Ctrl+C to stop the system early.")
 
-        while True:
-            await asyncio.sleep(2)  # Run the loop indefinitely
+        start_time = time.time()
+        while time.time() - start_time < RUN_DURATION_SECONDS:
+            await asyncio.sleep(2)
+
+        print(f"\n⏰ Run duration of {RUN_DURATION_SECONDS}s reached -- stopping sensors, draining in-flight readings...")
+
+        # UNCOMMENT FOR INFINITE
+        # while True:
+        #     await asyncio.sleep(2)  # Run the loop indefinitely
 
     except KeyboardInterrupt:
         print("\n⚠️  System interrupted by user")
@@ -191,7 +202,7 @@ async def main():
                 pass
 
         # wait for in-flight messages to drain
-        await asyncio.sleep(2)
+        await asyncio.sleep(DRAIN_WAIT_SECONDS)
             
         try:
             await health.stop()
