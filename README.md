@@ -99,7 +99,7 @@ See `.env.example` for the full configuration template. Copy it to `.env` and fi
 
 ## Patient Profiles
  
-Four patient profiles are provided under `patients/`, each demonstrating a distinct dehydration pathway:
+Five patient profiles are provided under `patients/`, each demonstrating a distinct dehydration pathway:
  
 | No. | Patient | Pathway | Notes |
 |---|---|---|---|
@@ -173,6 +173,22 @@ The system includes retry and fallback mechanisms for its three external depende
 - **PDDL planner (Fast Downward)**: falls back to a minimal critical-steps plan if planning fails or times out
 
 Repeated fallbacks trigger an email alert (via `alert_mailer.py`) and are surfaced on the Researcher dashboard view.
+
+## Evaluation
+
+The system was evaluated using four dedicated validation scripts, run over timed MAS sessions controlled by `RUN_DURATION_SECONDS` (total run length) and `DRAIN_WAIT_SECONDS` (graceful shutdown/drain window):
+
+- `validation/validate_plans.py`: Checks every logged PDDL plan against the five documented templates (Euhydrated, Mild_ORS, Mild_NoORS, Moderate, Severe), validating both step count and exact action sequence.
+
+- `validation/validate_routing.py`: Verifies that routing.routed_to and routing.kafka_topic in each JSON log match the expected agent/topic mapping per risk level and oral-intake feasibility (including Mild_NoORS escalation to CareAgent).
+
+- `validation/validate_kafka.py`: 
+    - Confirms Sensor → Kafka → HealthAgent completeness by comparing decrypted vitals_raw CSV readings against patient_*.json logs per patient.
+    - Tabulates routing.kafka_publish_success per Kafka topic to identify publish failures that should trigger fallback and email alerts.
+
+- `validation/validate_interval.py`: Validates dynamic monitoring intervals by checking gaps between consecutive sensor readings against the target schedule implied by the previous risk (Euhydrated 60s, Mild 30s, Moderate 20s, Severe 10s), within a small tolerance.
+
+These scripts were run on multiple evaluation and fallback runs to demonstrate end-to-end correctness of plans, routing, Kafka delivery, and risk-driven polling intervals under the configured timed-run and shutdown settings.
 
 ## Acknowledgements
  
