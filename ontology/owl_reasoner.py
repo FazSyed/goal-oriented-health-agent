@@ -13,7 +13,29 @@ JAVA_PATH = os.getenv("JAVA_PATH")
 if not JAVA_PATH:
     raise EnvironmentError("[Security] JAVA_PATH not found in .env")
 
-counter = 0
+ # Specifying path to Java executable (required for running Pellet reasoner)
+owlready2.JAVA_EXE = JAVA_PATH
+# Set amount of memory (in MB) that Java can use
+owlready2.JAVA_MEMORY = 8000
+# Loading existing OWL ontology
+onto = get_ontology("./ontology/healthagent.owl").load()
+
+_patient_individuals = {}
+
+def _get_patient_individual(patient_id):
+    """
+    Returns this patient's persistent OWL individual, creating it once
+    on first use and reusing it thereafter
+    """
+    # Check whether the patient already has a cached OWL individual.
+    if patient_id not in _patient_individuals:
+        # Enter the ontology context before creating the new individual.
+        with onto:
+            # Create and store a persistent OWL individual for this patient.
+            _patient_individuals[patient_id] = onto.Patient(f"Patient_{patient_id}")
+
+    # Return the cached OWL individual for the requested patient.
+    return _patient_individuals[patient_id]
 
 # Mapping of risk labels to fallback actions in case ontology inference fails
 FALLBACK_ACTION_MAP = {
@@ -36,36 +58,29 @@ def infer_risk_and_action(risk_label: str, patient_id: int = 1):
     - risk: Inferred risk status (str)
     - action: Inferred action to be taken (str)
     """
-
-    global counter
-
     try:
+        # Retrieve or create the persistent OWL individual for the given patient ID
+        p = _get_patient_individual(patient_id)
 
-        # Specifying path to Java executable (required for running Pellet reasoner)
-        owlready2.JAVA_EXE = JAVA_PATH
-        # Set amount of memory (in MB) that Java can use
-        owlready2.JAVA_MEMORY = 8000
-
-        # Loading existing OWL ontology
-        onto = get_ontology("./ontology/healthagent.owl").load()
-        
+        # Enter the ontology context so ontology updates are applied safely
         with onto:
-            # Create a new Patient instance with a unique ID to prevent conflicts
-            # This ensures that each run creates a fresh patient instance
-            onto_patient_id=f"Patient_{patient_id}.{counter}"
-            p = onto.Patient(onto_patient_id)
-            # Set hasRiskStatus directly from ML prediction
-            # instead of setting TBWLossPercent and letting SWRL infer risk
+            # Ensure the patient individual is classified as an OWL Patient
+            p.is_a = [onto.Patient]
+            # Set hasRiskStatus directly from the ML prediction so SWRL rules can infer the action
             risk_individual = onto.search_one(iri="*#"+risk_label)
 
+            # If the matching risk concept exists in the ontology, assign it to the patient
             if risk_individual is not None:
-                p.hasRiskStatus.append(risk_individual)
+                # Link the patient to the predicted risk status
+                p.hasRiskStatus = [risk_individual]
+                # Clear any previously inferred action so the reasoner can recompute it
+                p.triggersAction = []
+                
+            # If the requested risk label does not exist in the ontology, log the issue and fall back
             else:
                 print(f"[ERROR] Risk individual '{risk_label}' not found in ontology.")
-                return _use_fallback(risk_label, patient_id, reason="risk individual not found in ontology")
+                return _use_fallback(risk_label, patient_id, reason="risk individual not found in ontlogy")
 
-            counter += 1
-        
         # Working within the ontology context to run reasoner
         with onto:
             # Run Pellet reasoner to infer triggersAction from hasRiskStatus
