@@ -122,7 +122,7 @@ async def main():
     print("🏥 ELDERLY DEHYDRATION MONITORING SYSTEM")
     print("🤖 Multi-Agent System Starting...")
     print("=" * 60)
-    print(f"⏱️  Timed run: {RUN_DURATION_SECONDS} seconds") # Comment out for infinite run
+    # print(f"⏱️  Timed run: {RUN_DURATION_SECONDS} seconds") # Comment out for infinite run
 
     sensors = []
 
@@ -173,15 +173,16 @@ async def main():
         
         print("Press Ctrl+C to stop the system early.")
 
-        start_time = time.time()
-        while time.time() - start_time < RUN_DURATION_SECONDS:
-            await asyncio.sleep(2)
+        # Save the current time as the starting time and run the MAS until it is less than the specified Duration
+        # start_time = time.time()
+        # while time.time() - start_time < RUN_DURATION_SECONDS:
+        #     await asyncio.sleep(2)
 
-        print(f"\n⏰ Run duration of {RUN_DURATION_SECONDS}s reached -- stopping sensors, draining in-flight readings...")
+        # print(f"\n⏰ Run duration of {RUN_DURATION_SECONDS}s reached -- stopping sensors, draining in-flight readings...")
 
         # UNCOMMENT FOR INFINITE
-        # while True:
-        #     await asyncio.sleep(2)  # Run the loop indefinitely
+        while True:
+            await asyncio.sleep(2)  # Run the loop indefinitely
 
     except KeyboardInterrupt:
         print("\n⚠️  System interrupted by user")
@@ -224,7 +225,7 @@ async def main():
 
         print("✅ Kafka consumer stopped")
             
-        print("🏁 System shutdown complete")   
+        print("🏁 System shutdown complete")    
 
 if __name__ == "__main__":
     asyncio.run(main())
