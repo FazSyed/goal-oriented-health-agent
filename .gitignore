@@ -7,8 +7,7 @@ secret.key
 
 # Logs
 logs/
-logs_dry_run/
-logs_evaluation/
+archive/
 
 # Kafka internal data
 kafka_db/kafka-logs/
@@ -34,21 +33,8 @@ ml_model/*.pkl
 # Plaintext CSV vitals data file
 visualization/plaintext_vitals_raw_log.csv
 
-# evaluation run csv files
-visualization/vitals_raw_dry_run.csv
-visualization/plaintext_vitals_raw_dry_run.csv
-
-visualization/vitals_raw_evaluation.csv
-visualization/plaintext_vitals_raw_evaluation.csv
-
-visualization/vitals_raw_fallback_kafka.csv
-visualization/plaintext_vitals_raw_fallback_kafka.csv
-
-visualization/vitals_raw_fallback_ontology.csv
-visualization/plaintext_vitals_raw_fallback_ontology.csv
-
-visualization/vitals_raw_fallback_planner.csv
-visualization/plaintext_vitals_raw_fallback_planner.csv
+# evaluation logs and csv
+evaluation/
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
