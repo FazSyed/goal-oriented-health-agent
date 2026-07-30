@@ -23,9 +23,10 @@ PLANNER_TIMEOUT_SEC = 30  # max time to wait for Fast Downward before giving up
 # Hardcoded fallback plans for each risk status in case the planner fails or no plan is found
 FALLBACK_PLANS = {
     "Euhydrated": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
-    "Mild":       "(check_hydration patient1)\n(consume_ORS patient1)\n(monitor_intake patient1)",
-    "Moderate":   "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)",
-    "Severe":     "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)",
+    "Mild_ORS":   "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+    "Mild_NoORS": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+    "Moderate":   "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+    "Severe":     "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
 }
 
 def create_problem_file(risk_status: str, problem_path: str, oral_intake_feasible: bool = True):
@@ -206,13 +207,13 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True, patient_id=
         )
     except FileNotFoundError:
         print(f"[Planner] ERROR: Fast Downward not found at {FAST_DOWNWARD_PATH}")
-        return _use_fallback(risk_status, patient_id, reason="Fast Downward executable not found")
+        return _use_fallback(risk_status, patient_id, reason="Fast Downward executable not found", oral_intake_feasible=oral_intake_feasible)
     except subprocess.TimeoutExpired:
         print(f"[Planner] ERROR: Fast Downward timed out after {PLANNER_TIMEOUT_SEC}s")
-        return _use_fallback(risk_status, patient_id, reason="planner timeout")
+        return _use_fallback(risk_status, patient_id, reason="planner timeout", oral_intake_feasible=oral_intake_feasible)
     except Exception as e:
         print(f"[Planner] ERROR: Unexpected error running Fast Downward: {e}")
-        return _use_fallback(risk_status, patient_id, reason=str(e))
+        return _use_fallback(risk_status, patient_id, reason=str(e), oral_intake_feasible=oral_intake_feasible)
 
     # Step 3: Capture and return the plan
     try:
@@ -229,7 +230,7 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True, patient_id=
         # sas_plan existed but contained no usable action lines — treat as failure
         if not plan_lines:
             print(f"[Planner] WARNING: sas_plan was empty for risk={risk_status}.")
-            return _use_fallback(risk_status, patient_id, reason="empty sas_plan")
+            return _use_fallback(risk_status, patient_id, reason="empty sas_plan", oral_intake_feasible=oral_intake_feasible)
 
         plan = "\n".join(plan_lines)
 
@@ -249,9 +250,9 @@ def run_planner(risk_status: str, oral_intake_feasible: bool = True, patient_id=
 
     except FileNotFoundError:
         print(f"[Planner] No plan found for risk={risk_status}. Problem may be unsolvable, or domain/problem files are invalid.")
-        return _use_fallback(risk_status, patient_id, reason="no sas_plan produced (unsolvable or invalid PDDL)")
-
-def _use_fallback(risk_status: str, patient_id, reason: str) -> tuple:
+        return _use_fallback(risk_status, patient_id, reason="empty sas_plan", oral_intake_feasible=oral_intake_feasible)
+    
+def _use_fallback(risk_status: str, patient_id, reason: str, oral_intake_feasible: bool = True) -> tuple:
     """
     Fallback mechanism to return a predefined plan based on the risk status when planner fails or produces no plan.
 
@@ -266,13 +267,19 @@ def _use_fallback(risk_status: str, patient_id, reason: str) -> tuple:
 
     report_fallback("planner", reason, patient_id)
 
-    plan = FALLBACK_PLANS.get(risk_status)
+    # Plan Key is used to retrieve the fallback care plan for the appropriate risk
+    if risk_status == "Mild":
+        plan_key = "Mild_ORS" if oral_intake_feasible else "Mild_NoORS"
+    else:
+        plan_key = risk_status
+ 
+    plan = FALLBACK_PLANS.get(plan_key)
  
     if plan is None:
-        print(f"[Planner] FALLBACK FAILED: No fallback plan available for risk_status='{risk_status}'. Reason for fallback: {reason}")
+        print(f"[Planner] FALLBACK FAILED: No fallback plan available for risk_status='{risk_status}' (key='{plan_key}'). Reason for fallback: {reason}")
         return None, {"fallback_used": True, "fallback_reason": f"no fallback for: {risk_status}"}
  
-    print(f"[Planner] FALLBACK PLAN USED (reason: {reason}) for risk={risk_status}:")
+    print(f"[Planner] FALLBACK PLAN USED (reason: {reason}) for risk={risk_status} (key='{plan_key}'):")
     print(f"[Planner] ----------")
     for line in plan.splitlines():
         print(f"[Planner] {line}")
