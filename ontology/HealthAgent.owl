@@ -11,7 +11,7 @@
      xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
      xmlns:HealthAgent="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent#">
     <owl:Ontology rdf:about="http://www.semanticweb.org/fazilasyed/ontologies/2025/6/HealthAgent">
-        <rdfs:comment>Phase 2 of Goal-Oriented Agents for Real-time Decision-Making in Elderly Care: 
+        <rdfs:comment>Goal-Oriented Agents for Real-time Decision-Making in Elderly Care: 
 Creating a multi-agent system (MAS) that utilized Machine Learning, OWL, PDDL, and SPADE agents to detect and alert dehydration risks in elderly patients.</rdfs:comment>
     </owl:Ontology>
     
