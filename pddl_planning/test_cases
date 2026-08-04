@@ -1,6 +1,8 @@
 This file includes different Test Cases for the hydration_problem.pddl file.
 To test for a particualar case, COPY PASTE the section specified below and paste it in the hydration_problem.pddl file.
 
+To run the PDDL planner: Ctrl+Shift+P -> "Run PDDL Planner" -> Select this problem file (Shortcut: Alt+P). Select ENHSP or BFWS as the planner
+
 ================ EUHYDRATION ================
 
 
