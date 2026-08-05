@@ -47,6 +47,8 @@ def load_encryption_key():
  
 FERNET = load_encryption_key()
 
+PROFILE_BY_ID = {p["patient_id"]: p for p in ALL_PROFILES}
+
 # Color mapping for hydration risk categories
 RISK_COLORS = {
     "Euhydrated":"#2ECC71",
@@ -82,6 +84,14 @@ FAMILY_MESSAGES = {
     "Severe": "Critical dehydration detected. Emergency services contacted.",
     "Unknown": "Status is currently being assessed.",
 }
+
+PATIENT_MESSAGES_MILD_NOORS = (
+    "Your care team has been notified and will assist you directly."
+)
+FAMILY_MESSAGES_MILD_NOORS = (
+    "Hydration is slightly low, but oral fluids aren't an option right now. "
+    "The care team has been alerted to assist."
+)
 
 def load_json_logs():
     # initialize list to collect log records from JSON files
@@ -780,6 +790,8 @@ def update_all(n, risk_filter, patient_id, current_page):
     # Classify each record by risk and summarize the latest patient state
     latest = latest_summary(df)
     risk = latest.get("risk", "Unknown")
+    oral_feasible = PROFILE_BY_ID.get(patient_id, {}).get("oral_intake_feasible", True)
+    is_mild_noors = (risk == "Mild" and not oral_feasible)
     color = RISK_COLORS.get(risk, "#95A5A6")
     label = RISK_LABELS.get(risk, "UNKNOWN")
 
@@ -804,8 +816,9 @@ def update_all(n, risk_filter, patient_id, current_page):
     ])
 
     # Display a tailored patient message based on current risk
+    patient_msg_text = PATIENT_MESSAGES_MILD_NOORS if is_mild_noors else PATIENT_MESSAGES.get(risk, "")
     patient_msg = html.P(
-        PATIENT_MESSAGES.get(risk, ""),
+        patient_msg_text,
         style={
             "color": "#E0E0E0", "fontSize": "1.3rem",
             "fontWeight": "400", "maxWidth": "500px",
@@ -841,6 +854,7 @@ def update_all(n, risk_filter, patient_id, current_page):
         family_note = "All readings today are normal. No action needed."
 
     # Build the family status card with the current risk label and supporting message
+    family_msg_text = FAMILY_MESSAGES_MILD_NOORS if is_mild_noors else FAMILY_MESSAGES.get(risk, "")
     family_status = html.Div([
         html.Div([
             html.Span(label, style={
@@ -853,7 +867,7 @@ def update_all(n, risk_filter, patient_id, current_page):
                 "marginRight": "1rem"
             }),
             html.Span(
-                FAMILY_MESSAGES.get(risk, ""),
+                family_msg_text,
                 style={"color": "#E0E0E0", "fontSize": "1rem"}
             ),
         ], style={"marginBottom": "0.5rem"}),
