@@ -1,8 +1,10 @@
 cryptography==43.0.1
 dash==4.3.0
 dash-bootstrap-components==2.0.4
+heartpy>=1.2.5
 joblib==1.5.2
 kafka-python==2.2.15
+neurokit2>=0.2.7
 numpy==2.3.2
 owlready2==0.48
 pandas==2.3.2
