@@ -1,0 +1,331 @@
+[
+  {
+    "timestamp": "2026-10-04 18:29:20",
+    "sensor_timestamp": "2026-10-04 18:29:06",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.4,
+      "potassium": 4.8,
+      "chloride": 113.6,
+      "bun": 40.2,
+      "creatinine": 2.39,
+      "glucose": 200.1,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124147.1879451,
+      "ml_done_ts": 1791124147.2060432,
+      "ontology_done_ts": 1791124149.2732575,
+      "planner_done_ts": 1791124160.1664546,
+      "routed_ts": 1791124160.2952933,
+      "ml_latency_ms": 18.1,
+      "ontology_latency_ms": 2067.21,
+      "planner_latency_ms": 10893.2,
+      "routing_latency_ms": 128.84,
+      "total_latency_ms": 13107.35
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:30:09",
+    "sensor_timestamp": "2026-10-04 18:30:06",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 142.9,
+      "potassium": 4.8,
+      "chloride": 113.6,
+      "bun": 40.7,
+      "creatinine": 2.33,
+      "glucose": 199.9,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124206.9906385,
+      "ml_done_ts": 1791124207.0028894,
+      "ontology_done_ts": 1791124208.9198916,
+      "planner_done_ts": 1791124209.2779367,
+      "routed_ts": 1791124209.4052715,
+      "ml_latency_ms": 12.25,
+      "ontology_latency_ms": 1917.0,
+      "planner_latency_ms": 358.05,
+      "routing_latency_ms": 127.33,
+      "total_latency_ms": 2414.63
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:33:45",
+    "sensor_timestamp": "2026-10-04 18:33:42",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.2,
+      "potassium": 4.6,
+      "chloride": 113.3,
+      "bun": 43.6,
+      "creatinine": 2.31,
+      "glucose": 236.0,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124423.175173,
+      "ml_done_ts": 1791124423.1809936,
+      "ontology_done_ts": 1791124424.7588356,
+      "planner_done_ts": 1791124425.1231673,
+      "routed_ts": 1791124425.2590334,
+      "ml_latency_ms": 5.82,
+      "ontology_latency_ms": 1577.84,
+      "planner_latency_ms": 364.33,
+      "routing_latency_ms": 135.87,
+      "total_latency_ms": 2083.86
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:34:45",
+    "sensor_timestamp": "2026-10-04 18:34:42",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 141.2,
+      "potassium": 4.9,
+      "chloride": 113.5,
+      "bun": 43.3,
+      "creatinine": 2.07,
+      "glucose": 182.1,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124483.0522823,
+      "ml_done_ts": 1791124483.0629525,
+      "ontology_done_ts": 1791124484.808176,
+      "planner_done_ts": 1791124485.1966503,
+      "routed_ts": 1791124485.325408,
+      "ml_latency_ms": 10.67,
+      "ontology_latency_ms": 1745.22,
+      "planner_latency_ms": 388.47,
+      "routing_latency_ms": 128.76,
+      "total_latency_ms": 2273.13
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:15",
+    "sensor_timestamp": "2026-10-04 18:35:12",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 142.2,
+      "potassium": 4.7,
+      "chloride": 113.9,
+      "bun": 40.6,
+      "creatinine": 2.1,
+      "glucose": 204.0,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124513.0465055,
+      "ml_done_ts": 1791124513.0557418,
+      "ontology_done_ts": 1791124514.8945246,
+      "planner_done_ts": 1791124515.2414894,
+      "routed_ts": 1791124515.3648057,
+      "ml_latency_ms": 9.24,
+      "ontology_latency_ms": 1838.78,
+      "planner_latency_ms": 346.96,
+      "routing_latency_ms": 123.32,
+      "total_latency_ms": 2318.3
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:45",
+    "sensor_timestamp": "2026-10-04 18:35:42",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 142.6,
+      "potassium": 4.8,
+      "chloride": 113.1,
+      "bun": 40.2,
+      "creatinine": 2.75,
+      "glucose": 198.0,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124543.0478644,
+      "ml_done_ts": 1791124543.0570242,
+      "ontology_done_ts": 1791124544.9105287,
+      "planner_done_ts": 1791124545.2579691,
+      "routed_ts": 1791124545.3815832,
+      "ml_latency_ms": 9.16,
+      "ontology_latency_ms": 1853.5,
+      "planner_latency_ms": 347.44,
+      "routing_latency_ms": 123.61,
+      "total_latency_ms": 2333.72
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:38:55",
+    "sensor_timestamp": "2026-10-04 18:38:52",
+    "patient_id": 1,
+    "vitals": {
+      "sodium": 142.6,
+      "potassium": 4.8,
+      "chloride": 113.8,
+      "bun": 44.5,
+      "creatinine": 2.99,
+      "glucose": 231.5,
+      "age": 72,
+      "gender": 2,
+      "weight": 65.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(consume_ors patient1)\n(monitor_intake patient1)\n(recheck_hydration patient1)\n(log_status_mild patient1)",
+      "step_count": 5,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "reminderagent@localhost",
+      "kafka_topic": "reminders",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124733.2261593,
+      "ml_done_ts": 1791124733.2355697,
+      "ontology_done_ts": 1791124735.0198388,
+      "planner_done_ts": 1791124735.3511539,
+      "routed_ts": 1791124735.4821146,
+      "ml_latency_ms": 9.41,
+      "ontology_latency_ms": 1784.27,
+      "planner_latency_ms": 331.32,
+      "routing_latency_ms": 130.96,
+      "total_latency_ms": 2255.96
+    }
+  }
+]

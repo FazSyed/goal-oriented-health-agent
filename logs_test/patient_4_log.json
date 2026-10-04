@@ -1,0 +1,425 @@
+[
+  {
+    "timestamp": "2026-10-04 18:29:44",
+    "sensor_timestamp": "2026-10-04 18:29:41",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 155.0,
+      "potassium": 4.8,
+      "chloride": 113.5,
+      "bun": 31.4,
+      "creatinine": 1.56,
+      "glucose": 208.2,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124181.8269455,
+      "ml_done_ts": 1791124181.8383265,
+      "ontology_done_ts": 1791124183.7656517,
+      "planner_done_ts": 1791124184.1756434,
+      "routed_ts": 1791124184.3113158,
+      "ml_latency_ms": 11.38,
+      "ontology_latency_ms": 1927.33,
+      "planner_latency_ms": 409.99,
+      "routing_latency_ms": 135.67,
+      "total_latency_ms": 2484.37
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:34:08",
+    "sensor_timestamp": "2026-10-04 18:34:05",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 160.5,
+      "potassium": 4.0,
+      "chloride": 111.6,
+      "bun": 45.1,
+      "creatinine": 2.46,
+      "glucose": 163.4,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124446.0980644,
+      "ml_done_ts": 1791124446.1113057,
+      "ontology_done_ts": 1791124448.032173,
+      "planner_done_ts": 1791124448.376032,
+      "routed_ts": 1791124448.4979591,
+      "ml_latency_ms": 13.24,
+      "ontology_latency_ms": 1920.87,
+      "planner_latency_ms": 343.86,
+      "routing_latency_ms": 121.93,
+      "total_latency_ms": 2399.89
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:08",
+    "sensor_timestamp": "2026-10-04 18:35:05",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 159.1,
+      "potassium": 4.2,
+      "chloride": 112.1,
+      "bun": 43.7,
+      "creatinine": 2.89,
+      "glucose": 160.2,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124505.9330027,
+      "ml_done_ts": 1791124505.9462924,
+      "ontology_done_ts": 1791124507.9124234,
+      "planner_done_ts": 1791124508.2665915,
+      "routed_ts": 1791124508.3856735,
+      "ml_latency_ms": 13.29,
+      "ontology_latency_ms": 1966.13,
+      "planner_latency_ms": 354.17,
+      "routing_latency_ms": 119.08,
+      "total_latency_ms": 2452.67
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:20",
+    "sensor_timestamp": "2026-10-04 18:35:17",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 156.0,
+      "potassium": 4.8,
+      "chloride": 112.5,
+      "bun": 46.1,
+      "creatinine": 2.95,
+      "glucose": 195.5,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124517.9849548,
+      "ml_done_ts": 1791124517.996525,
+      "ontology_done_ts": 1791124519.858932,
+      "planner_done_ts": 1791124520.2528894,
+      "routed_ts": 1791124520.3883972,
+      "ml_latency_ms": 11.57,
+      "ontology_latency_ms": 1862.41,
+      "planner_latency_ms": 393.96,
+      "routing_latency_ms": 135.51,
+      "total_latency_ms": 2403.44
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:28",
+    "sensor_timestamp": "2026-10-04 18:35:25",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 159.7,
+      "potassium": 5.2,
+      "chloride": 112.6,
+      "bun": 46.1,
+      "creatinine": 2.48,
+      "glucose": 159.8,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124525.9343987,
+      "ml_done_ts": 1791124525.9472604,
+      "ontology_done_ts": 1791124527.7943385,
+      "planner_done_ts": 1791124528.1443386,
+      "routed_ts": 1791124528.2661376,
+      "ml_latency_ms": 12.86,
+      "ontology_latency_ms": 1847.08,
+      "planner_latency_ms": 350.0,
+      "routing_latency_ms": 121.8,
+      "total_latency_ms": 2331.74
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:38",
+    "sensor_timestamp": "2026-10-04 18:35:35",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 157.1,
+      "potassium": 5.2,
+      "chloride": 106.8,
+      "bun": 38.4,
+      "creatinine": 2.16,
+      "glucose": 129.9,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124535.9392815,
+      "ml_done_ts": 1791124535.9497998,
+      "ontology_done_ts": 1791124537.8195996,
+      "planner_done_ts": 1791124538.2159564,
+      "routed_ts": 1791124538.3444667,
+      "ml_latency_ms": 10.52,
+      "ontology_latency_ms": 1869.8,
+      "planner_latency_ms": 396.36,
+      "routing_latency_ms": 128.51,
+      "total_latency_ms": 2405.19
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:48",
+    "sensor_timestamp": "2026-10-04 18:35:45",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 159.2,
+      "potassium": 4.5,
+      "chloride": 110.8,
+      "bun": 30.6,
+      "creatinine": 1.79,
+      "glucose": 180.8,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124545.9308014,
+      "ml_done_ts": 1791124545.938201,
+      "ontology_done_ts": 1791124547.7558062,
+      "planner_done_ts": 1791124548.144488,
+      "routed_ts": 1791124548.2679374,
+      "ml_latency_ms": 7.4,
+      "ontology_latency_ms": 1817.61,
+      "planner_latency_ms": 388.68,
+      "routing_latency_ms": 123.45,
+      "total_latency_ms": 2337.14
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:58",
+    "sensor_timestamp": "2026-10-04 18:35:55",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 159.4,
+      "potassium": 5.1,
+      "chloride": 110.2,
+      "bun": 46.7,
+      "creatinine": 2.81,
+      "glucose": 132.4,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124555.9282067,
+      "ml_done_ts": 1791124555.9382665,
+      "ontology_done_ts": 1791124557.830901,
+      "planner_done_ts": 1791124558.2896242,
+      "routed_ts": 1791124558.4292219,
+      "ml_latency_ms": 10.06,
+      "ontology_latency_ms": 1892.63,
+      "planner_latency_ms": 458.72,
+      "routing_latency_ms": 139.6,
+      "total_latency_ms": 2501.02
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:39:18",
+    "sensor_timestamp": "2026-10-04 18:39:15",
+    "patient_id": 4,
+    "vitals": {
+      "sodium": 155.5,
+      "potassium": 4.8,
+      "chloride": 109.8,
+      "bun": 46.6,
+      "creatinine": 1.98,
+      "glucose": 169.3,
+      "age": 75,
+      "gender": 1,
+      "weight": 68.0,
+      "bmi": 25.2
+    },
+    "ml_prediction": "Severe",
+    "ontology": {
+      "risk": "Severe",
+      "action": "SendEmergencySignal",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(call_emergency patient1)\n(transfer_to_hospital_severe patient1)\n(administer_fluids_severe patient1)\n(recheck_labs_severe patient1)\n(monitor_vitals_continuous patient1)\n(log_status_severe patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124756.224022,
+      "ml_done_ts": 1791124756.2324154,
+      "ontology_done_ts": 1791124758.2062042,
+      "planner_done_ts": 1791124758.5936198,
+      "routed_ts": 1791124758.7282324,
+      "ml_latency_ms": 8.39,
+      "ontology_latency_ms": 1973.79,
+      "planner_latency_ms": 387.42,
+      "routing_latency_ms": 134.61,
+      "total_latency_ms": 2504.21
+    }
+  }
+]

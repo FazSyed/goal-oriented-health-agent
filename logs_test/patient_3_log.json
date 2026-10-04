@@ -1,0 +1,331 @@
+[
+  {
+    "timestamp": "2026-10-04 18:29:36",
+    "sensor_timestamp": "2026-10-04 18:29:33",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 149.9,
+      "potassium": 4.3,
+      "chloride": 106.6,
+      "bun": 45.1,
+      "creatinine": 2.42,
+      "glucose": 109.0,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124173.9880066,
+      "ml_done_ts": 1791124174.000288,
+      "ontology_done_ts": 1791124175.862856,
+      "planner_done_ts": 1791124176.290141,
+      "routed_ts": 1791124176.4173582,
+      "ml_latency_ms": 12.28,
+      "ontology_latency_ms": 1862.57,
+      "planner_latency_ms": 427.29,
+      "routing_latency_ms": 127.22,
+      "total_latency_ms": 2429.35
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:34:00",
+    "sensor_timestamp": "2026-10-04 18:33:58",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 148.0,
+      "potassium": 4.2,
+      "chloride": 104.1,
+      "bun": 51.0,
+      "creatinine": 1.93,
+      "glucose": 102.1,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124438.4761925,
+      "ml_done_ts": 1791124438.4830878,
+      "ontology_done_ts": 1791124440.1494675,
+      "planner_done_ts": 1791124440.5059998,
+      "routed_ts": 1791124440.62858,
+      "ml_latency_ms": 6.9,
+      "ontology_latency_ms": 1666.38,
+      "planner_latency_ms": 356.53,
+      "routing_latency_ms": 122.58,
+      "total_latency_ms": 2152.39
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:00",
+    "sensor_timestamp": "2026-10-04 18:34:58",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 149.6,
+      "potassium": 4.0,
+      "chloride": 106.7,
+      "bun": 48.2,
+      "creatinine": 1.9,
+      "glucose": 130.3,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124498.3412235,
+      "ml_done_ts": 1791124498.353167,
+      "ontology_done_ts": 1791124500.290417,
+      "planner_done_ts": 1791124500.6473265,
+      "routed_ts": 1791124500.7795637,
+      "ml_latency_ms": 11.94,
+      "ontology_latency_ms": 1937.25,
+      "planner_latency_ms": 356.91,
+      "routing_latency_ms": 132.24,
+      "total_latency_ms": 2438.34
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:22",
+    "sensor_timestamp": "2026-10-04 18:35:20",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 147.3,
+      "potassium": 4.0,
+      "chloride": 108.3,
+      "bun": 48.1,
+      "creatinine": 2.13,
+      "glucose": 115.7,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124520.5348024,
+      "ml_done_ts": 1791124520.5449321,
+      "ontology_done_ts": 1791124522.5006597,
+      "planner_done_ts": 1791124522.8673084,
+      "routed_ts": 1791124522.987509,
+      "ml_latency_ms": 10.13,
+      "ontology_latency_ms": 1955.73,
+      "planner_latency_ms": 366.65,
+      "routing_latency_ms": 120.2,
+      "total_latency_ms": 2452.71
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:40",
+    "sensor_timestamp": "2026-10-04 18:35:38",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 149.5,
+      "potassium": 4.8,
+      "chloride": 109.0,
+      "bun": 48.7,
+      "creatinine": 2.38,
+      "glucose": 165.7,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124538.4966924,
+      "ml_done_ts": 1791124538.5101037,
+      "ontology_done_ts": 1791124540.3704724,
+      "planner_done_ts": 1791124540.73548,
+      "routed_ts": 1791124540.8736107,
+      "ml_latency_ms": 13.41,
+      "ontology_latency_ms": 1860.37,
+      "planner_latency_ms": 365.01,
+      "routing_latency_ms": 138.13,
+      "total_latency_ms": 2376.92
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:36:00",
+    "sensor_timestamp": "2026-10-04 18:35:58",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 148.3,
+      "potassium": 4.1,
+      "chloride": 105.0,
+      "bun": 50.9,
+      "creatinine": 2.13,
+      "glucose": 134.8,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124558.5796688,
+      "ml_done_ts": 1791124558.5906842,
+      "ontology_done_ts": 1791124560.4957516,
+      "planner_done_ts": 1791124560.859264,
+      "routed_ts": 1791124560.9931068,
+      "ml_latency_ms": 11.02,
+      "ontology_latency_ms": 1905.07,
+      "planner_latency_ms": 363.51,
+      "routing_latency_ms": 133.84,
+      "total_latency_ms": 2413.44
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:39:10",
+    "sensor_timestamp": "2026-10-04 18:39:08",
+    "patient_id": 3,
+    "vitals": {
+      "sodium": 149.9,
+      "potassium": 3.9,
+      "chloride": 106.4,
+      "bun": 44.9,
+      "creatinine": 2.0,
+      "glucose": 170.1,
+      "age": 68,
+      "gender": 2,
+      "weight": 58.0,
+      "bmi": 23.1
+    },
+    "ml_prediction": "Moderate",
+    "ontology": {
+      "risk": "Moderate",
+      "action": "SendIVRequiredAlert",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 7,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124748.543024,
+      "ml_done_ts": 1791124748.550842,
+      "ontology_done_ts": 1791124750.3475006,
+      "planner_done_ts": 1791124750.6858337,
+      "routed_ts": 1791124750.805208,
+      "ml_latency_ms": 7.82,
+      "ontology_latency_ms": 1796.66,
+      "planner_latency_ms": 338.33,
+      "routing_latency_ms": 119.37,
+      "total_latency_ms": 2262.18
+    }
+  }
+]

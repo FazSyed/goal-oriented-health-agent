@@ -1,0 +1,143 @@
+[
+  {
+    "timestamp": "2026-10-04 18:29:52",
+    "sensor_timestamp": "2026-10-04 18:29:49",
+    "patient_id": 5,
+    "vitals": {
+      "sodium": 138.9,
+      "potassium": 3.8,
+      "chloride": 99.0,
+      "bun": 14.5,
+      "creatinine": 1.54,
+      "glucose": 175.7,
+      "age": 85,
+      "gender": 1,
+      "weight": 78.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124189.7393653,
+      "ml_done_ts": 1791124189.7469704,
+      "ontology_done_ts": 1791124191.6166797,
+      "planner_done_ts": 1791124192.0179818,
+      "routed_ts": 1791124192.1461997,
+      "ml_latency_ms": 7.61,
+      "ontology_latency_ms": 1869.71,
+      "planner_latency_ms": 401.3,
+      "routing_latency_ms": 128.22,
+      "total_latency_ms": 2406.83
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:34:16",
+    "sensor_timestamp": "2026-10-04 18:34:13",
+    "patient_id": 5,
+    "vitals": {
+      "sodium": 139.9,
+      "potassium": 4.0,
+      "chloride": 112.8,
+      "bun": 12.5,
+      "creatinine": 1.18,
+      "glucose": 106.8,
+      "age": 85,
+      "gender": 1,
+      "weight": 78.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124453.8920584,
+      "ml_done_ts": 1791124453.9031408,
+      "ontology_done_ts": 1791124455.8333864,
+      "planner_done_ts": 1791124456.227394,
+      "routed_ts": 1791124456.356949,
+      "ml_latency_ms": 11.08,
+      "ontology_latency_ms": 1930.25,
+      "planner_latency_ms": 394.01,
+      "routing_latency_ms": 129.55,
+      "total_latency_ms": 2464.89
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:17",
+    "sensor_timestamp": "2026-10-04 18:35:15",
+    "patient_id": 5,
+    "vitals": {
+      "sodium": 136.8,
+      "potassium": 3.8,
+      "chloride": 107.7,
+      "bun": 11.8,
+      "creatinine": 1.66,
+      "glucose": 113.2,
+      "age": 85,
+      "gender": 1,
+      "weight": 78.0,
+      "bmi": 26.5
+    },
+    "ml_prediction": "Euhydrated",
+    "ontology": {
+      "risk": "Euhydrated",
+      "action": "NoActionRequired",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(log_status_euhydrated patient1)",
+      "step_count": 2,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": null,
+      "kafka_topic": "euhydrated_log",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124515.5143197,
+      "ml_done_ts": 1791124515.525692,
+      "ontology_done_ts": 1791124517.3240845,
+      "planner_done_ts": 1791124517.6929712,
+      "routed_ts": 1791124517.833685,
+      "ml_latency_ms": 11.37,
+      "ontology_latency_ms": 1798.39,
+      "planner_latency_ms": 368.89,
+      "routing_latency_ms": 140.71,
+      "total_latency_ms": 2319.37
+    }
+  }
+]

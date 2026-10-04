@@ -1,0 +1,284 @@
+[
+  {
+    "timestamp": "2026-10-04 18:29:28",
+    "sensor_timestamp": "2026-10-04 18:29:25",
+    "patient_id": 2,
+    "vitals": {
+      "sodium": 141.9,
+      "potassium": 4.5,
+      "chloride": 113.2,
+      "bun": 40.7,
+      "creatinine": 2.25,
+      "glucose": 195.1,
+      "age": 80,
+      "gender": 2,
+      "weight": 72.0,
+      "bmi": 24.8
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 8,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124165.732525,
+      "ml_done_ts": 1791124165.7446907,
+      "ontology_done_ts": 1791124167.9675512,
+      "planner_done_ts": 1791124168.423499,
+      "routed_ts": 1791124168.549572,
+      "ml_latency_ms": 12.17,
+      "ontology_latency_ms": 2222.86,
+      "planner_latency_ms": 455.95,
+      "routing_latency_ms": 126.07,
+      "total_latency_ms": 2817.05
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:33:53",
+    "sensor_timestamp": "2026-10-04 18:33:50",
+    "patient_id": 2,
+    "vitals": {
+      "sodium": 141.1,
+      "potassium": 4.8,
+      "chloride": 113.4,
+      "bun": 44.9,
+      "creatinine": 2.27,
+      "glucose": 194.6,
+      "age": 80,
+      "gender": 2,
+      "weight": 72.0,
+      "bmi": 24.8
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 8,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124430.7084363,
+      "ml_done_ts": 1791124430.7211032,
+      "ontology_done_ts": 1791124432.5163069,
+      "planner_done_ts": 1791124432.903893,
+      "routed_ts": 1791124433.0283613,
+      "ml_latency_ms": 12.67,
+      "ontology_latency_ms": 1795.2,
+      "planner_latency_ms": 387.59,
+      "routing_latency_ms": 124.47,
+      "total_latency_ms": 2319.93
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:34:53",
+    "sensor_timestamp": "2026-10-04 18:34:50",
+    "patient_id": 2,
+    "vitals": {
+      "sodium": 142.9,
+      "potassium": 4.9,
+      "chloride": 113.1,
+      "bun": 44.3,
+      "creatinine": 2.08,
+      "glucose": 204.7,
+      "age": 80,
+      "gender": 2,
+      "weight": 72.0,
+      "bmi": 24.8
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 8,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124490.566197,
+      "ml_done_ts": 1791124490.5806022,
+      "ontology_done_ts": 1791124492.5562177,
+      "planner_done_ts": 1791124492.9175885,
+      "routed_ts": 1791124493.0385711,
+      "ml_latency_ms": 14.41,
+      "ontology_latency_ms": 1975.62,
+      "planner_latency_ms": 361.37,
+      "routing_latency_ms": 120.98,
+      "total_latency_ms": 2472.37
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:25",
+    "sensor_timestamp": "2026-10-04 18:35:23",
+    "patient_id": 2,
+    "vitals": {
+      "sodium": 142.3,
+      "potassium": 4.6,
+      "chloride": 113.6,
+      "bun": 40.1,
+      "creatinine": 2.86,
+      "glucose": 206.1,
+      "age": 80,
+      "gender": 2,
+      "weight": 72.0,
+      "bmi": 24.8
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 8,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124523.1446283,
+      "ml_done_ts": 1791124523.1562219,
+      "ontology_done_ts": 1791124524.95746,
+      "planner_done_ts": 1791124525.3165565,
+      "routed_ts": 1791124525.44079,
+      "ml_latency_ms": 11.59,
+      "ontology_latency_ms": 1801.24,
+      "planner_latency_ms": 359.1,
+      "routing_latency_ms": 124.23,
+      "total_latency_ms": 2296.16
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:35:52",
+    "sensor_timestamp": "2026-10-04 18:35:50",
+    "patient_id": 2,
+    "vitals": {
+      "sodium": 142.4,
+      "potassium": 4.5,
+      "chloride": 113.9,
+      "bun": 41.4,
+      "creatinine": 2.45,
+      "glucose": 190.8,
+      "age": 80,
+      "gender": 2,
+      "weight": 72.0,
+      "bmi": 24.8
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 8,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124550.5497308,
+      "ml_done_ts": 1791124550.5574274,
+      "ontology_done_ts": 1791124552.4258611,
+      "planner_done_ts": 1791124552.799669,
+      "routed_ts": 1791124552.9300456,
+      "ml_latency_ms": 7.7,
+      "ontology_latency_ms": 1868.43,
+      "planner_latency_ms": 373.81,
+      "routing_latency_ms": 130.38,
+      "total_latency_ms": 2380.31
+    }
+  },
+  {
+    "timestamp": "2026-10-04 18:39:03",
+    "sensor_timestamp": "2026-10-04 18:39:00",
+    "patient_id": 2,
+    "vitals": {
+      "sodium": 141.4,
+      "potassium": 4.7,
+      "chloride": 113.2,
+      "bun": 42.5,
+      "creatinine": 2.38,
+      "glucose": 237.6,
+      "age": 80,
+      "gender": 2,
+      "weight": 72.0,
+      "bmi": 24.8
+    },
+    "ml_prediction": "Mild",
+    "ontology": {
+      "risk": "Mild",
+      "action": "SendHydrationReminder",
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "planner": {
+      "plan": "(check_hydration patient1)\n(escalate_to_moderate patient1)\n(alert_caregiver patient1)\n(transfer_to_hospital_moderate patient1)\n(administer_fluids_moderate patient1)\n(recheck_labs_moderate patient1)\n(monitor_vitals_moderate patient1)\n(log_status_moderate patient1)",
+      "step_count": 8,
+      "fallback_used": false,
+      "fallback_reason": null
+    },
+    "routing": {
+      "routed_to": "careagent@localhost",
+      "kafka_topic": "care_alerts",
+      "kafka_publish_success": true
+    },
+    "timing": {
+      "received_ts": 1791124740.936462,
+      "ml_done_ts": 1791124740.9453366,
+      "ontology_done_ts": 1791124742.683272,
+      "planner_done_ts": 1791124743.0155003,
+      "routed_ts": 1791124743.1373513,
+      "ml_latency_ms": 8.87,
+      "ontology_latency_ms": 1737.94,
+      "planner_latency_ms": 332.23,
+      "routing_latency_ms": 121.85,
+      "total_latency_ms": 2200.89
+    }
+  }
+]
