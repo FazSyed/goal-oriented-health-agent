@@ -1,6 +1,9 @@
 cryptography==43.0.1
 dash==4.3.0
 dash-bootstrap-components==2.0.4
+gspread>=6.0.0
+google-api-python-client>=2.100.0
+gunicorn>=22.0.0
 heartpy>=1.2.5
 joblib==1.5.2
 kafka-python==2.2.15
