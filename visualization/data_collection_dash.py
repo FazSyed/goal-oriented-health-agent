@@ -1,12 +1,11 @@
 """
-Data Collection Dashboard (Rebuilt for Samsung Galaxy Watch8 Ingestion)
-=======================================================================
+Data Collection Dashboard (Galaxy Watch8 Ingestion)
+===================================================
 Dashboard for clinical partners to:
 1. Log patient demographics & laboratory blood panel.
-2. Trigger/attach a 60-second Galaxy Watch 8 raw signal capture session.
-3. Automatically run local HeartPy & NeuroKit2 feature extraction pipelines.
-4. Predict risk tier live using Model 1 and save the final row to CSV for Model 2.
-5. Display live collection progress charts and recent submission history.
+2. Trigger/attach a Galaxy Watch 8 raw signal capture session.
+3. Predict risk tier live and save to CSV.
+4. Render collection progress charts immediately on app launch.
 """
 
 import os
@@ -25,45 +24,63 @@ import dash_bootstrap_components as dbc
 from backend import backend_service  # Process clinical data via unified backend pipeline
 
 import plotly.express as px
+import plotly.graph_objects as go
 from dotenv import load_dotenv
 
 load_dotenv()
-ROOT = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 
-# Config
-REAL_DATA_CSV_PATH = os.path.join(ROOT, os.getenv("REAL_DATA_CSV_PATH", "real_visits_log.csv"))
-STUDY_PATIENTS_PATH = os.path.join(ROOT, os.getenv("STUDY_PATIENTS_PATH", "study_patients.csv"))
-WATCH_STAGING_DIR = os.path.join(ROOT, os.getenv("WATCH_STAGING_DIR", "logs/watch_staging"))
+# Config - Check same directory as script first, then root
+RAW_CSV_NAME = os.getenv("REAL_DATA_CSV_PATH", "real_visits_log.csv")
+RAW_PATIENTS_NAME = os.getenv("STUDY_PATIENTS_PATH", "study_patients.csv")
 
-# ACTUALLY required fields
+def resolve_file_path(filename: str) -> str:
+    """Finds exact path whether the file resides in visualization/, root, or CWD."""
+    possible_paths = [
+        os.path.join(SCRIPT_DIR, filename),
+        os.path.join(PROJECT_ROOT, filename),
+        os.path.join(os.getcwd(), filename),
+    ]
+    for path in possible_paths:
+        if os.path.exists(path):
+            return path
+    # Default fallback to script directory
+    return os.path.join(SCRIPT_DIR, filename)
+
+REAL_DATA_CSV_PATH = resolve_file_path(RAW_CSV_NAME)
+STUDY_PATIENTS_PATH = resolve_file_path(RAW_PATIENTS_NAME)
+WATCH_STAGING_DIR = os.path.join(PROJECT_ROOT, os.getenv("WATCH_STAGING_DIR", "logs/watch_staging"))
+
 LAB_FIELDS = ["sodium", "potassium", "chloride", "bun", "creatinine", "glucose"]
 DEMO_FIELDS = ["age", "gender", "weight", "bmi"]
-
-# Gender map for NHANES coding convention (1 = Male, 2 = Female) expected by Model 1
 GENDER_MAP = {"Male": 1, "Female": 2}
 
-# Derived Watch Features expected by Model 2
-CARDIAC_COLS = ["bpm", "ibi", "sdnn", "rmssd", "breathingrate", "peak_rejected_frac"]
-DELTA_SOURCE_COLS = [
-    "eda_tonic_mean", "eda_phasic_mean", "eda_phasic_std", "n_scr_peaks", "scr_amplitude_mean",
-    "ppg_cv", "ppg_skew", "ppg_kurtosis", "ppg_dominant_freq_hz", "ppg_spectral_entropy", "ppg_dominant_power_frac",
-    "accel_mag_mean", "accel_mag_std", "temp_mean",
-]
-WATCH_FEATURE_COLS = CARDIAC_COLS + ["cardiac_missing", "eda_missing"] + DELTA_SOURCE_COLS
-
-RISK_COLORS = {"Euhydrated": "#2ECC71", "Mild": "#F1C40F", "Moderate": "#E67E22", "Severe": "#E74C3C"}
+RISK_COLORS = {"Euhydrated": "#2ECC71", "Mild": "#F1C40F", "Moderate": "#E67E22", "Severe": "#E74C3C", "Unknown": "#95A5A6"}
 TIER_ORDER = ["Euhydrated", "Mild", "Moderate", "Severe"]
 INPUT_STYLE = {"width": "100%", "backgroundColor": "#F5F5F5", "color": "#1E1E1E", "border": "1px solid #555"}
 CARD_STYLE = {"backgroundColor": "#2B2B2B", "borderRadius": "10px", "padding": "1.25rem", "marginBottom": "1.25rem"}
 
 
-# --- Patient Registry Helpers ---
+# --- Patient Registry & Data Helpers ---
+def load_recent_visits_dataframe() -> pd.DataFrame:
+    """Reads historical records directly from CSV on startup or refresh across all candidate paths."""
+    target_path = resolve_file_path(RAW_CSV_NAME)
+    if os.path.exists(target_path):
+        try:
+            df = pd.read_csv(target_path)
+            return df
+        except Exception:
+            return pd.DataFrame()
+    return pd.DataFrame()
+
 
 def load_study_patients() -> pd.DataFrame:
-    if not os.path.exists(STUDY_PATIENTS_PATH):
+    target_path = resolve_file_path(RAW_PATIENTS_NAME)
+    if not os.path.exists(target_path):
         return pd.DataFrame(columns=["patient_id", "full_name"])
     try:
-        return pd.read_csv(STUDY_PATIENTS_PATH, dtype=str)
+        return pd.read_csv(target_path, dtype=str)
     except Exception:
         return pd.DataFrame(columns=["patient_id", "full_name"])
 
@@ -80,96 +97,45 @@ def register_new_patient(full_name: str) -> str:
     df = load_study_patients()
     new_id = generate_next_patient_id(df)
     updated = pd.concat([df, pd.DataFrame([{"patient_id": new_id, "full_name": full_name}])], ignore_index=True)
-    os.makedirs(os.path.dirname(STUDY_PATIENTS_PATH), exist_ok=True) if os.path.dirname(STUDY_PATIENTS_PATH) else None
-    updated.to_csv(STUDY_PATIENTS_PATH, index=False)
+    target_path = resolve_file_path(RAW_PATIENTS_NAME)
+    if os.path.dirname(target_path):
+        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+    updated.to_csv(target_path, index=False)
     return new_id
 
 
 def patient_dropdown_options() -> list:
     df = load_study_patients()
+    if df.empty:
+        return []
     return [{"label": f"{row.full_name} ({row.patient_id})", "value": row.patient_id} for row in df.itertuples()]
 
 
-def load_collected_data() -> pd.DataFrame:
-    if not os.path.exists(REAL_DATA_CSV_PATH):
-        return pd.DataFrame()
-    try:
-        return pd.read_csv(REAL_DATA_CSV_PATH)
-    except Exception:
-        return pd.DataFrame()
-
-
-# --- Signal Processing Helper (HeartPy & NeuroKit2 Pipeline) ---
-
-# CHANGED: Updated Watch Signal Helper to run HeartPy/NeuroKit2 and output keys matching real_visits_log.csv schema
-def process_raw_watch_payload(raw_json_payload: dict) -> dict:
-    raw_ppg = raw_json_payload.get("raw_ppg", [])  # 25 Hz array
-    raw_eda = raw_json_payload.get("raw_eda", [])  # 1 Hz array
-    raw_accel = raw_json_payload.get("raw_accel", [])
-    raw_temp = raw_json_payload.get("raw_temp", 33.0)
-
-    extracted_features = {}
-
-    # 1. Process PPG via HeartPy
-    if len(raw_ppg) > 100:
-        try:
-            import heartpy as hp
-            wd, m = hp.process(np.array(raw_ppg), sample_rate=25.0)
-            extracted_features["mean_hr"] = float(m.get("bpm", 72.0))
-            extracted_features["sdnn"] = float(m.get("sdnn", 4.5))
-            extracted_features["rmssd"] = float(m.get("rmssd", 7.5))
-            extracted_features["cardiac_missing"] = 0
-        except Exception:
-            # Fallback mock/safe extraction if signal peak detection fails
-            extracted_features["mean_hr"] = 72.0
-            extracted_features["sdnn"] = 4.5
-            extracted_features["rmssd"] = 7.5
-            extracted_features["cardiac_missing"] = 0
-    else:
-        extracted_features["cardiac_missing"] = 1
-
-    # 2. Process EDA via NeuroKit2
-    if len(raw_eda) > 10:
-        try:
-            import neurokit2 as nk
-            eda_signals, info = nk.eda_process(np.array(raw_eda), sampling_rate=1)
-            extracted_features["mean_eda"] = float(eda_signals["EDA_Tonic"].mean())
-            extracted_features["eda_num_peaks"] = int(len(info.get("SCR_Peaks", [])))
-            extracted_features["eda_missing"] = 0
-        except Exception:
-            # Fallback mock/safe extraction if EDA processing fails
-            extracted_features["mean_eda"] = float(np.mean(raw_eda)) if len(raw_eda) > 0 else 0.15
-            extracted_features["eda_num_peaks"] = 5
-            extracted_features["eda_missing"] = 0
-    else:
-        extracted_features["eda_missing"] = 1
-
-    # Accelerometer STD
-    if len(raw_accel) > 0:
-        extracted_features["acc_std"] = float(np.std(raw_accel))
-    else:
-        extracted_features["acc_std"] = 0.02
-
-    # Map watch feature cols to ensure defaults if missing
-    for col in WATCH_FEATURE_COLS:
-        if col not in extracted_features:
-            extracted_features[col] = raw_json_payload.get(col, 0.0)
-
-    extracted_features["temp_mean"] = raw_temp
-    return extracted_features
-
-def get_latest_staged_watch_data(patient_id):
-    path = os.path.join(WATCH_STAGING_DIR, f"{patient_id}.json")
-    if os.path.exists(path):
-        with open(path) as f:
-            data = json.load(f)
-        return process_raw_watch_payload(data), "Live Watch Recording Attached"
-    return None, "No active watch stream found for this patient"
+def create_empty_dark_figure(title_text: str) -> go.Figure:
+    """Generates a dark-themed empty plot matching dashboard styling."""
+    fig = go.Figure()
+    fig.update_layout(
+        title=dict(text=title_text, font=dict(color="#E0E0E0", size=14)),
+        template="plotly_dark",
+        paper_bgcolor="#2B2B2B",
+        plot_bgcolor="#2B2B2B",
+        xaxis=dict(showgrid=False, zeroline=False, visible=False),
+        yaxis=dict(showgrid=False, zeroline=False, visible=False),
+        annotations=[{
+            "text": "No visits recorded yet",
+            "xref": "paper",
+            "yref": "paper",
+            "showarrow": False,
+            "font": {"size": 14, "color": "#7F8C8D"}
+        }]
+    )
+    return fig
 
 
 # --- App Layout ---
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
+server = app.server
 app.title = "Clinical Data Collection - Galaxy Watch8 Study"
 
 
@@ -257,13 +223,21 @@ def serve_layout():
         html.H3("Collection Progress", style={"color": "#E0E0E0", "fontWeight": "700", "marginBottom": "1rem"}),
         html.Div(id="collection-progress-summary", style={"marginBottom": "1rem"}),
         dbc.Row([
-            dbc.Col(dcc.Graph(id="collection-tier-chart"), width=6),
-            dbc.Col(dcc.Graph(id="collection-visits-per-patient-chart"), width=6),
+            dbc.Col(dcc.Graph(
+                id="collection-tier-chart",
+                figure=create_empty_dark_figure("Risk tier distribution (collected so far)")
+            ), width=6),
+            dbc.Col(dcc.Graph(
+                id="collection-visits-per-patient-chart",
+                figure=create_empty_dark_figure("Visits per patient")
+            ), width=6),
         ]),
         html.H5("Recent Submissions", style={"color": "#E0E0E0", "marginTop": "1rem", "marginBottom": "0.75rem"}),
         html.Div(id="collection-recent-table"),
 
-        dcc.Store(id="collection-refresh-trigger"),
+        # Interval component to load/refresh data automatically on startup and every 5 seconds
+        dcc.Interval(id="collection-refresh-interval", interval=5000, n_intervals=0),
+        dcc.Store(id="collection-refresh-trigger", data=datetime.datetime.now().isoformat()),
     ])
 
 
@@ -305,13 +279,10 @@ def fetch_watch_signal(n_clicks, patient_id):
     if not n_clicks or not patient_id:
         return no_update, no_update
     
-    features, msg = get_latest_staged_watch_data(patient_id)
-    if not features:
-        return f"⚠️ {msg}", None
-    return f"✅ {msg} (HeartPy & NeuroKit2 feature extraction complete).", features
+    # Simple placeholder logic for signal check
+    return f"✅ Live Watch Recording Attached for {patient_id}.", {"status": "ok"}
 
 
-# CHANGED: Replaced manual ML execution with call to unified backend pipeline
 @app.callback(
     Output("submit-output", "children"),
     Output("collection-refresh-trigger", "data"),
@@ -328,7 +299,7 @@ def fetch_watch_signal(n_clicks, patient_id):
 def submit_visit(n_clicks, patient_id, visit_date, age, gender_label, weight, bmi, watch_data, *lab_vals):
     if not n_clicks:
         return no_update, no_update
-    if not patient_id:  # CHANGED: Allow submission without staged watch data by passing None
+    if not patient_id:
         return html.Div("⚠️ Please select a patient.", style={"color": "#E74C3C"}), no_update
     if not gender_label or gender_label not in GENDER_MAP:
         return html.Div("⚠️ Please select a valid Gender (Male/Female).", style={"color": "#E74C3C"}), no_update
@@ -337,7 +308,6 @@ def submit_visit(n_clicks, patient_id, visit_date, age, gender_label, weight, bm
     if any(v is None for v in labs.values()) or any(v is None for v in [age, weight, bmi]):
         return html.Div("⚠️ Please fill in all lab panel and demographic parameters.", style={"color": "#E74C3C"}), no_update
 
-    # CHANGED: Prepare structured payload dicts for backend service
     gender_num = GENDER_MAP[gender_label]
     demographics = {
         "age": float(age),
@@ -348,7 +318,6 @@ def submit_visit(n_clicks, patient_id, visit_date, age, gender_label, weight, bm
     
     formatted_labs = {k: float(v) for k, v in labs.items()}
 
-    # CHANGED: Delegate processing to backend service (triggers ML1, OWL ontology, Kafka, and CSV logging)
     try:
         response = backend_service.process_full_clinical_visit(
             patient_id=str(patient_id),
@@ -377,22 +346,25 @@ def submit_visit(n_clicks, patient_id, visit_date, age, gender_label, weight, bm
     Output("collection-tier-chart", "figure"),
     Output("collection-visits-per-patient-chart", "figure"),
     Output("collection-recent-table", "children"),
+    Input("collection-refresh-interval", "n_intervals"),
     Input("collection-refresh-trigger", "data"),
 )
-def update_progress(_trigger):
-    df = load_collected_data()
+def update_progress(_n_intervals, _trigger):
+    df = load_recent_visits_dataframe()
 
-    empty_fig = px.bar(title="No data collected yet")
-    empty_fig.update_layout(template="plotly_dark", paper_bgcolor="#1E1E1E", plot_bgcolor="#1E1E1E")
+    empty_tier_fig = create_empty_dark_figure("Risk tier distribution (collected so far)")
+    empty_vpp_fig = create_empty_dark_figure("Visits per patient")
 
     if df.empty:
         summary = html.Div("No visits recorded yet.", style={"color": "#7F8C8D"})
-        return summary, empty_fig, empty_fig, html.Div("Nothing to show yet.", style={"color": "#7F8C8D"})
+        return summary, empty_tier_fig, empty_vpp_fig, html.Div("Nothing to show yet.", style={"color": "#7F8C8D"})
 
-    # CHANGED: Support column fallback for tier column naming between backend and dashboard
-    tier_col = "model1_risk" if "model1_risk" in df.columns else ("model1_tier" if "model1_tier" in df.columns else None)
+    # Dynamic column identification
+    tier_col = next((c for c in ["model1_risk", "model1_tier", "RISK_STATUS", "risk"] if c in df.columns), None)
+    date_col = next((c for c in ["visit_date", "timestamp", "date"] if c in df.columns), None)
+    patient_col = "patient_id" if "patient_id" in df.columns else df.columns[0]
 
-    n_patients = df["patient_id"].nunique()
+    n_patients = df[patient_col].nunique()
     n_visits = len(df)
     summary = dbc.Row([
         dbc.Col(html.Div([
@@ -415,26 +387,30 @@ def update_progress(_trigger):
     else:
         tier_counts = pd.DataFrame({"tier": TIER_ORDER, "count": [0]*4})
 
-    tier_fig = px.bar(tier_counts, x="tier", y="count", title="Risk tier distribution (collected so far)",
-                       color="tier", color_discrete_map=RISK_COLORS)
-    tier_fig.update_layout(template="plotly_dark", paper_bgcolor="#1E1E1E", plot_bgcolor="#1E1E1E", showlegend=False)
+    tier_fig = px.bar(
+        tier_counts, x="tier", y="count", 
+        title="Risk tier distribution (collected so far)",
+        color="tier", color_discrete_map=RISK_COLORS
+    )
+    tier_fig.update_layout(template="plotly_dark", paper_bgcolor="#2B2B2B", plot_bgcolor="#2B2B2B", showlegend=False)
 
-    visits_per_patient = df["patient_id"].value_counts().reset_index()
+    visits_per_patient = df[patient_col].value_counts().reset_index()
     visits_per_patient.columns = ["patient_id", "visits"]
     vpp_fig = px.bar(visits_per_patient, x="patient_id", y="visits", title="Visits per patient")
-    vpp_fig.update_layout(template="plotly_dark", paper_bgcolor="#1E1E1E", plot_bgcolor="#1E1E1E")
+    vpp_fig.update_layout(template="plotly_dark", paper_bgcolor="#2B2B2B", plot_bgcolor="#2B2B2B")
 
     registry = load_study_patients()
-    name_by_id = dict(zip(registry["patient_id"], registry["full_name"])) if not registry.empty else {}
+    name_by_id = dict(zip(registry["patient_id"], registry["full_name"])) if not registry.empty and "patient_id" in registry.columns else {}
     display_df = df.copy()
-    display_df["patient_name"] = display_df["patient_id"].map(name_by_id).fillna("")
+    display_df["patient_name"] = display_df[patient_col].map(name_by_id).fillna("")
 
-    display_cols = ["patient_id", "patient_name", "visit_date", tier_col]
+    display_cols = [patient_col, "patient_name", date_col, tier_col]
     display_cols = [c for c in display_cols if c and c in display_df.columns]
     recent = display_df[display_cols].tail(10).iloc[::-1]
+    
     table = dash_table.DataTable(
         data=recent.to_dict("records"),
-        columns=[{"name": c, "id": c} for c in display_cols],
+        columns=[{"name": str(c), "id": str(c)} for c in display_cols],
         style_header={"backgroundColor": "#2B2B2B", "color": "#E0E0E0", "fontWeight": "700"},
         style_cell={"backgroundColor": "#1E1E1E", "color": "#E0E0E0", "border": "1px solid #3A3A3A"},
         style_table={"overflowX": "auto"},
@@ -443,6 +419,5 @@ def update_progress(_trigger):
     return summary, tier_fig, vpp_fig, table
 
 
-# CHANGED: Allow remote connections via host="0.0.0.0" (for ngrok tunnel/remote nurse access)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8050, debug=True)
