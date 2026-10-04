@@ -1,6 +1,7 @@
 from owlready2 import *
 import owlready2
 import os
+import jdk4py
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -9,12 +10,16 @@ from alerting.alert_mailer import report_fallback
 
 load_dotenv()
 
-JAVA_PATH = os.getenv("JAVA_PATH")
-if not JAVA_PATH:
+# Set JAVA_PATH from jdk4py if not explicitly provided in environment
+if not os.getenv("JAVA_PATH"):
+    os.environ["JAVA_PATH"] = str(jdk4py.JAVA_BIN)
+
+java_path = os.getenv("JAVA_PATH")
+if not java_path:
     raise EnvironmentError("[Security] JAVA_PATH not found in .env")
 
  # Specifying path to Java executable (required for running Pellet reasoner)
-owlready2.JAVA_EXE = JAVA_PATH
+owlready2.JAVA_EXE = java_path
 # Set amount of memory (in MB) that Java can use
 owlready2.JAVA_MEMORY = 8000
 # Loading existing OWL ontology

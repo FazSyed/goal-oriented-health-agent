@@ -16,3 +16,5 @@ python-dotenv==1.2.2
 scikit-learn==1.6.1
 scipy==1.16.1
 spade==4.1.0
+
+jdk4py
