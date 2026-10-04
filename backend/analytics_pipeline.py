@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 from datetime import datetime
 from typing import Dict, Any
 
@@ -12,13 +13,30 @@ from ml_model.model_utils import predict_dehydration_risk
 from ontology.owl_reasoner import infer_risk_and_action
 from backend.database_repository import DatabaseRepository
 from backend.watch_ingestion import WatchSignalProcessor
-from kafka_db.kafka_utils import KafkaLogger
+
+# Check if Kafka should be enabled (defaults to False for Google Drive/Sheets workflow)
+USE_KAFKA = os.getenv("USE_KAFKA", "false").lower() == "true"
+
+if USE_KAFKA:
+    try:
+        from kafka_db.kafka_utils import KafkaLogger
+    except Exception as e:
+        logging.warning(f"Failed to import KafkaLogger: {e}")
+        USE_KAFKA = False
 
 class LocalAnalyticsService:
     def __init__(self):
         self.repo = DatabaseRepository()
         self.signal_processor = WatchSignalProcessor()
-        self.kafka_logger = KafkaLogger(topic='sensor_data') # Dispatches visit events
+        
+        # Safe Kafka Logger initialization
+        self.kafka_logger = None
+        if USE_KAFKA:
+            try:
+                self.kafka_logger = KafkaLogger(topic='sensor_data')
+            except Exception as e:
+                logging.warning(f"[KafkaLogger] Could not connect to Kafka broker: {e}. Operating without Kafka.")
+                self.kafka_logger = None
 
     def process_full_clinical_visit(
         self,
@@ -116,8 +134,12 @@ class LocalAnalyticsService:
         # 5. Persist Record
         success = self.repo.save_visit_record(visit_record)
 
-        # 6. Publish Event to Kafka for Multi-Agent System (MAS) consumption
-        self.kafka_logger.publish(visit_record)
+        # 6. Publish Event to Kafka ONLY if active
+        if self.kafka_logger:
+            try:
+                self.kafka_logger.publish(visit_record)
+            except Exception as e:
+                logging.warning(f"Failed to publish to Kafka: {e}")
 
         return {
             "status": "success" if success else "failed",
