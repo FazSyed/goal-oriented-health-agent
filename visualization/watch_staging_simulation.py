@@ -18,8 +18,8 @@ payload = {
 }
 
 # Write to both potential paths so the dashboard finds it regardless of launch folder
-for path in ["logs/watch_staging/P001.json", "visualization/logs/watch_staging/P001.json"]:
+for path in ["logs/watch_staging/P002.json", "visualization/logs/watch_staging/P002.json"]:
     with open(path, "w") as f:
         json.dump(payload, f, indent=2)
 
-print("✅ Generated watch staging file for P001 successfully!")
+print("✅ Generated watch staging file for P002 successfully!")
