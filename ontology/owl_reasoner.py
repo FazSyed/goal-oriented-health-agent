@@ -13,25 +13,32 @@ load_dotenv()
 import os
 import jdk4py
 
-# Dynamically set JAVA_PATH from jdk4py
+# --- Configure Java executable path dynamically via jdk4py ---
 if not os.getenv("JAVA_PATH"):
     try:
-        # Get path to executable string
         os.environ["JAVA_PATH"] = str(jdk4py.java_executable())
     except AttributeError:
-        # Fallback to JAVA_HOME binary location if java_executable() is unavailable
         os.environ["JAVA_PATH"] = os.path.join(str(jdk4py.JAVA_HOME), "bin", "java")
 
 java_path = os.getenv("JAVA_PATH")
+
 if not java_path:
-    raise EnvironmentError("[Security] JAVA_PATH not found in .env")
+    raise EnvironmentError("[Security] JAVA_PATH not found in .env or via jdk4py")
 
  # Specifying path to Java executable (required for running Pellet reasoner)
 owlready2.JAVA_EXE = java_path
 # Set amount of memory (in MB) that Java can use
 owlready2.JAVA_MEMORY = 8000
+
+# Construct absolute path to healthagent.owl dynamically
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ONTOLOGY_PATH = os.path.join(BASE_DIR, "healthagent.owl")
+
 # Loading existing OWL ontology
-onto = get_ontology("./ontology/healthagent.owl").load()
+# onto = get_ontology("./ontology/healthagent.owl").load()
+
+# Load ontology using absolute path
+onto = get_ontology(ONTOLOGY_PATH).load()
 
 _patient_individuals = {}
 
