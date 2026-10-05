@@ -13,6 +13,28 @@ load_dotenv()
 import os
 import jdk4py
 
+# Absolute directory of this file (ontology folder)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Point owlready2's global search path directly to the ontology directory
+if BASE_DIR not in owlready2.onto_path:
+    owlready2.onto_path.append(BASE_DIR)
+
+# Ensure exact file existence check before attempting load
+ONTOLOGY_FILE = "healthagent.owl"
+FULL_ONTOLOGY_PATH = os.path.join(BASE_DIR, ONTOLOGY_FILE)
+
+if not os.path.exists(FULL_ONTOLOGY_PATH):
+    # Perform case-insensitive search to catch capitalization mismatches (e.g. HealthAgent.owl)
+    actual_files = os.listdir(BASE_DIR)
+    matching = [f for f in actual_files if f.lower() == ONTOLOGY_FILE.lower()]
+    if matching:
+        FULL_ONTOLOGY_PATH = os.path.join(BASE_DIR, matching[0])
+    else:
+        raise FileNotFoundError(
+            f"[Ontology] File '{ONTOLOGY_FILE}' not found in {BASE_DIR}. Directory contents: {actual_files}"
+        )
+    
 # --- Configure Java executable path dynamically via jdk4py ---
 if not os.getenv("JAVA_PATH"):
     try:
@@ -30,15 +52,11 @@ owlready2.JAVA_EXE = java_path
 # Set amount of memory (in MB) that Java can use
 owlready2.JAVA_MEMORY = 8000
 
-# Construct absolute path to healthagent.owl dynamically
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ONTOLOGY_PATH = os.path.join(BASE_DIR, "healthagent.owl")
-
 # Loading existing OWL ontology
 # onto = get_ontology("./ontology/healthagent.owl").load()
 
 # Load ontology using absolute path
-onto = get_ontology(ONTOLOGY_PATH).load()
+onto = get_ontology(f"file://{FULL_ONTOLOGY_PATH}").load()
 
 _patient_individuals = {}
 
