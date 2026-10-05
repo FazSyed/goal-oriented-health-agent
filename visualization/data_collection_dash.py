@@ -14,6 +14,11 @@ import json
 import base64
 import io
 import datetime
+import traceback
+import warnings
+
+# Suppress known external library deprecation warnings (e.g., heartpy / pkg_resources)
+warnings.filterwarnings("ignore", category=UserWarning, module="heartpy")
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -44,6 +49,9 @@ TIER_ORDER = ["Euhydrated", "Mild", "Moderate", "Severe"]
 INPUT_STYLE = {"width": "100%", "backgroundColor": "#F5F5F5", "color": "#1E1E1E", "border": "1px solid #555"}
 CARD_STYLE = {"backgroundColor": "#2B2B2B", "borderRadius": "10px", "padding": "1.25rem", "marginBottom": "1.25rem"}
 
+SPREADSHEET_KEY = os.getenv("GOOGLE_SHEET_ID", "")
+SPREADSHEET_NAME = os.getenv("GOOGLE_SHEET_NAME", "Dehydration_Study_Visits")
+
 
 # --- Auth & Data Helpers ---
 
@@ -63,6 +71,13 @@ def get_google_credentials():
 def get_gspread_client():
     creds = get_google_credentials()
     return gspread.authorize(creds)
+
+
+def open_google_sheet(gc):
+    """Helper to open spreadsheet by key ID if available, otherwise by name."""
+    if SPREADSHEET_KEY:
+        return gc.open_by_key(SPREADSHEET_KEY).sheet1
+    return gc.open(SPREADSHEET_NAME).sheet1
 
 
 def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id: str) -> str:
@@ -94,7 +109,7 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
 def append_visit_to_google_sheet(record_data: dict):
     """Appends structured clinical visit record to Google Sheets."""
     gc = get_gspread_client()
-    sh = gc.open("Dehydration_Study_Visits").sheet1
+    sh = open_google_sheet(gc)
     
     row = [
         record_data.get("patient_id", ""),
@@ -119,17 +134,30 @@ def append_visit_to_google_sheet(record_data: dict):
 
 
 def load_visits_from_google_sheet() -> pd.DataFrame:
+    """Loads visits from Google Sheet into a pandas DataFrame safely."""
     try:
         gc = get_gspread_client()
-        sh = gc.open("Dehydration_Study_Visits").sheet1
+        sh = open_google_sheet(gc)
         records = sh.get_all_records()
+
+        # Handle requests.Response objects returned by custom client wrappers
+        if hasattr(records, "json"):
+            try:
+                records = records.json()
+            except Exception:
+                records = []
+        elif not isinstance(records, (list, dict)):
+            records = []
+
         return pd.DataFrame(records)
-    except Exception:
+    except Exception as e:
+        print(f"[Google Sheets Fetch Detail]: Raw error -> {repr(e)}")
         return pd.DataFrame()
 
 def load_recent_visits_dataframe() -> pd.DataFrame:
     """Helper alias used by update_progress callback."""
     return load_visits_from_google_sheet()
+
 
 def create_empty_dark_figure(title_text: str) -> go.Figure:
     fig = go.Figure()
@@ -179,7 +207,6 @@ def serve_layout():
                 ], width=6)
             ], style={"marginBottom": "1rem"}),
 
-            # Dynamic Row for Patient ID & Name Inputs
             dbc.Row([
                 dbc.Col([
                     html.Label("Patient ID", style={"color": "#7F8C8D"}),
@@ -269,7 +296,6 @@ def update_patient_dropdown(_trigger):
     options = [{"label": "➕ Add New Patient", "value": "NEW_PATIENT"}]
     
     if not df.empty and "patient_id" in df.columns:
-        # Group by patient_id to get the patient name
         patients = df.drop_duplicates(subset=["patient_id"])
         for _, row in patients.iterrows():
             pid = str(row.get("patient_id", ""))
@@ -294,7 +320,6 @@ def update_patient_dropdown(_trigger):
 def handle_patient_selection(selected_pid):
     """Auto-fills patient demographics when an existing patient is selected."""
     if not selected_pid or selected_pid == "NEW_PATIENT":
-        # Enable inputs for new patient
         return "", "", None, None, None, None, False, False
 
     df = load_visits_from_google_sheet()
@@ -310,8 +335,8 @@ def handle_patient_selection(selected_pid):
                 last_record.get("gender"),
                 last_record.get("weight"),
                 last_record.get("bmi"),
-                True,  # Disable ID editing for existing patients
-                True   # Disable Name editing for existing patients
+                True,
+                True
             )
     return selected_pid, "", None, None, None, None, True, True
 
@@ -351,7 +376,7 @@ def submit_visit(n_clicks, patient_id, patient_name, visit_date, age, gender_lab
     
     labs = dict(zip(LAB_FIELDS, lab_vals))
     if any(v is None for v in labs.values()) or any(v is None for v in [age, weight, bmi]):
-        return html.Div("⚠️ Please fill in all lab panel and demographic fields.", style={"color": "#E74C3C"}), no_update
+        return html.Div("⚠ Please fill in all lab panel and demographic fields.", style={"color": "#E74C3C"}), no_update
 
     gender_num = GENDER_MAP[gender_label]
     demographics = {"age": float(age), "gender": gender_num, "weight": float(weight), "bmi": float(bmi)}
@@ -362,16 +387,30 @@ def submit_visit(n_clicks, patient_id, patient_name, visit_date, age, gender_lab
         if watch_file_contents and watch_filename:
             drive_file_id = upload_signal_to_google_drive(watch_file_contents, watch_filename, str(patient_id))
 
-        response = backend_service.process_full_clinical_visit(
+        raw_response = backend_service.process_full_clinical_visit(
             patient_id=str(patient_id),
             labs=formatted_labs,
             demographics=demographics,
             raw_watch_data={"drive_file_id": drive_file_id}
         )
 
-        if response.get("status") == "success":
-            risk = response["record"].get("model1_risk", "Unknown")
-            action = response.get("inferred_action", "None")
+        if hasattr(raw_response, "json"):
+            try:
+                res_dict = raw_response.json()
+            except Exception:
+                res_dict = {}
+            is_success = getattr(raw_response, "ok", False) or res_dict.get("status") == "success"
+        elif isinstance(raw_response, dict):
+            res_dict = raw_response
+            is_success = res_dict.get("status") == "success" or "status" not in res_dict
+        else:
+            res_dict = {}
+            is_success = False
+
+        if is_success:
+            record = res_dict.get("record") if isinstance(res_dict.get("record"), dict) else {}
+            risk = record.get("model1_risk") or res_dict.get("model1_risk") or res_dict.get("risk") or "Unknown"
+            action = res_dict.get("inferred_action") or record.get("inferred_action") or "None"
 
             record_data = {
                 "patient_id": str(patient_id),
@@ -392,15 +431,25 @@ def submit_visit(n_clicks, patient_id, patient_name, visit_date, age, gender_lab
                 "drive_file_id": drive_file_id if drive_file_id else "None",
                 "timestamp": datetime.datetime.now().isoformat()
             }
+            
             append_visit_to_google_sheet(record_data)
 
             msg = html.Div(f"✅ Visit Logged for {patient_name} ({patient_id})! Risk: {risk} | Drive File ID: {drive_file_id or 'None'}", style={"color": "#2ECC71", "fontWeight": "700"})
             return msg, datetime.datetime.now().isoformat()
         else:
-            return html.Div("❌ Failed to process visit record in backend.", style={"color": "#E74C3C"}), no_update
+            err_detail = res_dict.get("error") or res_dict.get("message") or "Failed to process visit record in backend."
+            return html.Div(f"❌ Backend Error: {err_detail}", style={"color": "#E74C3C"}), no_update
 
+    except gspread.exceptions.SpreadsheetNotFound:
+        return html.Div(
+            f"❌ Google Sheet Error: Could not find spreadsheet '{SPREADSHEET_NAME}'. "
+            "Ensure the Google Sheet is shared with your Service Account email as Editor, "
+            "or set GOOGLE_SHEET_ID in your .env file.",
+            style={"color": "#E74C3C"}
+        ), no_update
     except Exception as e:
-        return html.Div(f"❌ Backend Execution Error: {str(e)}", style={"color": "#E74C3C"}), no_update
+        print(f"[Backend Exception Traceback]:\n{traceback.format_exc()}")
+        return html.Div(f"❌ Execution Error: {type(e).__name__} - {str(e)}", style={"color": "#E74C3C"}), no_update
 
 
 @app.callback(

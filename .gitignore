@@ -4,7 +4,7 @@ venv/
 # Environment and secret keys
 .env
 secret.key
-dehydration-mas-0719af244ffe.json
+google_credentials.json
 
 # Logs
 logs/
