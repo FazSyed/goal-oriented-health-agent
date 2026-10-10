@@ -5,7 +5,8 @@ Dashboard for clinical partners to:
 1. Register new patients or select existing patients.
 2. Auto-populate existing patient demographics (Age, Gender, Weight, BMI).
 3. Log lab panel values and upload Galaxy Watch raw CSV directly to Google Drive.
-4. Predict dehydration risk tier and append structured record to Google Sheets.
+4. Run real-time HeartPy & NeuroKit2 feature extraction for Model 2 training datasets.
+5. Predict dehydration risk tier and append structured record with extracted biometrics to Google Sheets.
 """
 
 import os
@@ -22,14 +23,20 @@ from functools import lru_cache
 # Suppress external library deprecation warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="heartpy")
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Ensure project imports resolve
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 import numpy as np
 import pandas as pd
 import gspread
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseUpload
-from google.oauth2.service_account import Credentials
+from google.oauth2.credentials import Credentials as UserCredentials
+from google.oauth2.service_account import Credentials as ServiceCredentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 
 import dash
 from dash import dcc, html, Input, Output, State, no_update, dash_table
@@ -41,7 +48,7 @@ from dotenv import load_dotenv
 
 from backend import backend_service
 
-ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
+ENV_PATH = ROOT_DIR / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
 LAB_FIELDS = [
@@ -72,23 +79,64 @@ CARD_STYLE = {"backgroundColor": "#2B2B2B", "borderRadius": "8px", "padding": "1
 SPREADSHEET_KEY = os.getenv("GOOGLE_SHEET_ID", "").strip()
 SPREADSHEET_NAME = os.getenv("GOOGLE_SHEET_NAME", "Dehydration_Study_Visits").strip()
 
+SCOPES = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+]
+
+VISIT_SHEET_HEADER = [
+    "patient_id", "patient_name", "visit_date", "age", "gender", "weight", "bmi",
+    "sodium", "potassium", "chloride", "bun", "creatinine", "glucose",
+    "mean_hr", "sdnn", "rmssd", "mean_eda", "eda_num_peaks", "acc_std",
+    "model1_risk", "inferred_action", "drive_file_id", "timestamp"
+]
+
 
 # --- Google Auth & Cached Data Helpers ---
 
 def get_google_credentials():
-    scopes = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive",
-    ]
+    """
+    Supports both OAuth User Credentials (token.json/credentials.json) for personal Drive
+    and Service Account Credentials (GOOGLE_CREDENTIALS_JSON or google_credentials.json).
+    """
+    token_path = ROOT_DIR / "token.json"
+    creds_path = ROOT_DIR / "credentials.json"
+    
+    # 1. Try OAuth User Credentials (bypasses Service Account storage quota limits)
+    if token_path.exists() or creds_path.exists():
+        creds = None
+        if token_path.exists():
+            try:
+                creds = UserCredentials.from_authorized_user_file(str(token_path), SCOPES)
+            except Exception as e:
+                print(f"[Auth] Token load warning: {e}")
+                
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                try:
+                    creds.refresh(Request())
+                except Exception as e:
+                    print(f"[Auth] Refresh token failed: {e}")
+                    creds = None
+            if not creds and creds_path.exists():
+                flow = InstalledAppFlow.from_client_secrets_file(str(creds_path), SCOPES)
+                creds = flow.run_local_server(port=0)
+                with open(token_path, "w") as token_file:
+                    token_file.write(creds.to_json())
+        if creds:
+            return creds
+
+    # 2. Fallback to Service Account Credentials
     if "GOOGLE_CREDENTIALS_JSON" in os.environ and os.environ["GOOGLE_CREDENTIALS_JSON"].strip():
         creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS_JSON"])
-        return Credentials.from_service_account_info(creds_dict, scopes=scopes)
+        return ServiceCredentials.from_service_account_info(creds_dict, scopes=SCOPES)
     
-    local_creds_path = Path(__file__).resolve().parent.parent / "google_credentials.json"
+    local_creds_path = ROOT_DIR / "google_credentials.json"
     if not local_creds_path.exists():
         local_creds_path = Path("google_credentials.json")
         
-    return Credentials.from_service_account_file(str(local_creds_path), scopes=scopes)
+    return ServiceCredentials.from_service_account_file(str(local_creds_path), scopes=SCOPES)
 
 
 def get_gspread_client():
@@ -98,8 +146,16 @@ def get_gspread_client():
 
 def open_google_sheet(gc):
     if SPREADSHEET_KEY:
-        return gc.open_by_key(SPREADSHEET_KEY).sheet1
-    return gc.open(SPREADSHEET_NAME).sheet1
+        sh = gc.open_by_key(SPREADSHEET_KEY)
+    else:
+        sh = gc.open(SPREADSHEET_NAME)
+    ws = sh.sheet1
+    
+    # Auto-initialize headers if worksheet is completely empty
+    existing_vals = ws.get_all_values()
+    if not existing_vals:
+        ws.append_row(VISIT_SHEET_HEADER)
+    return ws
 
 
 def open_patients_worksheet(gc):
@@ -128,7 +184,6 @@ def _fetch_registered_patients_cached(cache_key: str) -> str:
 
 def load_registered_patients_from_sheet() -> pd.DataFrame:
     try:
-        # Use a minute-level cache key to auto-refresh every minute at most
         cache_key = f"patients_{datetime.datetime.now().strftime('%Y%m%d_%H%M')}"
         raw_json = _fetch_registered_patients_cached(cache_key)
         records = json.loads(raw_json)
@@ -174,6 +229,7 @@ def register_new_patient_to_sheet(patient_id: str, patient_name: str):
 
 
 def append_visit_to_google_sheet(record_data: dict):
+    """Appends a single structured visit row containing demographics, labs, extracted biometrics, and Drive file ID."""
     gc = get_gspread_client()
     sh = open_google_sheet(gc)
     
@@ -191,6 +247,14 @@ def append_visit_to_google_sheet(record_data: dict):
         record_data.get("bun", ""),
         record_data.get("creatinine", ""),
         record_data.get("glucose", ""),
+        # Extracted Biometric Features for Model 2
+        record_data.get("mean_hr", ""),
+        record_data.get("sdnn", ""),
+        record_data.get("rmssd", ""),
+        record_data.get("mean_eda", ""),
+        record_data.get("eda_num_peaks", ""),
+        record_data.get("acc_std", ""),
+        # Outputs & Metadata
         record_data.get("model1_risk", ""),
         record_data.get("inferred_action", ""),
         record_data.get("drive_file_id", "None"),
@@ -201,6 +265,7 @@ def append_visit_to_google_sheet(record_data: dict):
 
 
 def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id: str) -> str:
+    """Uploads raw watch CSV file to Google Drive and returns file ID."""
     try:
         creds = get_google_credentials()
         drive_service = build("drive", "v3", credentials=creds)
@@ -208,21 +273,65 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
         content_type, content_string = file_contents.split(",")
         decoded = base64.b64decode(content_string)
         
-        folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID", "")
+        folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID", "").strip()
         file_metadata = {
             "name": f"{patient_id}_{datetime.date.today().isoformat()}_{filename}",
             "parents": [folder_id] if folder_id else []
         }
         
-        media = MediaIoBaseUpload(io.BytesIO(decoded), mimetype="text/csv", resumable=True)
+        media = MediaIoBaseUpload(io.BytesIO(decoded), mimetype="text/csv", resumable=False)
         uploaded_file = drive_service.files().create(
-            body=file_metadata, media_body=media, fields="id, name"
+            body=file_metadata, 
+            media_body=media, 
+            fields="id, name",
+            supportsAllDrives=True
         ).execute()
         
-        return uploaded_file.get("id", "")
+        file_id = uploaded_file.get("id", "")
+        print(f"✅ Drive Upload Succeeded! File ID: {file_id}")
+        return file_id
     except Exception as e:
         print(f"Google Drive Upload Error: {e}")
         return ""
+
+
+def parse_watch_csv_contents(file_contents: str) -> dict:
+    """
+    Decodes base64 CSV upload from Dash, parses numeric columns into numpy arrays,
+    and returns a structured dict compatible with backend_service / WatchSignalProcessor.
+    """
+    try:
+        content_type, content_string = file_contents.split(",")
+        decoded = base64.b64decode(content_string)
+        df_csv = pd.read_csv(io.BytesIO(decoded))
+        
+        # Standardize column header names to lowercase
+        df_csv.columns = [c.strip().lower() for c in df_csv.columns]
+        
+        raw_watch_payload = {}
+        
+        # PPG column mapping
+        ppg_col = next((c for c in ["ppg", "raw_ppg", "pleth"] if c in df_csv.columns), None)
+        if ppg_col:
+            raw_watch_payload["raw_ppg"] = df_csv[ppg_col].dropna().values
+            
+        # EDA / GSR column mapping
+        eda_col = next((c for c in ["eda", "raw_eda", "gsr"] if c in df_csv.columns), None)
+        if eda_col:
+            raw_watch_payload["raw_eda"] = df_csv[eda_col].dropna().values
+            
+        # Accelerometer column mapping
+        acc_cols = [c for c in ["acc_x", "acc_y", "acc_z"] if c in df_csv.columns]
+        if len(acc_cols) == 3:
+            raw_watch_payload["raw_accel"] = df_csv[acc_cols].values
+        elif "acc" in df_csv.columns or "accel" in df_csv.columns:
+            acc_col = "acc" if "acc" in df_csv.columns else "accel"
+            raw_watch_payload["raw_accel"] = df_csv[acc_col].dropna().values
+
+        return raw_watch_payload
+    except Exception as e:
+        print(f"[CSV Parsing Error]: {e}")
+        return {}
 
 
 def generate_next_patient_id(existing_df: pd.DataFrame) -> str:
@@ -376,7 +485,7 @@ def serve_layout():
             dbc.Col(dcc.Graph(id="collection-tier-chart", figure=create_empty_dark_figure("Risk tier distribution")), width=6),
             dbc.Col(dcc.Graph(id="collection-visits-per-patient-chart", figure=create_empty_dark_figure("Visits per patient")), width=6),
         ]),
-        html.H5("Recent Submissions", style={"color": "#E0E0E0", "marginTop": "1rem", "marginBottom": "0.75rem"}),
+        html.H5("Recent Submissions & Biometric Feature Logging", style={"color": "#E0E0E0", "marginTop": "1rem", "marginBottom": "0.75rem"}),
         html.Div(id="collection-recent-table"),
 
         # Relaxed interval to 30,000ms (30 seconds) to conserve Google Sheets API rate limits
@@ -538,14 +647,21 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
 
     try:
         drive_file_id = ""
+        raw_watch_payload = {}
+        
+        # 1. Upload raw CSV to Google Drive
         if watch_file_contents and watch_filename:
             drive_file_id = upload_signal_to_google_drive(watch_file_contents, watch_filename, str(patient_id))
+            raw_watch_payload = parse_watch_csv_contents(watch_file_contents)
 
+        raw_watch_payload["drive_file_id"] = drive_file_id
+
+        # 2. Invoke backend processing for Model 1 inference + HeartPy / NeuroKit2 feature extraction
         raw_response = backend_service.process_full_clinical_visit(
             patient_id=str(patient_id),
             labs=formatted_labs,
             demographics=demographics,
-            raw_watch_data={"drive_file_id": drive_file_id}
+            raw_watch_data=raw_watch_payload
         )
 
         if hasattr(raw_response, "json"):
@@ -566,6 +682,7 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
             risk = record.get("model1_risk") or res_dict.get("model1_risk") or res_dict.get("risk") or "Unknown"
             action = res_dict.get("inferred_action") or record.get("inferred_action") or "None"
 
+            # 3. Form structured row containing demographics, labs, extracted biometrics, and Drive pointer
             record_data = {
                 "patient_id": str(patient_id),
                 "patient_name": str(patient_name),
@@ -580,15 +697,27 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
                 "bun": formatted_labs.get("bun", ""),
                 "creatinine": formatted_labs.get("creatinine", ""),
                 "glucose": formatted_labs.get("glucose", ""),
+                # Extracted biometric features returned by backend_service
+                "mean_hr": record.get("mean_hr", ""),
+                "sdnn": record.get("sdnn", ""),
+                "rmssd": record.get("rmssd", ""),
+                "mean_eda": record.get("mean_eda", ""),
+                "eda_num_peaks": record.get("eda_num_peaks", ""),
+                "acc_std": record.get("acc_std", ""),
+                # Outputs & pointers
                 "model1_risk": risk,
                 "inferred_action": action,
                 "drive_file_id": drive_file_id if drive_file_id else "None",
                 "timestamp": datetime.datetime.now().isoformat()
             }
             
+            # 4. Append row to Google Sheets
             append_visit_to_google_sheet(record_data)
 
-            msg = html.Div(f"✅ Visit Logged for {patient_name} ({patient_id})! Live Risk Tier: {risk}", style={"color": "#2ECC71", "fontWeight": "700"})
+            msg = html.Div(
+                f"✅ Visit Logged for {patient_name} ({patient_id})! Live Risk Tier: {risk}. Biometric Features Extracted & Uploaded.",
+                style={"color": "#2ECC71", "fontWeight": "700"}
+            )
             return msg, datetime.datetime.now().isoformat()
         else:
             err_detail = res_dict.get("error") or res_dict.get("message") or "Failed to process visit record in backend."
@@ -636,11 +765,17 @@ def update_progress(_n_intervals, _trigger):
     vpp_fig.update_layout(template="plotly_dark", paper_bgcolor="#2B2B2B", plot_bgcolor="#2B2B2B")
 
     recent = df.tail(10).iloc[::-1]
+    
+    # Render table showing primary columns including biometric features
+    display_cols = [c for c in ["patient_id", "patient_name", "visit_date", "model1_risk", "mean_hr", "sdnn", "mean_eda", "drive_file_id"] if c in df.columns]
+    if not display_cols:
+        display_cols = list(df.columns[:8])
+
     table = dash_table.DataTable(
         data=recent.to_dict("records"),
-        columns=[{"name": str(c), "id": str(c)} for c in df.columns[:7]],
+        columns=[{"name": str(c), "id": str(c)} for c in display_cols],
         style_header={"backgroundColor": "#2B2B2B", "color": "#E0E0E0", "fontWeight": "700"},
-        style_cell={"backgroundColor": "#1E1E1E", "color": "#E0E0E0", "border": "1px solid #3A3A3A"},
+        style_cell={"backgroundColor": "#1E1E1E", "color": "#E0E0E0", "border": "1px solid #3A3A3A", "fontSize": "0.85rem"},
         style_table={"overflowX": "auto"},
     )
 
