@@ -5,6 +5,8 @@ venv/
 .env
 secret.key
 google_credentials.json
+credentials.json
+token.json
 
 # Logs
 logs/
