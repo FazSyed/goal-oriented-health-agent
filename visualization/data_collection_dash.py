@@ -249,29 +249,40 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
         creds = get_google_credentials()
         drive_service = build("drive", "v3", credentials=creds)
         
-        content_type, content_string = file_contents.split(",")
-        decoded = base64.b64decode(content_string)
-        
         folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID", "").strip()
+        print(f"DEBUG: Active GOOGLE_DRIVE_FOLDER_ID: '{folder_id}'")
+        
         if not folder_id:
             print("❌ Critical Error: GOOGLE_DRIVE_FOLDER_ID is missing from environment variables!")
             return ""
 
+        content_type, content_string = file_contents.split(",")
+        decoded = base64.b64decode(content_string)
+        
+        # Explicit metadata binding
         file_metadata = {
             "name": f"{patient_id}_{datetime.date.today().isoformat()}_{filename}",
             "parents": [folder_id]
         }
         
-        media = MediaIoBaseUpload(io.BytesIO(decoded), mimetype="text/csv", resumable=False)
+        media = MediaIoBaseUpload(
+            io.BytesIO(decoded), 
+            mimetype="text/csv", 
+            resumable=False
+        )
+
+        # supportsAllDrives=True & includeItemsFromAllDrives=True ensure 
+        # service account uploads redirect storage quota to the parent folder owner
         uploaded_file = drive_service.files().create(
             body=file_metadata, 
             media_body=media, 
-            fields="id, name",
-            supportsAllDrives=True
+            fields="id, name, parents",
+            supportsAllDrives=True,
+            supportsTeamDrives=True
         ).execute()
         
         file_id = uploaded_file.get("id", "")
-        print(f"✅ Drive Upload Succeeded! File ID: {file_id}")
+        print(f"✅ Drive Upload Succeeded! File ID: {file_id} in parent: {uploaded_file.get('parents')}")
         return file_id
     except Exception as e:
         print(f"Google Drive Upload Error: {e}")
