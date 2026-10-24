@@ -259,7 +259,6 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
         content_type, content_string = file_contents.split(",")
         decoded = base64.b64decode(content_string)
         
-        # Explicit metadata binding
         file_metadata = {
             "name": f"{patient_id}_{datetime.date.today().isoformat()}_{filename}",
             "parents": [folder_id]
@@ -271,8 +270,7 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
             resumable=False
         )
 
-        # supportsAllDrives=True & includeItemsFromAllDrives=True ensure 
-        # service account uploads redirect storage quota to the parent folder owner
+        # 1. Create file with explicit drive context parameters
         uploaded_file = drive_service.files().create(
             body=file_metadata, 
             media_body=media, 
@@ -284,6 +282,7 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
         file_id = uploaded_file.get("id", "")
         print(f"✅ Drive Upload Succeeded! File ID: {file_id} in parent: {uploaded_file.get('parents')}")
         return file_id
+
     except Exception as e:
         print(f"Google Drive Upload Error: {e}")
         return ""
