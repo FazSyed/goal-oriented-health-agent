@@ -869,7 +869,15 @@ def check_live_watch_telemetry(selected_pid, _trigger):
     if latest_file:
         file_id = latest_file.get("drive_file_id", "")
         file_name = latest_file.get("filename", "")
-        created_time = latest_file.get("created_time", "")[:19].replace("T", " ")
+        raw_created = latest_file.get("created_time", "")
+        try:
+            # Parse UTC timestamp from Google Drive API
+            utc_dt = datetime.datetime.fromisoformat(raw_created.replace("Z", "+00:00"))
+            # Convert to local timezone
+            local_dt = utc_dt.astimezone()
+            created_time = local_dt.strftime("%Y-%m-%d %H:%M:%S")
+        except Exception:
+            created_time = raw_created[:19].replace("T", " ")
         
         status_card = dbc.Alert([
             html.Div([
