@@ -397,11 +397,47 @@ def create_empty_dark_figure(title_text: str) -> go.Figure:
     return fig
 
 
-# --- App Layout ---
+# --- App Layout & Server Route ---
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
 server = app.server
 app.title = "Clinical Data Collection - Galaxy Watch8 Study"
+
+# Ingests raw CSV multipart POST requests directly from Galaxy Watch
+@server.route('/api/upload_watch_csv', methods=['POST'])
+def upload_watch_csv_route():
+    from flask import request, jsonify
+    try:
+        patient_id = request.form.get('patient_id', 'UNKNOWN').strip()
+        if 'file' not in request.files:
+            return jsonify({'status': 'error', 'message': 'No file provided'}), 400
+            
+        file = request.files['file']
+        filename = file.filename or f"{patient_id}_watch_raw.csv"
+        content_bytes = file.read()
+        
+        if not content_bytes:
+            return jsonify({'status': 'error', 'message': 'Uploaded file is empty'}), 400
+
+        # Encode bytes to base64 Data URL for Google Drive helper
+        base64_encoded = base64.b64encode(content_bytes).decode('utf-8')
+        data_url = f"data:text/csv;base64,{base64_encoded}"
+
+        # Upload raw stream directly to Google Drive study folder
+        drive_file_id = upload_signal_to_google_drive(data_url, filename, patient_id)
+
+        print(f"✅ Auto-Uploaded Watch CSV for {patient_id} to Google Drive! File ID: {drive_file_id}")
+        return jsonify({
+            'status': 'success',
+            'patient_id': patient_id,
+            'drive_file_id': drive_file_id,
+            'filename': filename
+        }), 200
+
+    except Exception as e:
+        print(f"❌ Upload Endpoint Error: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
 
 def serve_layout():
     return html.Div(style={"backgroundColor": "#1E1E1E", "minHeight": "100vh", "padding": "2rem"}, children=[
