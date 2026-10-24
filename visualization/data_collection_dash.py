@@ -266,26 +266,44 @@ def register_new_patient_to_sheet(patient_id: str, patient_name: str):
 
 def save_or_update_visit_in_google_sheet(record_data: dict):
     """
-    Intelligent Upsert: Searches Google Sheets for an existing row for the patient
-    that contains placeholder lab values (from an auto watch upload). If found, it 
-    updates the lab panel cells in-place. If no placeholder row exists, it appends a new row.
+    Intelligent Upsert (Multi-Visit Safe):
+    Searches Google Sheets starting from the MOST RECENT row. Matches primarily by
+    drive_file_id, or secondarily by patient_id with placeholder 0 labs.
+    Overwrites the targeted row in-place or appends if no placeholder match exists.
     """
     gc = get_gspread_client()
     sh = open_google_sheet(gc)
     
     patient_id = str(record_data.get("patient_id", "")).strip()
+    target_drive_id = str(record_data.get("drive_file_id", "")).strip()
+    
     records = sh.get_all_records()
-    
     existing_row_index = None
-    
-    # Check if there's a recent row for this patient with placeholder 0 labs
-    for idx, row in enumerate(records):
-        row_pid = str(row.get("patient_id", "")).strip()
-        sodium_val = row.get("sodium", "")
-        if row_pid == patient_id and (sodium_val == 0 or sodium_val == "0" or sodium_val == "" or sodium_val == 0.0):
-            existing_row_index = idx + 2  # 1-indexed header offset
-            break
 
+    # --- Step 1: Priority Match by drive_file_id (Most Accurate) ---
+    if target_drive_id and target_drive_id != "None":
+        for idx in range(len(records) - 1, -1, -1):  # Scan backwards (newest first)
+            row = records[idx]
+            row_drive_id = str(row.get("drive_file_id", "")).strip()
+            if row_drive_id == target_drive_id:
+                existing_row_index = idx + 2  # 1-indexed header offset
+                print(f"🎯 Matched exact Drive File ID '{target_drive_id}' at Row {existing_row_index}")
+                break
+
+    # --- Step 2: Fallback Match to Latest Row for Patient with 0 Labs ---
+    if not existing_row_index:
+        for idx in range(len(records) - 1, -1, -1):  # Scan backwards (newest first)
+            row = records[idx]
+            row_pid = str(row.get("patient_id", "")).strip()
+            sodium_val = row.get("sodium", "")
+            
+            # Match latest row for this patient where labs are unpopulated
+            if row_pid == patient_id and (sodium_val == 0 or sodium_val == "0" or sodium_val == "" or sodium_val == 0.0):
+                existing_row_index = idx + 2
+                print(f"🔍 Matched latest unpopulated lab row for Patient {patient_id} at Row {existing_row_index}")
+                break
+
+    # Construct complete 23-column row vector
     row_vector = [
         record_data.get("patient_id", ""),
         record_data.get("patient_name", ""),
@@ -313,10 +331,12 @@ def save_or_update_visit_in_google_sheet(record_data: dict):
     ]
 
     if existing_row_index:
+        # Overwrite the specific visit row in-place
         range_label = f"A{existing_row_index}:W{existing_row_index}"
         sh.update(range_name=range_label, values=[row_vector])
-        print(f"🔄 Updated Google Sheet Row {existing_row_index} for Patient {patient_id} with lab values!")
+        print(f"🔄 Updated Google Sheet Row {existing_row_index} for Patient {patient_id}!")
     else:
+        # Append as a new visit row if no watch pre-upload row was found
         sh.append_row(row_vector)
         print(f"✅ Appended new visit row for Patient {patient_id} to Google Sheets!")
 
