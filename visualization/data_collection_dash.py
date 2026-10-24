@@ -6,7 +6,7 @@ Clinical telemetry ingestion & decision support dashboard:
 2. Auto-populate existing patient demographics and lab values (filtering out auto-watch 0 placeholders).
 3. Live linking of incoming Galaxy Watch8 raw CSVs uploaded directly from Wear OS app.
 4. Real-time HeartPy, NeuroKit2, & IMU feature extraction for Model 2 training datasets.
-5. Risk tier inference and structured upsert to Google Sheets (multi-visit safe, overwriting auto-upload 0 lab placeholders).
+5. Risk tier inference and structured upsert to Google Sheets (multi-visit safe, local timezone aware).
 """
 
 import os
@@ -51,6 +51,9 @@ from backend import backend_service
 
 ENV_PATH = ROOT_DIR / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
+
+# Explicit Local Timezone (+04:00)
+LOCAL_TZ = datetime.timezone(datetime.timedelta(hours=4))
 
 LAB_FIELDS = [
     ("sodium", "Sodium"),
@@ -260,7 +263,7 @@ def clear_visit_cache():
 def register_new_patient_to_sheet(patient_id: str, patient_name: str):
     gc = get_gspread_client()
     ws = open_patients_worksheet(gc)
-    ws.append_row([patient_id, patient_name, datetime.date.today().isoformat()])
+    ws.append_row([patient_id, patient_name, datetime.datetime.now(LOCAL_TZ).strftime("%Y-%m-%d")])
     clear_patient_cache()
 
 
@@ -359,7 +362,7 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
         decoded = base64.b64decode(content_string)
         
         file_metadata = {
-            "name": f"{patient_id}_{datetime.date.today().isoformat()}_{filename}",
+            "name": f"{patient_id}_{datetime.datetime.now(LOCAL_TZ).strftime('%Y-%m-%d')}_{filename}",
             "parents": [folder_id]
         }
         
@@ -552,10 +555,11 @@ def upload_watch_csv_route():
         drive_file_id = upload_signal_to_google_drive(data_url, filename, patient_id)
 
         # 3. Log initial row into Google Sheets (Labs default to 0 until updated on Dashboard)
+        now_local = datetime.datetime.now(LOCAL_TZ)
         record_data = {
             "patient_id": patient_id,
             "patient_name": f"Patient {patient_id}",
-            "visit_date": datetime.date.today().isoformat(),
+            "visit_date": now_local.strftime("%Y-%m-%d"),
             "age": 0, "gender": "", "weight": 0.0, "bmi": 0.0,
             "sodium": 0.0, "potassium": 0.0, "chloride": 0.0, "bun": 0.0, "creatinine": 0.0, "glucose": 0.0,
             "mean_hr": biometrics.get("mean_hr", 0.0),
@@ -567,7 +571,7 @@ def upload_watch_csv_route():
             "model1_risk": "Low Risk",
             "inferred_action": "Continue Monitoring",
             "drive_file_id": drive_file_id if drive_file_id else "None",
-            "timestamp": datetime.datetime.now().isoformat()
+            "timestamp": now_local.strftime("%Y-%m-%d %H:%M:%S")
         }
         
         save_or_update_visit_in_google_sheet(record_data)
@@ -613,7 +617,7 @@ def serve_layout():
                 dbc.Col([
                     html.Div([
                         html.Label("Visit Date", style=LABEL_STYLE),
-                        dcc.Input(id="visit-date", type="text", value=datetime.date.today().isoformat(), style=INPUT_STYLE)
+                        dcc.Input(id="visit-date", type="text", value=datetime.datetime.now(LOCAL_TZ).strftime("%Y-%m-%d"), style=INPUT_STYLE)
                     ], style={"marginBottom": "1.25rem"}),
                     html.Div([
                         html.Button(
@@ -729,7 +733,7 @@ def serve_layout():
         html.Div(id="collection-recent-table"),
 
         dcc.Interval(id="collection-refresh-interval", interval=30000, n_intervals=0),
-        dcc.Store(id="collection-refresh-trigger", data=datetime.datetime.now().isoformat()),
+        dcc.Store(id="collection-refresh-trigger", data=datetime.datetime.now(LOCAL_TZ).isoformat()),
     ])
 
 app.layout = serve_layout
@@ -797,7 +801,7 @@ def register_patient_only(n_clicks, patient_name):
 
     msg = html.Div(f"✅ Registered {patient_name.strip()} as {new_id}.", style={"color": "#2ECC71", "fontSize": "0.85rem", "fontWeight": "600"})
     
-    return msg, updated_options, new_id, datetime.datetime.now().isoformat()
+    return msg, updated_options, new_id, datetime.datetime.now(LOCAL_TZ).isoformat()
 
 
 @app.callback(
@@ -870,13 +874,14 @@ def check_live_watch_telemetry(selected_pid, _trigger):
         file_id = latest_file.get("drive_file_id", "")
         file_name = latest_file.get("filename", "")
         raw_created = latest_file.get("created_time", "")
+        
         try:
-            # Parse UTC timestamp from Google Drive API
+            # Parse Google Drive UTC ISO timestamp and convert explicitly to Local (+04:00)
             utc_dt = datetime.datetime.fromisoformat(raw_created.replace("Z", "+00:00"))
-            # Convert to local timezone
-            local_dt = utc_dt.astimezone()
+            local_dt = utc_dt.astimezone(LOCAL_TZ)
             created_time = local_dt.strftime("%Y-%m-%d %H:%M:%S")
-        except Exception:
+        except Exception as e:
+            print(f"Time conversion error: {e}")
             created_time = raw_created[:19].replace("T", " ")
         
         status_card = dbc.Alert([
@@ -990,6 +995,7 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
 
             acc_std_val = record.get("acc_std") or extracted_biometrics.get("acc_std", 0.0)
 
+            now_local = datetime.datetime.now(LOCAL_TZ)
             record_data = {
                 "patient_id": str(patient_id),
                 "patient_name": str(patient_name),
@@ -1013,7 +1019,7 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
                 "model1_risk": risk,
                 "inferred_action": action,
                 "drive_file_id": drive_file_id if drive_file_id else "None",
-                "timestamp": datetime.datetime.now().isoformat()
+                "timestamp": now_local.strftime("%Y-%m-%d %H:%M:%S")
             }
             
             # Multi-visit safe upsert into Google Sheets (overwrites recent 0 placeholder row)
@@ -1023,7 +1029,7 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
                 f"✅ Visit Synced for {patient_name} ({patient_id})! Clinical Labs Updated & Risk Tier: {risk}.",
                 style={"color": "#2ECC71", "fontWeight": "700"}
             )
-            return msg, datetime.datetime.now().isoformat()
+            return msg, now_local.isoformat()
         else:
             err_detail = res_dict.get("error") or res_dict.get("message") or "Failed to process visit record in backend."
             return html.Div(f"❌ Backend Error: {err_detail}", style={"color": "#E74C3C"}), no_update
