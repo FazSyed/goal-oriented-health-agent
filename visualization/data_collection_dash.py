@@ -3,10 +3,10 @@ Data Collection Dashboard (Galaxy Watch8 Telemetry Ingestion)
 =============================================================
 Clinical telemetry ingestion & decision support dashboard:
 1. Register new patients or select existing patients.
-2. Auto-populate existing patient demographics and lab values.
+2. Auto-populate existing patient demographics and lab values (filtering out auto-watch 0 placeholders).
 3. Live linking of incoming Galaxy Watch8 raw CSVs uploaded directly from Wear OS app.
 4. Real-time HeartPy, NeuroKit2, & IMU feature extraction for Model 2 training datasets.
-5. Risk tier inference and structured upsert to Google Sheets (overwriting auto-upload 0 lab placeholders).
+5. Risk tier inference and structured upsert to Google Sheets (multi-visit safe, overwriting auto-upload 0 lab placeholders).
 """
 
 import os
@@ -824,14 +824,30 @@ def handle_patient_selection(selected_pid):
     if not df_visits.empty and "patient_id" in df_visits.columns:
         df_visits["patient_id"] = df_visits["patient_id"].astype(str)
         p_data = df_visits[df_visits["patient_id"] == str(selected_pid)]
+        
         if not p_data.empty:
-            last_record = p_data.iloc[-1]
+            # Filter out auto-watch rows where demographics were defaulted to 0 or blank
+            valid_p_data = p_data[
+                (p_data["age"].notna()) & (p_data["age"] != 0) & (p_data["age"] != "0") & (p_data["age"] != "")
+            ]
+            
+            # Use most recent completed clinical record if available; otherwise fall back to latest row
+            target_record = valid_p_data.iloc[-1] if not valid_p_data.empty else p_data.iloc[-1]
+            
+            # Map gender number back to selection label string if stored numerically
+            raw_gender = target_record.get("gender")
+            gender_label = raw_gender
+            if str(raw_gender) == "1" or raw_gender == 1:
+                gender_label = "Male"
+            elif str(raw_gender) == "2" or raw_gender == 2:
+                gender_label = "Female"
+
             return (
-                patient_name or str(last_record.get("patient_name", "")),
-                last_record.get("age"),
-                last_record.get("gender"),
-                last_record.get("weight"),
-                last_record.get("bmi"),
+                patient_name or str(target_record.get("patient_name", "")),
+                target_record.get("age") if target_record.get("age") != 0 else None,
+                gender_label if gender_label in ["Male", "Female"] else None,
+                target_record.get("weight") if target_record.get("weight") != 0 else None,
+                target_record.get("bmi") if target_record.get("bmi") != 0 else None,
                 True
             )
 
@@ -992,7 +1008,7 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
                 "timestamp": datetime.datetime.now().isoformat()
             }
             
-            # Upsert into Google Sheet (overwrites existing placeholder 0 row)
+            # Multi-visit safe upsert into Google Sheets (overwrites recent 0 placeholder row)
             save_or_update_visit_in_google_sheet(record_data)
 
             msg = html.Div(
