@@ -6,7 +6,7 @@ Clinical telemetry ingestion & decision support dashboard:
 2. Auto-populate existing patient demographics and lab values.
 3. Live linking of incoming Galaxy Watch8 raw CSVs uploaded directly from Wear OS app.
 4. Real-time HeartPy, NeuroKit2, & IMU feature extraction for Model 2 training datasets.
-5. Risk tier inference and structured append to Google Sheets (including acc_std in Col 19).
+5. Risk tier inference and structured upsert to Google Sheets (overwriting auto-upload 0 lab placeholders).
 """
 
 import os
@@ -264,12 +264,29 @@ def register_new_patient_to_sheet(patient_id: str, patient_name: str):
     clear_patient_cache()
 
 
-def append_visit_to_google_sheet(record_data: dict):
+def save_or_update_visit_in_google_sheet(record_data: dict):
+    """
+    Intelligent Upsert: Searches Google Sheets for an existing row for the patient
+    that contains placeholder lab values (from an auto watch upload). If found, it 
+    updates the lab panel cells in-place. If no placeholder row exists, it appends a new row.
+    """
     gc = get_gspread_client()
     sh = open_google_sheet(gc)
     
-    # Explicit 23-column row vector mapping (acc_std is Column 19)
-    row = [
+    patient_id = str(record_data.get("patient_id", "")).strip()
+    records = sh.get_all_records()
+    
+    existing_row_index = None
+    
+    # Check if there's a recent row for this patient with placeholder 0 labs
+    for idx, row in enumerate(records):
+        row_pid = str(row.get("patient_id", "")).strip()
+        sodium_val = row.get("sodium", "")
+        if row_pid == patient_id and (sodium_val == 0 or sodium_val == "0" or sodium_val == "" or sodium_val == 0.0):
+            existing_row_index = idx + 2  # 1-indexed header offset
+            break
+
+    row_vector = [
         record_data.get("patient_id", ""),
         record_data.get("patient_name", ""),
         record_data.get("visit_date", ""),
@@ -288,13 +305,21 @@ def append_visit_to_google_sheet(record_data: dict):
         record_data.get("rmssd", ""),
         record_data.get("mean_eda", ""),
         record_data.get("eda_num_peaks", ""),
-        record_data.get("acc_std", ""),  # <-- Column 19
+        record_data.get("acc_std", ""),  # Column 19
         record_data.get("model1_risk", ""),
         record_data.get("inferred_action", ""),
         record_data.get("drive_file_id", "None"),
         record_data.get("timestamp", "")
     ]
-    sh.append_row(row)
+
+    if existing_row_index:
+        range_label = f"A{existing_row_index}:W{existing_row_index}"
+        sh.update(range_name=range_label, values=[row_vector])
+        print(f"🔄 Updated Google Sheet Row {existing_row_index} for Patient {patient_id} with lab values!")
+    else:
+        sh.append_row(row_vector)
+        print(f"✅ Appended new visit row for Patient {patient_id} to Google Sheets!")
+
     clear_visit_cache()
 
 
@@ -506,7 +531,7 @@ def upload_watch_csv_route():
         data_url = f"data:text/csv;base64,{base64_encoded}"
         drive_file_id = upload_signal_to_google_drive(data_url, filename, patient_id)
 
-        # 3. Write structured record into Google Sheet (populates acc_std in Column 19)
+        # 3. Log initial row into Google Sheets (Labs default to 0 until updated on Dashboard)
         record_data = {
             "patient_id": patient_id,
             "patient_name": f"Patient {patient_id}",
@@ -518,15 +543,15 @@ def upload_watch_csv_route():
             "rmssd": biometrics.get("rmssd", 0.0),
             "mean_eda": biometrics.get("mean_eda", 0.0),
             "eda_num_peaks": biometrics.get("eda_num_peaks", 0),
-            "acc_std": biometrics.get("acc_std", 0.0),  # <-- Saved to Column 19
+            "acc_std": biometrics.get("acc_std", 0.0),  # Column 19
             "model1_risk": "Low Risk",
             "inferred_action": "Continue Monitoring",
             "drive_file_id": drive_file_id if drive_file_id else "None",
             "timestamp": datetime.datetime.now().isoformat()
         }
-        append_visit_to_google_sheet(record_data)
+        
+        save_or_update_visit_in_google_sheet(record_data)
 
-        print(f"✅ Watch Telemetry Saved for {patient_id}! File ID: {drive_file_id}, acc_std: {biometrics.get('acc_std')}")
         return jsonify({
             'status': 'success',
             'patient_id': patient_id,
@@ -919,7 +944,6 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
             risk = record.get("model1_risk") or res_dict.get("model1_risk") or res_dict.get("risk") or "Unknown"
             action = res_dict.get("inferred_action") or record.get("inferred_action") or "None"
 
-            # Combine backend record values with extracted biometrics (including acc_std)
             acc_std_val = record.get("acc_std") or extracted_biometrics.get("acc_std", 0.0)
 
             record_data = {
@@ -941,17 +965,18 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
                 "rmssd": record.get("rmssd") or extracted_biometrics.get("rmssd", ""),
                 "mean_eda": record.get("mean_eda") or extracted_biometrics.get("mean_eda", ""),
                 "eda_num_peaks": record.get("eda_num_peaks") or extracted_biometrics.get("eda_num_peaks", ""),
-                "acc_std": acc_std_val,  # <-- Correctly mapped
+                "acc_std": acc_std_val,
                 "model1_risk": risk,
                 "inferred_action": action,
                 "drive_file_id": drive_file_id if drive_file_id else "None",
                 "timestamp": datetime.datetime.now().isoformat()
             }
             
-            append_visit_to_google_sheet(record_data)
+            # Upsert into Google Sheet (overwrites existing placeholder 0 row)
+            save_or_update_visit_in_google_sheet(record_data)
 
             msg = html.Div(
-                f"✅ Visit Logged for {patient_name} ({patient_id})! Live Risk Tier: {risk}. Biometric Features (acc_std: {acc_std_val}) Synced to Google Sheets.",
+                f"✅ Visit Synced for {patient_name} ({patient_id})! Clinical Labs Updated & Risk Tier: {risk}.",
                 style={"color": "#2ECC71", "fontWeight": "700"}
             )
             return msg, datetime.datetime.now().isoformat()
