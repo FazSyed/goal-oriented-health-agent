@@ -1,12 +1,12 @@
 """
-Data Collection Dashboard (Galaxy Watch8 Ingestion)
-===================================================
-Dashboard for clinical partners to:
+Data Collection Dashboard (Galaxy Watch8 Telemetry Ingestion)
+=============================================================
+Clinical telemetry ingestion & decision support dashboard:
 1. Register new patients or select existing patients.
-2. Auto-populate existing patient demographics (Age, Gender, Weight, BMI).
-3. Log lab panel values and upload Galaxy Watch raw CSV directly to Google Drive.
-4. Run real-time HeartPy & NeuroKit2 feature extraction for Model 2 training datasets.
-5. Predict dehydration risk tier and append structured record with extracted biometrics to Google Sheets.
+2. Auto-populate existing patient demographics and lab values.
+3. Live linking of incoming Galaxy Watch8 raw CSVs uploaded directly from Wear OS app.
+4. Real-time HeartPy & NeuroKit2 feature extraction for Model 2 training datasets.
+5. Risk tier inference and structured append to Google Sheets.
 """
 
 import os
@@ -32,7 +32,7 @@ import numpy as np
 import pandas as pd
 import gspread
 from googleapiclient.discovery import build
-from googleapiclient.http import MediaIoBaseUpload
+from googleapiclient.http import MediaIoBaseDownload, MediaIoBaseUpload
 from google.oauth2.credentials import Credentials as UserCredentials
 from google.oauth2.service_account import Credentials as ServiceCredentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -93,17 +93,12 @@ VISIT_SHEET_HEADER = [
 ]
 
 
-# --- Google Auth & Cached Data Helpers ---
+# --- Google Auth & Helpers ---
 
 def get_google_credentials():
-    """
-    Supports both OAuth User Credentials (token.json/credentials.json) for personal Drive
-    and Service Account Credentials (GOOGLE_CREDENTIALS_JSON or google_credentials.json).
-    """
     token_path = ROOT_DIR / "token.json"
     creds_path = ROOT_DIR / "credentials.json"
     
-    # 1. Try OAuth User Credentials (bypasses Service Account storage quota limits)
     if token_path.exists() or creds_path.exists():
         creds = None
         if token_path.exists():
@@ -127,7 +122,6 @@ def get_google_credentials():
         if creds:
             return creds
 
-    # 2. Fallback to Service Account Credentials
     if "GOOGLE_CREDENTIALS_JSON" in os.environ and os.environ["GOOGLE_CREDENTIALS_JSON"].strip():
         creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS_JSON"])
         return ServiceCredentials.from_service_account_info(creds_dict, scopes=SCOPES)
@@ -145,13 +139,8 @@ def get_gspread_client():
 
 
 def open_google_sheet(gc):
-    if SPREADSHEET_KEY:
-        sh = gc.open_by_key(SPREADSHEET_KEY)
-    else:
-        sh = gc.open(SPREADSHEET_NAME)
+    sh = gc.open_by_key(SPREADSHEET_KEY) if SPREADSHEET_KEY else gc.open(SPREADSHEET_NAME)
     ws = sh.sheet1
-    
-    # Auto-initialize headers if worksheet is completely empty
     existing_vals = ws.get_all_values()
     if not existing_vals:
         ws.append_row(VISIT_SHEET_HEADER)
@@ -159,10 +148,8 @@ def open_google_sheet(gc):
 
 
 def open_patients_worksheet(gc):
-    """Opens or creates the dedicated 'Patients' tab inside the Google Sheet (Case-Insensitive)."""
     sh = gc.open_by_key(SPREADSHEET_KEY) if SPREADSHEET_KEY else gc.open(SPREADSHEET_NAME)
-    worksheets = sh.worksheets()
-    for ws in worksheets:
+    for ws in sh.worksheets():
         if ws.title.strip().lower() == "patients":
             return ws
     
@@ -175,7 +162,6 @@ def open_patients_worksheet(gc):
 
 @lru_cache(maxsize=16)
 def _fetch_registered_patients_cached(cache_key: str) -> str:
-    """Internal cached reader converting records to JSON string representation."""
     gc = get_gspread_client()
     ws = open_patients_worksheet(gc)
     records = ws.get_all_records()
@@ -186,8 +172,7 @@ def load_registered_patients_from_sheet() -> pd.DataFrame:
     try:
         cache_key = f"patients_{datetime.datetime.now().strftime('%Y%m%d_%H%M')}"
         raw_json = _fetch_registered_patients_cached(cache_key)
-        records = json.loads(raw_json)
-        return pd.DataFrame(records)
+        return pd.DataFrame(json.loads(raw_json))
     except Exception as e:
         print(f"[Patients Sheet Load Detail]: {e}")
         return pd.DataFrame()
@@ -199,7 +184,6 @@ def clear_patient_cache():
 
 @lru_cache(maxsize=16)
 def _fetch_visits_cached(cache_key: str) -> str:
-    """Internal cached reader for visits data."""
     gc = get_gspread_client()
     sh = open_google_sheet(gc)
     records = sh.get_all_records()
@@ -210,10 +194,9 @@ def load_visits_from_google_sheet() -> pd.DataFrame:
     try:
         cache_key = f"visits_{datetime.datetime.now().strftime('%Y%m%d_%H%M')}"
         raw_json = _fetch_visits_cached(cache_key)
-        records = json.loads(raw_json)
-        return pd.DataFrame(records)
+        return pd.DataFrame(json.loads(raw_json))
     except Exception as e:
-        print(f"[Google Sheets Fetch Detail]: Raw error -> {repr(e)}")
+        print(f"[Google Sheets Fetch Detail]: {e}")
         return pd.DataFrame()
 
 
@@ -229,7 +212,6 @@ def register_new_patient_to_sheet(patient_id: str, patient_name: str):
 
 
 def append_visit_to_google_sheet(record_data: dict):
-    """Appends a single structured visit row containing demographics, labs, extracted biometrics, and Drive file ID."""
     gc = get_gspread_client()
     sh = open_google_sheet(gc)
     
@@ -247,14 +229,12 @@ def append_visit_to_google_sheet(record_data: dict):
         record_data.get("bun", ""),
         record_data.get("creatinine", ""),
         record_data.get("glucose", ""),
-        # Extracted Biometric Features for Model 2
         record_data.get("mean_hr", ""),
         record_data.get("sdnn", ""),
         record_data.get("rmssd", ""),
         record_data.get("mean_eda", ""),
         record_data.get("eda_num_peaks", ""),
         record_data.get("acc_std", ""),
-        # Outputs & Metadata
         record_data.get("model1_risk", ""),
         record_data.get("inferred_action", ""),
         record_data.get("drive_file_id", "None"),
@@ -265,7 +245,6 @@ def append_visit_to_google_sheet(record_data: dict):
 
 
 def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id: str) -> str:
-    """Uploads raw watch CSV file to Google Drive and returns file ID."""
     try:
         creds = get_google_credentials()
         drive_service = build("drive", "v3", credentials=creds)
@@ -296,31 +275,22 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
 
 
 def parse_watch_csv_contents(file_contents: str) -> dict:
-    """
-    Decodes base64 CSV upload from Dash, parses numeric columns into numpy arrays,
-    and returns a structured dict compatible with backend_service / WatchSignalProcessor.
-    """
     try:
         content_type, content_string = file_contents.split(",")
         decoded = base64.b64decode(content_string)
         df_csv = pd.read_csv(io.BytesIO(decoded))
         
-        # Standardize column header names to lowercase
         df_csv.columns = [c.strip().lower() for c in df_csv.columns]
-        
         raw_watch_payload = {}
         
-        # PPG column mapping
         ppg_col = next((c for c in ["ppg", "raw_ppg", "pleth"] if c in df_csv.columns), None)
         if ppg_col:
             raw_watch_payload["raw_ppg"] = df_csv[ppg_col].dropna().values
             
-        # EDA / GSR column mapping
         eda_col = next((c for c in ["eda", "raw_eda", "gsr"] if c in df_csv.columns), None)
         if eda_col:
             raw_watch_payload["raw_eda"] = df_csv[eda_col].dropna().values
             
-        # Accelerometer column mapping
         acc_cols = [c for c in ["acc_x", "acc_y", "acc_z"] if c in df_csv.columns]
         if len(acc_cols) == 3:
             raw_watch_payload["raw_accel"] = df_csv[acc_cols].values
@@ -332,6 +302,73 @@ def parse_watch_csv_contents(file_contents: str) -> dict:
     except Exception as e:
         print(f"[CSV Parsing Error]: {e}")
         return {}
+
+
+def download_and_parse_drive_csv(drive_file_id: str) -> dict:
+    """Downloads raw CSV stream from Google Drive and extracts numpy arrays for HeartPy & NeuroKit2."""
+    try:
+        creds = get_google_credentials()
+        drive_service = build("drive", "v3", credentials=creds)
+        
+        request = drive_service.files().get_media(fileId=drive_file_id)
+        file_stream = io.BytesIO()
+        downloader = MediaIoBaseDownload(file_stream, request)
+        
+        done = False
+        while not done:
+            _, done = downloader.next_chunk()
+            
+        file_stream.seek(0)
+        df_csv = pd.read_csv(file_stream)
+        df_csv.columns = [c.strip().lower() for c in df_csv.columns]
+        
+        raw_watch_payload = {}
+        
+        ppg_col = next((c for c in ["ppg", "raw_ppg", "pleth"] if c in df_csv.columns), None)
+        if ppg_col:
+            raw_watch_payload["raw_ppg"] = df_csv[ppg_col].dropna().values
+            
+        eda_col = next((c for c in ["eda", "raw_eda", "gsr"] if c in df_csv.columns), None)
+        if eda_col:
+            raw_watch_payload["raw_eda"] = df_csv[eda_col].dropna().values
+            
+        acc_cols = [c for c in ["acc_x", "acc_y", "acc_z"] if c in df_csv.columns]
+        if len(acc_cols) == 3:
+            raw_watch_payload["raw_accel"] = df_csv[acc_cols].values
+
+        return raw_watch_payload
+    except Exception as e:
+        print(f"❌ Failed downloading/parsing Drive file {drive_file_id}: {e}")
+        return {}
+
+
+def fetch_latest_drive_file_for_patient(patient_id: str) -> dict:
+    try:
+        creds = get_google_credentials()
+        drive_service = build("drive", "v3", credentials=creds)
+        folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID", "").strip()
+        
+        query = f"name contains '{patient_id}_watch_' and trashed = false"
+        if folder_id:
+            query += f" and '{folder_id}' in parents"
+            
+        results = drive_service.files().list(
+            q=query,
+            orderBy="createdTime desc",
+            pageSize=1,
+            fields="files(id, name, createdTime)"
+        ).execute()
+        
+        files = results.get("files", [])
+        if files:
+            return {
+                "drive_file_id": files[0]["id"],
+                "filename": files[0]["name"],
+                "created_time": files[0]["createdTime"]
+            }
+    except Exception as e:
+        print(f"[Drive Query Error]: {e}")
+    return {}
 
 
 def generate_next_patient_id(existing_df: pd.DataFrame) -> str:
@@ -453,20 +490,41 @@ def serve_layout():
             ])
         ], style=CARD_STYLE),
 
-        # Section 3: Galaxy Watch Signal Upload
+        # Section 3: Galaxy Watch Live Telemetry Status
         html.Div([
-            html.H4("3. Galaxy Watch 8 Raw Telemetry Upload (.csv)", style={"color": "#E0E0E0", "fontWeight": "400", "marginBottom": "0.75rem"}),
-            dcc.Upload(
-                id="upload-watch-signal",
-                children=html.Div(["Drag and Drop or ", html.A("Select Raw Watch Signal CSV File")]),
-                style={
-                    "width": "100%", "height": "60px", "lineHeight": "60px",
-                    "borderWidth": "1px", "borderStyle": "dashed", "borderRadius": "5px",
-                    "textAlign": "center", "margin": "10px 0", "color": "#E0E0E0"
-                },
-                multiple=False
+            html.H4("3. Galaxy Watch 8 Telemetry Ingestion Status", style={"color": "#E0E0E0", "fontWeight": "400", "marginBottom": "0.75rem"}),
+            
+            html.Div(
+                id="watch-telemetry-status",
+                children=[
+                    dbc.Alert(
+                        [
+                            html.I(className="bi bi-wifi me-2"),
+                            "Select a patient above to query live watch telemetry."
+                        ],
+                        color="secondary",
+                        style={"borderRadius": "6px", "backgroundColor": "#1E1E1E", "color": "#B0B0B0", "border": "1px solid #3A3A3A"}
+                    )
+                ]
             ),
-            html.Div(id="uploaded-filename", style={"color": "#2ECC71", "fontWeight": "600"})
+            
+            dbc.Accordion([
+                dbc.AccordionItem([
+                    dcc.Upload(
+                        id="upload-watch-signal",
+                        children=html.Div(["Drag and Drop or ", html.A("Select Raw Watch Signal CSV File")]),
+                        style={
+                            "width": "100%", "height": "50px", "lineHeight": "50px",
+                            "borderWidth": "1px", "borderStyle": "dashed", "borderRadius": "5px",
+                            "textAlign": "center", "margin": "10px 0", "color": "#E0E0E0"
+                        },
+                        multiple=False
+                    ),
+                    html.Div(id="uploaded-filename", style={"color": "#2ECC71", "fontWeight": "600", "fontSize": "0.85rem"})
+                ], title="Manual CSV Upload Fallback (Click to expand if Watch Wi-Fi is offline)")
+            ], start_collapsed=True, style={"marginTop": "10px"}),
+
+            dcc.Store(id="auto-drive-file-id", data="")
         ], style=CARD_STYLE),
 
         # Section 4: Submit & Save
@@ -488,7 +546,6 @@ def serve_layout():
         html.H5("Recent Submissions & Biometric Feature Logging", style={"color": "#E0E0E0", "marginTop": "1rem", "marginBottom": "0.75rem"}),
         html.Div(id="collection-recent-table"),
 
-        # Relaxed interval to 30,000ms (30 seconds) to conserve Google Sheets API rate limits
         dcc.Interval(id="collection-refresh-interval", interval=30000, n_intervals=0),
         dcc.Store(id="collection-refresh-trigger", data=datetime.datetime.now().isoformat()),
     ])
@@ -600,12 +657,47 @@ def handle_patient_selection(selected_pid):
 
 
 @app.callback(
+    Output("watch-telemetry-status", "children"),
+    Output("auto-drive-file-id", "data"),
+    Input("patient-selector", "value"),
+    Input("collection-refresh-trigger", "data")
+)
+def check_live_watch_telemetry(selected_pid, _trigger):
+    if not selected_pid or selected_pid == "NEW_PATIENT":
+        return dbc.Alert("Select or register a patient above to query live watch telemetry.", color="secondary", style={"backgroundColor": "#1E1E1E", "color": "#B0B0B0", "borderColor": "#3A3A3A"}), ""
+
+    latest_file = fetch_latest_drive_file_for_patient(selected_pid)
+    
+    if latest_file:
+        file_id = latest_file.get("drive_file_id", "")
+        file_name = latest_file.get("filename", "")
+        created_time = latest_file.get("created_time", "")[:19].replace("T", " ")
+        
+        status_card = dbc.Alert([
+            html.Div([
+                html.Span("🟢 Watch Telemetry Stream Linked!", style={"fontWeight": "700", "color": "#2ECC71", "fontSize": "1.05rem"}),
+                html.Span(f" (Uploaded: {created_time})", style={"color": "#B0B0B0", "fontSize": "0.85rem"})
+            ]),
+            html.Div(f"Linked File: {file_name}", style={"color": "#E0E0E0", "fontSize": "0.9rem", "marginTop": "4px"}),
+            html.Small("Drive ID: " + file_id, style={"color": "#7F8C8D"})
+        ], color="success", style={"backgroundColor": "#1E2A1E", "borderColor": "#2ECC71", "borderRadius": "6px"})
+        
+        return status_card, file_id
+    else:
+        status_card = dbc.Alert([
+            html.Span(f"🟡 No recent watch CSV found on Google Drive for {selected_pid}.", style={"fontWeight": "600"}),
+            html.Div("Please tap 'Stop & Save' on the watch, or use the manual file upload fallback below.", style={"fontSize": "0.85rem", "marginTop": "4px"})
+        ], color="warning", style={"backgroundColor": "#2A261E", "borderColor": "#F1C40F", "color": "#F1C40F", "borderRadius": "6px"})
+        return status_card, ""
+
+
+@app.callback(
     Output("uploaded-filename", "children"),
     Input("upload-watch-signal", "filename")
 )
 def update_upload_label(filename):
     if filename:
-        return f"📁 Attached CSV: {filename}"
+        return f"📁 Manual Override File Attached: {filename}"
     return ""
 
 
@@ -620,12 +712,13 @@ def update_upload_label(filename):
     State("input-gender", "value"),
     State("input-weight", "value"),
     State("input-bmi", "value"),
+    State("auto-drive-file-id", "data"),
     State("upload-watch-signal", "contents"),
     State("upload-watch-signal", "filename"),
     [State(f"lab-{k}", "value") for k, _ in LAB_FIELDS],
     prevent_initial_call=True
 )
-def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_label, weight, bmi, watch_file_contents, watch_filename, *lab_vals):
+def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_label, weight, bmi, auto_drive_file_id, watch_file_contents, watch_filename, *lab_vals):
     if not n_clicks:
         return no_update, no_update
     
@@ -646,17 +739,21 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
     formatted_labs = {k: float(v) for k, v in labs.items()}
 
     try:
-        drive_file_id = ""
+        drive_file_id = auto_drive_file_id or ""
         raw_watch_payload = {}
         
-        # 1. Upload raw CSV to Google Drive
-        if watch_file_contents and watch_filename:
+        # 1. Primary: Download raw CSV from Google Drive & parse arrays for HeartPy / NeuroKit2
+        if drive_file_id:
+            raw_watch_payload = download_and_parse_drive_csv(drive_file_id)
+            
+        # 2. Fallback: Parse manual file upload if watch didn't stream over Wi-Fi
+        elif watch_file_contents and watch_filename:
             drive_file_id = upload_signal_to_google_drive(watch_file_contents, watch_filename, str(patient_id))
             raw_watch_payload = parse_watch_csv_contents(watch_file_contents)
 
         raw_watch_payload["drive_file_id"] = drive_file_id
 
-        # 2. Invoke backend processing for Model 1 inference + HeartPy / NeuroKit2 feature extraction
+        # 3. Invoke backend processing for Model 1 inference + HeartPy / NeuroKit2 feature extraction
         raw_response = backend_service.process_full_clinical_visit(
             patient_id=str(patient_id),
             labs=formatted_labs,
@@ -682,7 +779,6 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
             risk = record.get("model1_risk") or res_dict.get("model1_risk") or res_dict.get("risk") or "Unknown"
             action = res_dict.get("inferred_action") or record.get("inferred_action") or "None"
 
-            # 3. Form structured row containing demographics, labs, extracted biometrics, and Drive pointer
             record_data = {
                 "patient_id": str(patient_id),
                 "patient_name": str(patient_name),
@@ -697,25 +793,22 @@ def submit_visit(n_clicks, selected_pid, patient_name, visit_date, age, gender_l
                 "bun": formatted_labs.get("bun", ""),
                 "creatinine": formatted_labs.get("creatinine", ""),
                 "glucose": formatted_labs.get("glucose", ""),
-                # Extracted biometric features returned by backend_service
                 "mean_hr": record.get("mean_hr", ""),
                 "sdnn": record.get("sdnn", ""),
                 "rmssd": record.get("rmssd", ""),
                 "mean_eda": record.get("mean_eda", ""),
                 "eda_num_peaks": record.get("eda_num_peaks", ""),
                 "acc_std": record.get("acc_std", ""),
-                # Outputs & pointers
                 "model1_risk": risk,
                 "inferred_action": action,
                 "drive_file_id": drive_file_id if drive_file_id else "None",
                 "timestamp": datetime.datetime.now().isoformat()
             }
             
-            # 4. Append row to Google Sheets
             append_visit_to_google_sheet(record_data)
 
             msg = html.Div(
-                f"✅ Visit Logged for {patient_name} ({patient_id})! Live Risk Tier: {risk}. Biometric Features Extracted & Uploaded.",
+                f"✅ Visit Logged for {patient_name} ({patient_id})! Live Risk Tier: {risk}. Biometric Features Extracted & Synced to Google Sheets.",
                 style={"color": "#2ECC71", "fontWeight": "700"}
             )
             return msg, datetime.datetime.now().isoformat()
@@ -766,7 +859,6 @@ def update_progress(_n_intervals, _trigger):
 
     recent = df.tail(10).iloc[::-1]
     
-    # Render table showing primary columns including biometric features
     display_cols = [c for c in ["patient_id", "patient_name", "visit_date", "model1_risk", "mean_hr", "sdnn", "mean_eda", "drive_file_id"] if c in df.columns]
     if not display_cols:
         display_cols = list(df.columns[:8])
