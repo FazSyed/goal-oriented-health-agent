@@ -96,40 +96,36 @@ VISIT_SHEET_HEADER = [
 # --- Google Auth & Helpers ---
 
 def get_google_credentials():
-    token_path = ROOT_DIR / "token.json"
-    creds_path = ROOT_DIR / "credentials.json"
-    
-    if token_path.exists() or creds_path.exists():
-        creds = None
-        if token_path.exists():
-            try:
-                creds = UserCredentials.from_authorized_user_file(str(token_path), SCOPES)
-            except Exception as e:
-                print(f"[Auth] Token load warning: {e}")
-                
-        if not creds or not creds.valid:
+    # 1. Prioritize personal User OAuth token on Render to bypass Service Account quota limits
+    if "GOOGLE_USER_TOKEN_JSON" in os.environ and os.environ["GOOGLE_USER_TOKEN_JSON"].strip():
+        try:
+            token_info = json.loads(os.environ["GOOGLE_USER_TOKEN_JSON"])
+            creds = UserCredentials.from_authorized_user_info(token_info, SCOPES)
             if creds and creds.expired and creds.refresh_token:
-                try:
-                    creds.refresh(Request())
-                except Exception as e:
-                    print(f"[Auth] Refresh token failed: {e}")
-                    creds = None
-            if not creds and creds_path.exists():
-                flow = InstalledAppFlow.from_client_secrets_file(str(creds_path), SCOPES)
-                creds = flow.run_local_server(port=0)
-                with open(token_path, "w") as token_file:
-                    token_file.write(creds.to_json())
-        if creds:
+                creds.refresh(Request())
+            print("🔑 Authenticated via User OAuth Token (Personal Drive Quota Active)")
             return creds
+        except Exception as e:
+            print(f"[Auth] Render user token load failed: {e}")
 
+    # 2. Fall back to local token.json
+    token_path = ROOT_DIR / "token.json"
+    if token_path.exists():
+        try:
+            creds = UserCredentials.from_authorized_user_file(str(token_path), SCOPES)
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            return creds
+        except Exception as e:
+            print(f"[Auth] Local token load warning: {e}")
+
+    # 3. Fall back to Service Account
     if "GOOGLE_CREDENTIALS_JSON" in os.environ and os.environ["GOOGLE_CREDENTIALS_JSON"].strip():
         creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS_JSON"])
+        print("⚠️ Authenticated via Service Account (0 GB Quota Warning)")
         return ServiceCredentials.from_service_account_info(creds_dict, scopes=SCOPES)
     
     local_creds_path = ROOT_DIR / "google_credentials.json"
-    if not local_creds_path.exists():
-        local_creds_path = Path("google_credentials.json")
-        
     return ServiceCredentials.from_service_account_file(str(local_creds_path), scopes=SCOPES)
 
 
