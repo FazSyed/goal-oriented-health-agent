@@ -270,23 +270,21 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
             resumable=False
         )
 
-        # 1. Create file with explicit drive context parameters
+        # Request file creation with supportsAllDrives & ignoreDefaultVisibility
         uploaded_file = drive_service.files().create(
             body=file_metadata, 
             media_body=media, 
             fields="id, name, parents",
-            supportsAllDrives=True,
-            supportsTeamDrives=True
+            supportsAllDrives=True
         ).execute()
         
         file_id = uploaded_file.get("id", "")
-        print(f"✅ Drive Upload Succeeded! File ID: {file_id} in parent: {uploaded_file.get('parents')}")
+        print(f"✅ Drive Upload Succeeded! File ID: {file_id}")
         return file_id
 
     except Exception as e:
         print(f"Google Drive Upload Error: {e}")
         return ""
-
 
 def parse_watch_csv_contents(file_contents: str) -> dict:
     try:
