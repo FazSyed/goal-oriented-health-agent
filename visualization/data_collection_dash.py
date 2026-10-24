@@ -253,9 +253,13 @@ def upload_signal_to_google_drive(file_contents: str, filename: str, patient_id:
         decoded = base64.b64decode(content_string)
         
         folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID", "").strip()
+        if not folder_id:
+            print("❌ Critical Error: GOOGLE_DRIVE_FOLDER_ID is missing from environment variables!")
+            return ""
+
         file_metadata = {
             "name": f"{patient_id}_{datetime.date.today().isoformat()}_{filename}",
-            "parents": [folder_id] if folder_id else []
+            "parents": [folder_id]
         }
         
         media = MediaIoBaseUpload(io.BytesIO(decoded), mimetype="text/csv", resumable=False)
