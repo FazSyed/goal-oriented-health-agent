@@ -1,0 +1,16 @@
+# Declares the containers managed by this Compose file
+services:
+  kafka-ui:
+    # Usesthe latest Kafka UI image from GitHub Container Registry
+    image: ghcr.io/kafbat/kafka-ui:latest
+    container_name: kafka-ui
+    ports: # Configures ports exposed from the container to the host
+      - "8080:8080" # Maps host port 8080 to container port 8080
+    extra_hosts: # Adds custom hostname mappings inside the container
+      - "host.docker.internal:host-gateway" # Resolves host.docker.internal to the Docker host gateway
+    environment: # environment varirables
+    # Sets the name of the first Kafka cluster to local
+      KAFKA_CLUSTERS_0_NAME: local
+      # Connects to the Kafka bootstrap server on host port 9093
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: host.docker.internal:9093 
+      DYNAMIC_CONFIG_ENABLED: "true"
